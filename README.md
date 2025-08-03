@@ -33,3 +33,7 @@
   - [GitHub -《大模型基础》](https://github.com/ZJU-LLMs/Foundations-of-LLMs) 毛玉仁, 高云君
   
   - 《GPT图解：大模型是怎样构建的》黄佳, 人民邮电出版社出版
+  
+  - 《大规模语言模型 - 从理论到实践（第2版）》张奇, 桂韬等, 电子工业出版社
+  
+  - 《从零构建大模型》Sebastian Raschka, 人民邮电出版社
