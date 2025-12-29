@@ -1,5 +1,3 @@
-# Machine Learning
-
 ## 参考资料
 
 - 数学
