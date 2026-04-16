@@ -11,7 +11,7 @@ Markdown 远程图片提取工具
 
 特性：
     - 支持配置 DOCS_DIR 指定文档目录
-    - 支持配置 IMAGES_DIR 指定图片保存目录（默认为文档目录下的 image 子目录）
+    - 支持配置 IMAGES_DIR 指定图片保存目录（默认为文档目录下的 images 子目录）
     - 支持配置 INCLUDE_FILES 指定处理的文件
     - 支持配置 SKIP_FILES 跳过指定文件
     - 已处理的文件（包含本地图片引用）会自动跳过
@@ -40,7 +40,7 @@ DOCS_DIR = '../../README.md'
 
 # 图片目录：指定下载图片的保存位置
 # 支持绝对路径或相对路径
-# 如果为空字符串，则默认设置为 DOCS_DIR 下的 image 子目录
+# 如果为空字符串，则默认设置为 DOCS_DIR 下的 images 子目录
 # 示例：IMAGES_DIR = '../../asserts/images'
 #   或 IMAGES_DIR = '../../supervised_learning/dpo/image'
 IMAGES_DIR = '../../asserts/images'
@@ -259,8 +259,8 @@ def main():
         if not image_dir.is_absolute():
             image_dir = script_dir / image_dir
     else:
-        # 如果为空，默认设置为文档目录下的 image 子目录
-        image_dir = actual_docs_dir / 'image'
+        # 如果为空，默认设置为文档目录下的 images 子目录
+        image_dir = actual_docs_dir / 'images'
 
     image_dir = image_dir.resolve()
 
