@@ -153,8 +153,8 @@ print([fibonacci(i) for i in range(10)])
 ## 七、链接与图片
 
 ### 文本链接
-- [百度](https://www.baidu.com)
 - [GitHub](https://github.com "GitHub主页")
+- [Bilibili](https://www.bilibili.com/)
 - 自动链接: <https://www.example.com>
 
 ### 引用式链接

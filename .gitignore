@@ -28,6 +28,19 @@ ENV/
 # IDE
 .idea/
 .vscode/
+.cursor/
+.claude/
+.codium/
+.tongyi/
+.bito/
+.comate/
+.codeium/
+.codegeex/
+.windsurf/
+.ruff/
+.pytest_cache/
+.mypy_cache/
+.coverage
 *.swp
 *.swo
 *~
