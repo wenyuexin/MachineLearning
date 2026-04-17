@@ -106,7 +106,3 @@ graph TD
 | 7 | | |
 | 8 | | |
 
-**渲染环境**：
-- 编辑器：VS Code
-- 插件：vscode-yarkdown
-- 报错信息：
