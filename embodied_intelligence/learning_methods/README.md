@@ -1,6 +1,11 @@
 # 学习方法
 
-本目录整理具身AI的学习方法和训练范式。
+本目录记录**通用学习方法在具身智能中的应用实践**。
+
+> 基础算法原理参见：
+> - [强化学习](../../reinforce_learning) - PPO、SAC、DQN等算法原理
+> - [监督学习](../../supervised_learning) - SFT、DPO等训练方法
+> - [世界模型](../../world_models) - Dreamer、RSSM等模型方法
 
 ## 学习方法概览
 

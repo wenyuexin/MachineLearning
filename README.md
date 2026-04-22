@@ -4,11 +4,17 @@
 
 ## 目录结构
 
-- **agent/** - AI Agent 相关学习，包括概述、基础能力、架构、记忆与工具、多智能体、应用、评估与安全等
-- **reinforce_learning/** - 强化学习笔记，包含基础理论和策略优化
-- **supervised_learning/** - 监督学习笔记，包含 SFT、DPO、Prompt、解码等
+### 基础方法
+- **reinforce_learning/** - 强化学习基础理论（PPO、SAC、DQN等算法原理）
+- **supervised_learning/** - 监督学习方法（SFT、DPO、Prompt、解码等）
+- **world_models/** - 世界模型方法（Dreamer、RSSM、JEPA等）
+
+### 领域应用
+- **embodied_intelligence/** - 具身智能（应用实践、论文、数据集）
+- **agent/** - AI Agent（架构、记忆与工具、多智能体、应用等）
+
+### 其他
 - **knowledge_graph/** - 知识图谱相关内容
-- **embodied_intelligence/** - 具身智能相关论文
 - **training_infra/** - 训练基础设施相关笔记
 - **learning-materials/** - [学习资料与阅读体验](./learning-materials/README.md)
 
@@ -19,4 +25,4 @@
 
 ## 声明
 
-虽然暂时不会有，但是万一有人想转载，请注明出处
+如需转载，请注明出处
