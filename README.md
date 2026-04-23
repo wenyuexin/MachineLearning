@@ -6,32 +6,33 @@
 
 ```
 MachineLearning/
-├── traditional_ml/              # 传统机器学习
+│
+├── traditional-ml/              # 传统机器学习
 │   ├── supervised/              # 监督学习
 │   │   ├── classification/      # 分类算法（SVM、决策树、随机森林等）
 │   │   └── regression/          # 回归算法（线性回归、岭回归等）
 │   ├── unsupervised/            # 无监督学习
 │   │   ├── clustering/          # 聚类算法（K-means、层次聚类、DBSCAN等）
-│   │   └── dimensionality_reduction/  # 降维（PCA、t-SNE等）
+│   │   └── dimensionality-reduction/  # 降维（PCA、t-SNE等）
 │   └── ensemble/                # 集成学习（Bagging、Boosting、Stacking）
 │
-├── deep_learning/               # 深度学习基础
+├── deep-learning/               # 深度学习基础
 │   ├── architectures/           # 基础架构（CNN、RNN、Transformer等）
 │   ├── foundations/             # 训练技巧、优化方法
 │   └── generative/              # 生成模型（GAN、VAE、Diffusion）
 │
 ├── cv/                          # 计算机视觉
 │   ├── traditional/             # 传统方法（SIFT、HOG、Canny等）
-│   ├── deep_learning/           # 深度学习方法
+│   ├── deep-learning/           # 深度学习方法
 │   │   ├── architectures/       # 网络架构（ResNet、ViT等）
 │   │   ├── classification/      # 图像分类
 │   │   ├── detection/           # 目标检测（YOLO、Faster R-CNN等）
 │   │   ├── segmentation/        # 图像分割（UNet、SAM等）
-│   │   ├── pose_estimation/     # 姿态估计
+│   │   ├── pose-estimation/     # 姿态估计
 │   │   ├── face/                # 人脸相关
 │   │   ├── ocr/                 # 文字识别
 │   │   ├── tracking/            # 目标跟踪
-│   │   ├── 3d_vision/           # 3D视觉（NeRF、深度估计）
+│   │   ├── 3d-vision/           # 3D视觉（NeRF、深度估计）
 │   │   ├── video/               # 视频理解
 │   │   └── generative/          # 图像生成（Stable Diffusion等）
 │   └── applications/            # 应用场景（自动驾驶、医学影像等）
@@ -43,12 +44,17 @@ MachineLearning/
 │   ├── dpo/                     # 直接偏好优化
 │   ├── rlhf/                    # 人类反馈强化学习
 │   ├── prompt/                  # Prompt工程
-│   └── inference/               # 推理优化
-│       └── decoding/            # 解码策略
+│   ├── inference/               # 推理优化
+│   │   └── decoding/            # 解码策略
+│   └── multimodal/              # 多模态大模型
+│       ├── vlm/                 # 视觉语言模型
+│       ├── audio/               # 音频语言模型
+│       ├── video/               # 视频语言模型
+│       └── any2any/             # 全模态模型
 │
-├── reinforce_learning/          # 强化学习
+├── reinforce-learning/          # 强化学习
 │   ├── fundation/               # 基础理论
-│   └── policy_otimization/      # 策略优化（PPO、TRPO等）
+│   └── policy-otimization/      # 策略优化（PPO、TRPO等）
 │
 ├── agentic/                     # AI智能体
 │   ├── 00-overview/             # 概述
@@ -62,21 +68,46 @@ MachineLearning/
 │   ├── 08-projects/             # 项目实践
 │   └── 09-papers/               # 论文笔记
 │
-├── embodied_intelligence/       # 具身智能
+├── embodied-intelligence/       # 具身智能
 │   ├── applications/            # 应用场景
 │   ├── datasets/                # 数据集
-│   ├── learning_methods/        # 学习方法
+│   ├── learning-methods/        # 学习方法
 │   ├── models/                  # 模型
 │   ├── papers/                  # 论文
 │   └── topics/                  # 细分主题
 │
-├── world_models/                # 世界模型
+├── world-models/                # 世界模型
+│   ├── foundations/             # 基础理论
+│   ├── architectures/           # 模型架构
+│   ├── algorithms/              # 核心算法（Dreamer、MuZero等）
+│   ├── applications/            # 应用场景
+│   ├── video-generation/        # 视频生成（Sora、Genie等）
+│   ├── training/                # 训练方法
+│   └── papers/                  # 论文笔记
 │
-├── knowledge_graph/             # 知识图谱
+├── knowledge-graph/             # 知识图谱
+│   ├── foundations/             # 基础理论
+│   ├── knowledge-representation/# 知识表示（RDF、OWL、属性图）
+│   ├── knowledge-extraction/    # 知识抽取（NER、关系抽取）
+│   ├── knowledge-fusion/        # 知识融合（实体对齐、消解）
+│   ├── knowledge-storage/       # 知识存储（Neo4j、SPARQL）
+│   ├── knowledge-reasoning/     # 知识推理
+│   ├── knowledge-graph-construction/  # 知识图谱构建
+│   ├── llm-kg-integration/      # LLM与知识图谱结合（GraphRAG）
+│   ├── datasets/                # 数据集（Freebase、Wikidata）
+│   ├── tools/                   # 工具与框架
+│   └── papers/                  # 论文笔记
 │
-├── training_infra/              # 训练基础设施
+├── training-infra/              # 训练基础设施
+│   ├── distributed-training/    # 分布式训练
+│   ├── optimization/            # 训练优化
+│   ├── frameworks/              # 训练框架（Megatron、DeepSpeed等）
+│   ├── hardware/                # 硬件相关
+│   ├── memory-management/       # 显存管理
+│   ├── fault-tolerance/         # 容错机制
+│   └── communication/           # 通信优化
 │
-├── learning_materials/          # 学习资料
+├── learning-materials/          # 学习资料
 │
 └── assets/                      # 资源文件
     ├── images/                  # 图片
