@@ -43,9 +43,12 @@ def convert_pdf_to_text(pdf_path: str, output_path: str = None) -> str:
     logger = logging.getLogger(__name__)
 
     with pdfplumber.open(pdf_path) as pdf:
-        logger.info(f"正在处理 {pdf_path}，共 {len(pdf.pages)} 页")
+        total_pages = len(pdf.pages)
+        logger.info(f"正在处理 {pdf_path}，共 {total_pages} 页")
 
         for i, page in enumerate(pdf.pages, start=1):
+            if i % 5 == 0 or i == total_pages:
+                logger.debug(f"第 {i} / {total_pages} 页")
             # 从页面提取文本
             text = page.extract_text()
             if text:
@@ -97,7 +100,6 @@ def main(input_path=None, output_path=None, verbose=False):
         sys.exit(1)
 
 if __name__ == "__main__":
-    main(
-        "assets\\temp\Claude Opus 4.7 System Card.pdf",
-        'assets\\temp\Claude_Opus_4.7_System_Card.txt'
-    )
+    input_path = "assets\\temp\\Claude Haiku 4.5 System Card.pdf"
+    output_path = input_path.replace(' ', '_').replace('.pdf', '.txt')
+    main(input_path, output_path, True)

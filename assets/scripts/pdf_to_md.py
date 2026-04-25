@@ -102,10 +102,12 @@ def convert_pdf_to_markdown(pdf_path: str, output_path: Optional[str] = None) ->
     logger = logging.getLogger(__name__)
 
     with pdfplumber.open(pdf_path) as pdf:
-        logger.info(f"正在处理 {pdf_path}，共 {len(pdf.pages)} 页")
+        total_pages = len(pdf.pages)
+        logger.info(f"正在处理 {pdf_path}，共 {total_pages} 页")
 
         for page_num, page in enumerate(pdf.pages, 1):
-            logger.debug(f"第 {page_num} 页")
+            if page_num % 5 == 0 or page_num == total_pages:
+                logger.debug(f"第 {page_num} / {total_pages} 页")
 
             # 先提取表格及其位置信息（用于与文本交错排列）
             found_tables = page.find_tables()
@@ -246,7 +248,6 @@ def main(input_path=None, output_path=None, verbose=False):
         sys.exit(1)
 
 if __name__ == "__main__":
-    main(
-        "assets\\temp\\Claude Opus 4.7 System Card.pdf",
-        'assets\\temp\\Claude_Opus_4.7_System_Card.md'
-    )
+    input_path = "assets\\temp\\Claude Sonnet 4.5 System Card.pdf"
+    output_path = input_path.replace(' ', '_').replace('.pdf', '.md')
+    main(input_path, output_path, True)
