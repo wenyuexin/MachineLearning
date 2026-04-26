@@ -46,30 +46,33 @@ Anthropic定位为**AI安全公司**而非单纯的AI公司。其公开声明的
 ### 2.1 模型时间线
 
 ```mermaid
-timeline
+gantt
     title Claude 模型家族演变历程
+    dateFormat YYYY-MM
+    axisFormat %m月
+    todayMarker off
     section 2023年
-        2023年3月 : Claude 1.0 / Claude Instant 1.0
-        2023年5月 : Claude 1.2 / Claude Instant 1.1
-        2023年6月 : Claude 1.3
-        2023年7月 : Claude 2.0
-        2023年8月 : Claude Instant 1.2
-        2023年11月 : Claude 2.1
+    Claude 1.0 / Instant 1.0       :2023-03, 1M
+    Claude 1.2 / Instant 1.1       :2023-05, 1M
+    Claude 1.3                      :2023-06, 1M
+    Claude 2.0                      :2023-07, 1M
+    Claude Instant 1.2              :2023-08, 1M
+    Claude 2.1                      :2023-11, 1M
     section 2024年
-        2024年3月 : Claude 3 系列 Opus Sonnet Haiku
-        2024年6月 : Claude 3.5 Sonnet
-        2024年10月 : Claude 3.5 Sonnet升级 + Computer Use
-        2024年11月 : Claude 3.5 Haiku
+    Claude 3 系列 Opus/Sonnet/Haiku :2024-03, 1M
+    Claude 3.5 Sonnet               :2024-06, 1M
+    Claude 3.5 Sonnet升级+Computer Use :2024-10, 1M
+    Claude 3.5 Haiku                :2024-11, 1M
     section 2025年
-        2025年2月 : Claude 3.7 Sonnet
-        2025年5月 : Claude Opus 4 / Sonnet 4
-        2025年8月 : Claude Opus 4.1
-        2025年9月 : Claude Sonnet 4.5
-        2025年10月 : Claude Haiku 4.5
-        2025年11月 : Claude Opus 4.5
+    Claude 3.7 Sonnet               :2025-02, 1M
+    Claude Opus 4 / Sonnet 4        :2025-05, 1M
+    Claude Opus 4.1                 :2025-08, 1M
+    Claude Sonnet 4.5               :2025-09, 1M
+    Claude Haiku 4.5                :2025-10, 1M
+    Claude Opus 4.5                 :2025-11, 1M
     section 2026年
-        2026年2月 : Claude Opus 4.6 / Sonnet 4.6
-        2026年4月 : Claude Opus 4.7 / Mythos Preview
+    Claude Opus 4.6 / Sonnet 4.6    :2026-02, 1M
+    Claude Opus 4.7 / Mythos Preview :2026-04, 1M
 ```
 
 ### 2.2 模型层级架构
