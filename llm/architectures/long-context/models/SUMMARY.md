@@ -1,7 +1,6 @@
 # 百万Token长上下文：模型技术综述
 
 **文档信息**
-
 | 维度 | 内容 |
 |------|------|
 | 文档版本 | v2.0 |
@@ -9,6 +8,15 @@
 | 最后更新 | 2026年4月 |
 | 伴生索引 | [models/README.md](./README.md) - 各模型论文索引 |
 | 综述参考 | [surveys/](../surveys/) - 长上下文综述论文集 |
+---
+
+## 导读
+
+大语言模型从4K上下文迈向1M（百万Token），需要跨越三道数学瓶颈：**计算量爆炸**（$O(N^2d)$ 注意力在1M下增长10,000倍）、**KV缓存膨胀**（单请求占用数GB显存）、**长程依赖衰减**（中间信息检索呈U型退化）。本文以这三道瓶颈为线索，系统梳理业界实现1M+上下文的完整技术版图。
+
+**四大技术路线**各有取舍：**原生架构**路线（Gemini 1.5 Pro、MiniMax M1）从底层重新设计注意力，Lightning Attention实现 $O(N)$ 线性复杂度，检索精度损失尚待验证；**注意力改造**路线（DeepSeek-V4）以"先压缩、再选择、后计算"的CSA+HCA混合压缩注意力将1M推理FLOPs降至27%、KV缓存降至10%，是当前效率提升最显著的方案；**工程扩展**路线（Qwen2.5-1M、Gradient/Llama 3）通过RoPE调优+渐进微调以极低成本将现有模型扩展至1M，但未改变 $O(N^2)$ 注意力本质；**闭源工程优化**路线（GPT-4.1、Claude）保持全精度注意力并辅以Context Compaction等系统层优化，NIAH召回率高达99.4%，但技术细节不透明。
+
+**核心趋势**：竞争已从"能不能做到"转向"做得有多高效"——稀疏化（参数稀疏MoE + 上下文稀疏压缩注意力）是共同方向；评估基准从"单针检索"向"多跳推理"乃至"长程理解"演进，当前模型在后者仍有显著瓶颈。
 
 ---
 
@@ -47,9 +55,9 @@ $$\text{FLOPs}_{\text{attn}} \approx 4L \cdot N^2 \cdot d_{model}$$
 
 自回归解码时，每个token的Key和Value状态需要持久存储，避免重复计算。KV缓存的显存占用为：
 
-$$\text{KV Cache} = 2 \times N \times d_{model} \times L \times \text{bytes\_per\_param}$$
+$$\text{KV Cache} = 2 \times N \times d_{model} \times L \times b$$
 
-其中因子2对应Key和Value各一份。
+其中 $b$ 为每个参数的字节数，因子2对应Key和Value各一份。
 
 **LLaMA-3 70B 的KV缓存估算**（$d_{model}=8192$，$L=80$，FP16=2bytes）：
 
