@@ -15,7 +15,7 @@
 | Uncertainty Quantification and Confidence Calibration in LLMs: A Survey | [`UQ_Confidence_Calibration_LLM_Survey_KDD2025_2503.15850`](./UQ_Confidence_Calibration_LLM_Survey_KDD2025_2503.15850.md) | KDD 2025 (2503.15850) | 四维不确定性分类法：输入/推理/参数/预测 | ⭐⭐⭐ 必读 |
 | A Survey of Uncertainty Estimation in LLMs: Theory Meets Practice | [`Uncertainty_Estimation_LLM_Survey_2410.15326`](./Uncertainty_Estimation_LLM_Survey_2410.15326.md) | arXiv 2410.15326 | 理论与实践结合的不确定性综述 | ⭐⭐⭐ 必读 |
 | 大语言模型不确定性测量与缓解方法系统综述 | [`Uncertainty_Measurement_LLM_Survey_2502.04567`](./Uncertainty_Measurement_LLM_Survey_2502.04567.md) | arXiv 2502.04567 | LLM校准方法、ECE变体应用 | ⭐⭐⭐ 必读 |
-| A Survey of Calibration Process for Black-Box LLMs | 待创建 | arXiv 2412 | 黑盒LLM校准方法 | ⭐⭐ 值得关注 |
+| A Survey of Calibration Process for Black-Box LLMs | [`Survey_Calibration_BlackBox_LLMs_2412`](./Survey_Calibration_BlackBox_LLMs_2412.md) | arXiv 2412 | 黑盒LLM校准方法 | ⭐⭐ 值得关注 |
 
 ### Agent不确定性（2025-2026 新方向）
 
@@ -31,7 +31,7 @@
 | Semantic Uncertainty: Linguistic Invariances for Uncertainty Estimation | [`Semantic_Uncertainty_2302.09664`](./Semantic_Uncertainty_2302.09664.md) | 2302.09664 | 提出Semantic Entropy，考虑语义等价 |
 | Detecting Hallucinations in LLMs Using Semantic Entropy | [`Detecting_Hallucinations_Semantic_Entropy_Nature_2024`](./Detecting_Hallucinations_Semantic_Entropy_Nature_2024.md) | Nature 2024 | 将语义熵应用于幻觉检测 |
 | Evidential Semantic Entropy for LLM Uncertainty Quantification | 待创建 | EACL 2026 | 证据理论增强的语义熵 |
-| From Tokens to Meaning: LLMs Require Semantic-Level Uncertainty | 待创建 | ICLR 2026 | 位置论文：语义级不确定性是关键 |
+| From Tokens to Meaning: LLMs Require Semantic-Level Uncertainty | [`From_Tokens_to_Meaning_ICLR2026`](./From_Tokens_to_Meaning_ICLR2026.md) | ICLR 2026 | 位置论文：Token级不确定性不充分，语义级是关键 |
 
 ### 校准方法
 
@@ -61,7 +61,7 @@
 | Can LLMs Express Their Uncertainty? | [`Can_LLMs_Express_Uncertainty_2306.13063`](./Can_LLMs_Express_Uncertainty_2306.13063.md) | 2306.13063 | LLM置信度表达能力评估 |
 | Just Ask for Calibration: Strategies for Eliciting Calibrated Confidence | [`Just_Ask_for_Calibration_2305.14975`](./Just_Ask_for_Calibration_2305.14975.md) | 2305.14975 (EMNLP 2023) | 引导模型表达校准置信度 |
 | LLM Uncertainty Quantification Should Be More Human-Centered | 待创建 | 2506.07461 | 以人为中心的不确定性量化 |
-| GRACE: A Granular Benchmark for Model Calibration | 待创建 | 2502.19684 | 细粒度校准基准 |
+| GRACE: A Granular Benchmark for Model Calibration | [`GRACE_Granular_Benchmark_Calibration_2502.19684`](./GRACE_Granular_Benchmark_Calibration_2502.19684.md) | ACL 2025 (2502.19684) | 细粒度校准基准，人机对比 |
 
 ### 校准训练方法（2024-2025）
 
@@ -185,7 +185,11 @@ LLM校准研究
   - UQ_LLM_Agents_2602.05073.md
 - 2026-04-29: 新增GraphGen ECE文档
   - GraphGen_ECE_Blind_Spot_2505.20416.md
-- 待添加: A Survey of Calibration Process for Black-Box LLMs, Evidential Semantic Entropy
+- 2026-04-29: 新增3篇论文文档
+  - From_Tokens_to_Meaning_ICLR2026.md
+  - GRACE_Granular_Benchmark_Calibration_2502.19684.md
+  - Survey_Calibration_BlackBox_LLMs_2412.md
+- 待添加: Evidential Semantic Entropy
 
 ---
 
