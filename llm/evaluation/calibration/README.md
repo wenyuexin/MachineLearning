@@ -60,8 +60,8 @@ LLM 的校准面临独特挑战：
 
 ## 相关资源
 
-- [ECE基础理论](../../../traditional-ml/model-selection/evaluation-metrics/papers/) - ECE通用方法与理论
-- [LLM架构总览](../../architectures/) - LLM技术架构
+- [ECE基础理论](/traditional-ml/model-selection/evaluation-metrics/papers/) - ECE通用方法与理论
+- [LLM架构总览](/llm/architectures/) - LLM技术架构
 - [论文索引](./papers/README.md) - LLM校准论文详细列表
 
 ---

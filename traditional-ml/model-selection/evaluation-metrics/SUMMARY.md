@@ -7,7 +7,7 @@
 | 覆盖范围 | ECE的定义、计算、变体、校准方法，以及深度学习/LLM中的应用 |
 | 最后更新 | 2026年4月 |
 | 伴生索引 | [papers/README.md](./papers/README.md) - ECE核心论文索引 |
-| LLM扩展 | [llm/evaluation/calibration/](../../../llm/evaluation/calibration/) - LLM校准专题 |
+| LLM扩展 | [llm/evaluation/calibration/](/llm/evaluation/calibration/) - LLM校准专题 |
 
 ---
 
@@ -474,7 +474,7 @@ LLM校准挑战
 | 中 (0.5-0.9) | 附带不确定性声明 |
 | 低 (<0.5) | 转交人工处理 |
 
-> LLM校准的详细内容见 [llm/evaluation/calibration/](../../../llm/evaluation/calibration/)
+> LLM校准的详细内容见 [llm/evaluation/calibration/](/llm/evaluation/calibration/)
 
 ---
 
@@ -583,8 +583,8 @@ ECE评估标准流程
 
 | 论文 | 来源 | 核心内容 | 笔记 |
 |------|------|---------|------|
-| Uncertainty Quantification and Confidence Calibration in LLMs | KDD 2025 | 四维不确定性分类法 | [LLM专题](../../../llm/evaluation/calibration/) |
-| Uncertainty Measurement for LLMs: Systematic Review | 2502.04567 | LLM校准方法综述 | [链接](../../../llm/evaluation/calibration/Uncertainty_Measurement_LLM_Survey_2502.04567.md) |
+| Uncertainty Quantification and Confidence Calibration in LLMs | KDD 2025 | 四维不确定性分类法 | [LLM专题](/llm/evaluation/calibration/) |
+| Uncertainty Measurement for LLMs: Systematic Review | 2502.04567 | LLM校准方法综述 | [链接](/llm/evaluation/calibration/Uncertainty_Measurement_LLM_Survey_2502.04567.md) |
 
 ### 扩展阅读
 

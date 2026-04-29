@@ -23,7 +23,7 @@
 
 ### LLM方向（大语言模型校准）
 
-> LLM 专用校准内容已迁移至 [llm/evaluation/calibration/](../../../../llm/evaluation/calibration/)
+> LLM 专用校准内容已迁移至 [llm/evaluation/calibration/](/llm/evaluation/calibration/)
 
 | 论文 | arXiv | 核心内容 |
 | --- | --- | --- |
@@ -55,7 +55,7 @@
        └── 目标检测校准
 
 3. LLM应用 (大语言模型校准)
-   → 已迁移至 [llm/evaluation/calibration/](../../../../llm/evaluation/calibration/)
+   → 已迁移至 [llm/evaluation/calibration/](/llm/evaluation/calibration/)
 
 4. 理论分析 (度量性质研究)
    └── Decoupling_Calibration_Measures_2208.13031
@@ -77,7 +77,7 @@
 
 进阶路线 (深入技术细节)
 ├── 4. LLM校准专题
-│      └── 见 [llm/evaluation/calibration/](../../../../llm/evaluation/calibration/)
+│      └── 见 [llm/evaluation/calibration/](/llm/evaluation/calibration/)
 └── 5. Decoupling_Calibration_Measures_2208.13031
        └── ECE理论性质与度量关系
 ```
@@ -141,7 +141,7 @@
 
 - `../ece.md` - 更完整的ECE论文收集列表（含arXiv链接）
 - `../../traditional-ml/` - 传统机器学习方法
-- [llm/evaluation/calibration/](../../../../llm/evaluation/calibration/) - LLM校准专题
+- [llm/evaluation/calibration/](/llm/evaluation/calibration/) - LLM校准专题
 
 ---
 
@@ -153,10 +153,9 @@
 | :--- | :--- | :--- |
 | 理论分析 | "Decoupling of neural network calibration measures" | 2208.13031 |
 | 理论分析 | "On the Dark Side of Calibration for Modern Neural Networks" | 2106.07663 |
-| LLM校准 | "A Survey of Calibration Process for Black-Box LLMs" | 2412.12345 |
-| 校准方法 | "Restoring Calibration for Aligned Large Language Models" | 2405.12345 |
-| 校准方法 | "Taming Overconfidence in LLMs: Reward Calibration in RLHF" | 2410.12345 |
 | 测试方法 | "T-Cal: An optimal test for the calibration of predictive models" | 2312.02870 |
+
+> LLM 校准相关论文见 [llm/evaluation/calibration/papers/](/llm/evaluation/calibration/papers/)
 
 ---
 
