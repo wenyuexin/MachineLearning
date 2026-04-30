@@ -1,4 +1,4 @@
-# Anthropic Claude 模型家族与核心技术
+# Anthropic Claude模型家族与核心技术
 
 **文档信息**
 
