@@ -1,5 +1,5 @@
 # !/usr/bin/env python3
-# -*- coding: utf-8 -*-  
+# -*- coding: utf-8 -*-
 """
 Markdown 本地图片迁移工具
 
@@ -17,39 +17,18 @@ Markdown 本地图片迁移工具
     - 批量处理完成后统一删除源图片
 
 使用：
-    1. 修改配置参数 DOCS_DIR
-    2. 运行: python migrate_images.py
+    命令行模式：
+        python migrate_images.py --docs_dir <path> [--source_images_dir <path>] [--keep-source] [--skip <file1> <file2>]
+
+    代码调用模式：
+        main(docs_dir='embodied_intelligence/papers', source_images_dir='../../assets/images', delete_source=True)
 """
 import os
 import re
 import shutil
+import argparse
 from pathlib import Path
 from typing import Set, Dict
-
-
-# ==================== 配置参数 ====================
-
-# 文档目录：指定要遍历的 markdown 文件所在目录，或单个 md 文件路径
-# 支持绝对路径或相对路径（相对于脚本所在位置）
-# 示例：
-#   - 目录：DOCS_DIR = '../../agent'
-#   - 单文件：DOCS_DIR = '../../README.md'
-DOCS_DIR = 'embodied_intelligence/papers'
-
-# 源图片目录：项目根目录下的图片存储目录
-# 默认为 assets/images
-SOURCE_IMAGES_DIR = '../../assets/images'
-
-# 是否在处理完成后删除源图片
-# 设为 False 可以只复制不删除，便于检查
-DELETE_SOURCE_AFTER_MIGRATE = True
-
-# 跳过的文件列表
-# 支持文件名、相对路径、绝对路径
-# 示例：SKIP_FILES = ['README.md', 'agent/overview.md']
-SKIP_FILES = []
-
-# ==================== 配置结束 ====================
 
 
 def get_project_root() -> Path:
@@ -219,34 +198,81 @@ def process_markdown_file(
     return modified
 
 
-def main():
+def main(docs_dir=None, source_images_dir=None, delete_source=None, skip_files=None):
     """
-    主函数
+    主函数：遍历指定文档或目录，迁移引用的本地图片
+
+    参数：
+        docs_dir: 文档目录路径或单个 md 文件路径，相对路径基于项目根目录解析
+        source_images_dir: 源图片目录路径，相对路径基于脚本所在目录解析
+        delete_source: 是否在迁移后删除源图片，默认 True
+        skip_files: 跳过的文件列表，支持文件名、相对路径或绝对路径
     """
+    # 如果没有传递参数，使用 argparse 解析命令行
+    if docs_dir is None:
+        parser = argparse.ArgumentParser(
+            description="Markdown 本地图片迁移工具：将引用的源目录图片复制到文档本地"
+        )
+        parser.add_argument(
+            "docs_dir", nargs="?", metavar="PATH",
+            help="文档目录路径或单个 md 文件路径"
+        )
+        parser.add_argument(
+            "--docs_dir", "-d", dest="docs_dir_opt",
+            help="文档目录路径或单个 md 文件路径"
+        )
+        parser.add_argument(
+            "--source_images_dir", "-s",
+            help="源图片目录路径（默认为 ../../assets/images）"
+        )
+        parser.add_argument(
+            "--keep-source",
+            action="store_true",
+            help="保留源图片，不在迁移后删除"
+        )
+        parser.add_argument(
+            "--skip", "-k",
+            nargs="*",
+            help="跳过的文件列表"
+        )
+        args = parser.parse_args()
+        _docs_dir = args.docs_dir or args.docs_dir_opt
+        _source_images_dir = args.source_images_dir
+        _delete_source = not args.keep_source
+        _skip_files = args.skip
+    else:
+        _docs_dir = docs_dir
+        _source_images_dir = source_images_dir
+        _delete_source = delete_source if delete_source is not None else True
+        _skip_files = skip_files
+
     # 获取脚本所在目录
     script_dir = Path(__file__).parent
-    
+
     # 解析文档路径
     project_root = get_project_root()
-    if DOCS_DIR:
-        docs_path = Path(DOCS_DIR)
+    if _docs_dir:
+        docs_path = Path(_docs_dir)
         if not docs_path.is_absolute():
             # 相对路径相对于项目根目录
             docs_path = project_root / docs_path
     else:
         docs_path = project_root
-    
+
     docs_path = docs_path.resolve()
-    
+
     # 解析源图片目录
-    source_image_dir = Path(SOURCE_IMAGES_DIR)
-    if not source_image_dir.is_absolute():
-        source_image_dir = script_dir / source_image_dir
+    if _source_images_dir:
+        source_image_dir = Path(_source_images_dir)
+        if not source_image_dir.is_absolute():
+            source_image_dir = script_dir / source_image_dir
+    else:
+        source_image_dir = project_root / 'assets' / 'images'
     source_image_dir = source_image_dir.resolve()
-    
+
     # 检查路径是否存在
     single_file_mode = docs_path.is_file() and docs_path.suffix == '.md'
-    
+
     if single_file_mode:
         if not docs_path.exists():
             print(f"Error: File does not exist: {docs_path}")
@@ -257,52 +283,52 @@ def main():
             print(f"Error: Directory does not exist: {docs_path}")
             return
         actual_docs_dir = docs_path
-    
+
     if not source_image_dir.exists():
         print(f"Error: Source image directory does not exist: {source_image_dir}")
         return
-    
+
     # 打印信息
     if single_file_mode:
         print(f"Single file mode: {docs_path}")
     else:
         print(f"Docs directory: {docs_path}")
     print(f"Source image directory: {source_image_dir}")
-    print(f"Delete source after migrate: {DELETE_SOURCE_AFTER_MIGRATE}")
-    
+    print(f"Delete source after migrate: {_delete_source}")
+
     # 获取要处理的 md 文件列表
     if single_file_mode:
         all_md_files = [docs_path]
     else:
         all_md_files = list(docs_path.rglob('*.md'))
-    
+
     # 应用跳过列表
-    if SKIP_FILES:
-        skip_names = {normalize_file_path(f, actual_docs_dir) for f in SKIP_FILES}
+    if _skip_files:
+        skip_names = {normalize_file_path(f, actual_docs_dir) for f in _skip_files}
         md_files = [f for f in all_md_files if f.name not in skip_names]
-        print(f"Skip files: {SKIP_FILES}")
+        print(f"Skip files: {_skip_files}")
     else:
         md_files = all_md_files
-    
+
     print(f"Files to process: {len(md_files)}")
-    
+
     # 记录已复制的图片
     copied_images: Set[str] = set()
-    
+
     # 处理每个文件
     modified_count = 0
     for md_path in md_files:
         if process_markdown_file(md_path, source_image_dir, copied_images):
             modified_count += 1
-    
+
     print(f"\n{'='*50}")
     print(f"Summary:")
     print(f"  Files processed: {len(md_files)}")
     print(f"  Files modified: {modified_count}")
     print(f"  Images migrated: {len(copied_images)}")
-    
+
     # 删除源图片
-    if DELETE_SOURCE_AFTER_MIGRATE and copied_images:
+    if _delete_source and copied_images:
         print(f"\nDeleting source images from {source_image_dir}:")
         for image_name in sorted(copied_images):
             source_path = source_image_dir / image_name
@@ -310,9 +336,18 @@ def main():
                 source_path.unlink()
                 print(f"  Deleted: {image_name}")
         print(f"  Total deleted: {len(copied_images)}")
-    
+
     print("\nDone!")
 
 
 if __name__ == '__main__':
+    # 示例：通过 hardcode 方式调用
+    # main(
+    #     docs_dir='embodied_intelligence/papers',
+    #     source_images_dir='../../assets/images',
+    #     delete_source=True,
+    #     skip_files=[]
+    # )
+
+    # 默认使用命令行参数模式
     main()

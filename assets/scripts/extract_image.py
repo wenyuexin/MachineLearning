@@ -18,48 +18,19 @@ Markdown 远程图片提取工具
     - 下载失败时保留原始远程链接
 
 使用：
-    1. 修改配置参数 DOCS_DIR 和 IMAGES_DIR
-    2. 运行: python extract_image.py
+    命令行模式：
+        python extract_image.py [<path>] [--images_dir <path>] [--include <file1> <file2>] [--skip <file1> <file2>]
+
+    代码调用模式：
+        main(docs_dir='../../README.md', images_dir='../../asserts/images', include_files=['file.md'])
 """
 import os
 import re
 import uuid
 import requests
+import argparse
 from pathlib import Path
 from urllib.parse import urlparse
-
-
-# ==================== 配置参数 ====================
-
-# 文档目录：指定要遍历的 markdown 文件所在目录，或单个 md 文件路径
-# 支持绝对路径或相对路径（相对于脚本所在位置）
-# 示例：
-#   - 目录：DOCS_DIR = '../../supervised_learning' 或 DOCS_DIR = '../../reinforce_learning'
-#   - 单文件：DOCS_DIR = '../../README.md' 或 DOCS_DIR = '../../reinforce_learning/学习路线.md'
-DOCS_DIR = '../../README.md'
-
-# 图片目录：指定下载图片的保存位置
-# 支持绝对路径或相对路径
-# 如果为空字符串，则默认设置为 DOCS_DIR 下的 images 子目录
-# 示例：IMAGES_DIR = '../../asserts/images'
-#   或 IMAGES_DIR = '../../supervised_learning/dpo/image'
-IMAGES_DIR = '../../asserts/images'
-
-# 只处理指定的文件列表
-# 支持三种格式：
-#   - 文件名：'学习路线.md'
-#   - 相对路径：'reinforce_learning/学习路线.md'
-#   - 绝对路径：'/Users/xxx/MachineLearning/README.md'
-# 设为 None 或空列表表示处理所有文件
-# 示例：INCLUDE_FILES = ['README.md', 'reinforce_learning/学习路线.md']
-INCLUDE_FILES = []
-
-# 跳过的文件列表
-# 支持格式同上，设为 None 或空列表表示不跳过任何文件
-# 示例：SKIP_FILES = ['README.md', 'reinforce_learning/学习路线.md']
-SKIP_FILES = []
-
-# ==================== 配置结束 ====================
 
 
 def download_image(url: str, save_dir: Path) -> str:
@@ -219,25 +190,69 @@ def normalize_file_path(file_path: str, base_dir: Path) -> str:
     return str(path)
 
 
-def main():
+def main(docs_dir=None, images_dir=None, include_files=None, skip_files=None):
     """
     主函数：遍历指定目录下的所有 md 文件或处理单个文件
+    
+    参数：
+        docs_dir: 文档目录路径或单个 md 文件路径，支持绝对路径或相对路径
+        images_dir: 图片保存目录路径，支持绝对路径或相对路径。若为 None，则使用 docs_dir 下的 images 子目录
+        include_files: 只处理的文件列表，支持文件名、相对路径或绝对路径。若为 None 或空列表，处理所有文件
+        skip_files: 跳过的文件列表，格式同 include_files。若为 None 或空列表，不跳过任何文件
     """
+    # 如果没有传递参数，使用 argparse 解析命令行
+    if docs_dir is None:
+        parser = argparse.ArgumentParser(
+            description="Markdown 远程图片提取工具：下载远程图片并更新本地引用"
+        )
+        parser.add_argument(
+            "docs_dir", nargs="?", metavar="PATH",
+            help="文档目录路径或单个 md 文件路径"
+        )
+        parser.add_argument(
+            "--docs_dir", "-d", dest="docs_dir_opt",
+            help="文档目录路径或单个 md 文件路径"
+        )
+        parser.add_argument(
+            "--images_dir", "-i",
+            help="图片保存目录路径（默认为文档目录下的 images 子目录）"
+        )
+        parser.add_argument(
+            "--include", "-n",
+            nargs="*",
+            help="只处理的文件列表"
+        )
+        parser.add_argument(
+            "--skip", "-s",
+            nargs="*",
+            help="跳过的文件列表"
+        )
+        args = parser.parse_args()
+        _docs_dir = args.docs_dir or args.docs_dir_opt
+        _images_dir = args.images_dir
+        _include_files = args.include
+        _skip_files = args.skip
+    else:
+        _docs_dir = docs_dir
+        _images_dir = images_dir
+        _include_files = include_files
+        _skip_files = skip_files
+
     # 获取脚本所在目录，用于解析相对路径
     script_dir = Path(__file__).parent
 
     # 解析文档目录
-    if DOCS_DIR:
-        docs_path = Path(DOCS_DIR)
+    if _docs_dir:
+        docs_path = Path(_docs_dir)
         if not docs_path.is_absolute():
             docs_path = script_dir / docs_path
     else:
-        # 默认使用脚本所在目录的祖父目录（保持向后兼容）
+        # 默认使用脚本所在目录的祖父目录
         docs_path = script_dir.parent.parent
 
     docs_path = docs_path.resolve()
 
-    # 检查 DOCS_DIR 是否指向单个 md 文件
+    # 检查 docs_path 是否指向单个 md 文件
     single_file_mode = docs_path.is_file() and docs_path.suffix == '.md'
 
     if single_file_mode:
@@ -254,8 +269,8 @@ def main():
             return
 
     # 解析图片目录
-    if IMAGES_DIR:
-        image_dir = Path(IMAGES_DIR)
+    if _images_dir:
+        image_dir = Path(_images_dir)
         if not image_dir.is_absolute():
             image_dir = script_dir / image_dir
     else:
@@ -279,22 +294,22 @@ def main():
         all_md_files = list(docs_path.rglob('*.md'))
 
     # 根据配置筛选文件
-    if INCLUDE_FILES:
+    if _include_files:
         # 只处理指定的文件（支持多种路径格式）
         include_names = {normalize_file_path(f, actual_docs_dir)
-                         for f in INCLUDE_FILES}
+                         for f in _include_files}
         md_files = [f for f in all_md_files if f.name in include_names]
-        print(f"Include files: {INCLUDE_FILES}")
+        print(f"Include files: {_include_files}")
     else:
         md_files = all_md_files
 
     # 跳过指定的文件
-    if SKIP_FILES:
+    if _skip_files:
         # 支持多种路径格式
         skip_names = {normalize_file_path(f, actual_docs_dir)
-                      for f in SKIP_FILES}
+                      for f in _skip_files}
         md_files = [f for f in md_files if f.name not in skip_names]
-        print(f"Skip files: {SKIP_FILES}")
+        print(f"Skip files: {_skip_files}")
 
     print(f"Files to process: {len(md_files)}")
 
@@ -306,7 +321,16 @@ def main():
         process_markdown_file(md_path, image_dir, actual_docs_dir)
 
     print("\nDone!")
-    
+
 
 if __name__ == '__main__':
+    # 示例：通过 hardcode 方式调用
+    # main(
+    #     docs_dir='../../README.md',
+    #     images_dir='../../asserts/images',
+    #     include_files=['llm/models/deepseek/DeepSeek_V4_Technical_Report.md'],
+    #     skip_files=[]
+    # )
+    
+    # 默认使用命令行参数模式
     main()

@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-PDF 转纯文本工具
+PDF转纯文本工具
 用法：
     python pdf_to_text.py input.pdf [output.txt]
-    python pdf_to_text.py input.pdf > output.txt
+    若省略 output.txt，自动生成 input.pdf -> input_pdf.txt
 """
 
 import sys
@@ -73,7 +73,7 @@ def main(input_path=None, output_path=None, verbose=False):
             description="使用 pdfplumber 将 PDF 文件转换为纯文本"
         )
         parser.add_argument("input", help="输入 PDF 文件路径")
-        parser.add_argument("output", nargs="?", help="可选的输出文本文件路径（若省略则输出到标准输出）")
+        parser.add_argument("output", nargs="?", help="可选的输出文本文件路径（若省略则自动生成）")
         parser.add_argument("-v", "--verbose", action="store_true", help="启用详细日志")
         args = parser.parse_args()
         _verbose = args.verbose
@@ -84,14 +84,15 @@ def main(input_path=None, output_path=None, verbose=False):
         _input = input_path
         _output = output_path
 
+    # 如果 output_path 无效，自动生成默认路径
+    if not _output:
+        _output = _input.replace(' ', '_').replace('.pdf', '.txt')
+
     level = logging.DEBUG if _verbose else logging.INFO
     logger = setup_logger(__name__, level)
 
     try:
-        text = convert_pdf_to_text(_input, _output)
-        if not _output and text:
-            # 输出到标准输出
-            sys.stdout.write(text)
+        convert_pdf_to_text(_input, _output)
     except FileNotFoundError as e:
         logger.error(e)
         sys.exit(1)
@@ -101,5 +102,4 @@ def main(input_path=None, output_path=None, verbose=False):
 
 if __name__ == "__main__":
     input_path = "assets\\temp\\Claude Haiku 4.5 System Card.pdf"
-    output_path = input_path.replace(' ', '_').replace('.pdf', '.txt')
-    main(input_path, output_path, True)
+    main(input_path, verbose=True)
