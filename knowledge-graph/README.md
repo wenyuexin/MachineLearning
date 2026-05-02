@@ -39,7 +39,7 @@ knowledge-graph/
 │   ├── dialogue-systems/
 │   └── domain-specific-kg/
 │
-└── 06-quality-and-evolution/         # 质量与演化
+└── 06-quality/         # 质量与演化
     ├── knowledge-completion/
     ├── error-detection/
     └── kg-versioning/
@@ -65,14 +65,14 @@ knowledge-graph/
 
 **应用阶段**
 - `05-applications/` — LLM与知识图谱结合（GraphRAG等）
-- `06-quality-and-evolution/` — 知识图谱质量与演化
+- `06-quality/` — 知识图谱质量与演化
 
 ## 与仓库其他目录的关系
 
 | 本目录内容 | 关联目录 | 说明 |
 |-----------|---------|------|
 | GraphRAG检索架构 | [../rag/04-advanced-rag-patterns/graph-rag/](../rag/04-advanced-rag-patterns/graph-rag/) | RAG视角的图增强检索 |
-| LLM推理 | [../llm/04-inference-and-deployment/](../llm/04-inference-and-deployment/) | LLM作为抽取/推理工具 |
+| LLM推理 | [../llm/04-serving/](../llm/04-serving/) | LLM作为抽取/推理工具 |
 | 可解释性 | [../llm/07-explainability/](../llm/07-explainability/) | KG驱动的模型解释 |
 
 ---

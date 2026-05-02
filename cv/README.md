@@ -15,7 +15,7 @@ cv/
 │   ├── efficient-models/
 │   └── training-tricks/
 │
-├── 03-object-detection-and-segmentation/  # 目标检测与分割
+├── 03-detection-and-segmentation/      # 目标检测与分割
 │   ├── two-stage-detectors/
 │   ├── one-stage-detectors/
 │   ├── instance-segmentation/
@@ -35,7 +35,7 @@ cv/
 │   │   └── stable-diffusion/
 │   └── multimodal-models/
 │
-├── 06-self-supervised-and-foundation-models/  # 自监督与基础模型
+├── 06-foundation-models/  # 自监督与基础模型
 │   ├── contrastive-learning/
 │   ├── masked-image-modeling/
 │   └── vision-foundation-models/
@@ -58,7 +58,7 @@ cv/
 **进阶阶段**
 - `04-video-and-3d-vision/` — 视频理解、3D重建、NeRF
 - `05-generative-and-multimodal/` — 图像生成、多模态模型
-- `06-self-supervised-and-foundation-models/` — 对比学习、基础模型
+- `06-foundation-models/` — 对比学习、基础模型
 - `07-applications-and-tools/` — OCR、人脸识别、部署优化
 
 ## 相关资源

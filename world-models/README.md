@@ -19,7 +19,7 @@ world-models/
 │   ├── diffusion-world-models/
 │   └── jepa-and-energy-based-models/
 │
-├── 03-world-models-for-reasoning/    # 推理用世界模型
+├── 03-reasoning-models/    # 推理用世界模型
 │   ├── model-based-planning/
 │   └── causal-world-models/
 │
@@ -54,7 +54,7 @@ world-models/
 - `02-methods-and-architectures/` — 掌握不同架构的特点和适用场景
 
 **算法阶段**
-- `03-world-models-for-reasoning/` — 基于模型的规划与因果推理
+- `03-reasoning-models/` — 基于模型的规划与因果推理
 
 **应用阶段**
 - `04-large-scale-world-models/` — 视频生成、大规模预训练

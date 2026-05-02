@@ -27,7 +27,7 @@ learning-materials/
 │   ├── engineering-blogs/
 │   └── community-highlights/
 │
-├── 05-tools-and-frameworks-quickstart/ # 工具与框架快速入门
+├── 05-tools-and-frameworks/ # 工具与框架快速入门
 │   ├── pytorch/
 │   ├── huggingface-ecosystem/
 │   └── langchain-llamaindex/

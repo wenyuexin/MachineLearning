@@ -21,7 +21,7 @@ deep-learning/
 │   │   └── batch-normalization/
 │   └── initialization-methods/
 │
-├── 03-architectures-by-domain/      # 按领域划分的架构
+├── 03-architectures/      # 按领域划分的架构
 │   ├── cnns/                        # 卷积神经网络
 │   ├── rnns-and-sequence-models/    # 循环神经网络与序列模型
 │   ├── transformers/                # Transformer
@@ -36,7 +36,7 @@ deep-learning/
 │   ├── neural-architecture-search/
 │   └── continual-learning/
 │
-└── 05-deep-learning-infra/          # 深度学习基础设施
+└── 05-infra/          # 深度学习基础设施
     ├── gpu-computing/
     ├── distributed-training/
     └── framework-comparison/
@@ -49,11 +49,11 @@ deep-learning/
 - `02-training-and-optimization/` — 反向传播、优化器、正则化
 
 **进阶阶段**
-- `03-architectures-by-domain/` — CNN、RNN、Transformer、生成模型
+- `03-architectures/` — CNN、RNN、Transformer、生成模型
 
 **深入阶段**
 - `04-advanced-topics/` — 自监督学习、元学习、NAS、持续学习
-- `05-deep-learning-infra/` — GPU计算、分布式训练、框架对比
+- `05-infra/` — GPU计算、分布式训练、框架对比
 
 ## 与仓库其他目录的关系
 

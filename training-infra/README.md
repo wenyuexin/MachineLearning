@@ -18,24 +18,24 @@ training-infra/
 │   │   └── pipeline-parallelism/
 │   └── hybrid-and-sequence-parallelism/
 │
-├── 03-training-frameworks-and-tools/      # 训练框架与工具
+├── 03-frameworks-and-tools/      # 训练框架与工具
 │   ├── deepspeed/
 │   ├── megatron-lm/
 │   ├── hf-accelerate/
 │   └── orchestration/
 │
-├── 04-memory-and-storage-optimization/    # 内存与存储优化
+├── 04-memory-and-storage/    # 内存与存储优化
 │   ├── gradient-checkpointing/
 │   ├── mixed-precision/
 │   ├── offloading-strategies/
 │   └── checkpointing-and-recovery/
 │
-├── 05-model-compilation-and-kernels/      # 模型编译与内核
+├── 05-compilation-and-kernels/      # 模型编译与内核
 │   ├── triton-and-custom-kernels/
 │   ├── torch-compile/
 │   └── xla-and-jit/
 │
-├── 06-experiment-tracking-and-operations/ # 实验追踪与运维
+├── 06-ml-operations/ # 实验追踪与运维
 │   ├── experiment-management/
 │   ├── data-pipelines/
 │   └── ci-cd-for-ml/
@@ -56,23 +56,23 @@ training-infra/
 |------|---------|---------|
 | 模型太大单卡放不下 | 模型并行、流水线并行 | `02-distributed-training/` |
 | 训练速度太慢 | 数据并行、通信优化 | `02-distributed-training/` |
-| 显存不足 | ZeRO、激活重计算、Offloading | `04-memory-and-storage-optimization/` |
-| 训练不稳定 | 混合精度、梯度裁剪 | `05-model-compilation-and-kernels/` |
-| 硬件故障 | Checkpoint、弹性训练 | `04-memory-and-storage-optimization/checkpointing-and-recovery/` |
+| 显存不足 | ZeRO、激活重计算、Offloading | `04-memory-and-storage/` |
+| 训练不稳定 | 混合精度、梯度裁剪 | `05-compilation-and-kernels/` |
+| 硬件故障 | Checkpoint、弹性训练 | `04-memory-and-storage/checkpointing-and-recovery/` |
 
 ## 学习路径
 
 **基础阶段**
 - `01-hardware-and-networking/` — 了解GPU架构和互联方式
-- `03-training-frameworks-and-tools/` — 掌握主流训练框架
+- `03-frameworks-and-tools/` — 掌握主流训练框架
 
 **进阶阶段**
 - `02-distributed-training/` — 学习各种并行策略
-- `05-model-compilation-and-kernels/` — 训练加速技巧
+- `05-compilation-and-kernels/` — 训练加速技巧
 
 **深入阶段**
-- `04-memory-and-storage-optimization/` — 显存优化技术
-- `06-experiment-tracking-and-operations/` — 实验追踪与运维
+- `04-memory-and-storage/` — 显存优化技术
+- `06-ml-operations/` — 实验追踪与运维
 - `07-observability-and-debugging/` — 可观测性与调试
 
 ## 相关资源

@@ -21,7 +21,7 @@ rag/
 │   ├── what-is-rag/
 │   └── rag-pipeline-overview/
 │
-├── 02-indexing-and-retrieval/        # 索引与检索
+├── 02-retrieval/        # 索引与检索
 │   ├── chunking-strategies/
 │   │   ├── fixed-size/
 │   │   └── semantic-chunking/
@@ -34,7 +34,7 @@ rag/
 │       ├── recursive-retrieval/
 │       └── multi-hop-retrieval/
 │
-├── 03-generation-and-augmentation/   # 生成与增强
+├── 03-generation/   # 生成与增强
 │   ├── context-integration/
 │   │   ├── prompt-templates/
 │   │   └── context-compression/
@@ -51,13 +51,13 @@ rag/
 │   ├── agentic-rag/
 │   └── multimodal-rag/
 │
-├── 05-evaluation-and-benchmarks/     # 评估与基准
+├── 05-evaluation/     # 评估与基准
 │   ├── end-to-end-metrics/
 │   │   ├── ragas/
 │   │   └── truelens/
 │   └── public-benchmarks/
 │
-└── 06-production-and-ecosystem/      # 生产与生态
+└── 06-production/      # 生产与生态
     ├── frameworks/
     ├── caching-and-scaling/
     └── security-and-privacy/
@@ -67,14 +67,14 @@ rag/
 
 | 内容 | 归属 | 说明 |
 |------|------|------|
-| Prompt工程 | [../llm/04-inference-and-deployment/prompt-engineering/](../llm/04-inference-and-deployment/prompt-engineering/) | 通用技术 |
-| LLM推理优化 | [../llm/04-inference-and-deployment/](../llm/04-inference-and-deployment/) | 通用推理优化 |
+| Prompt工程 | [../llm/04-serving/prompt-engineering/](../llm/04-serving/prompt-engineering/) | 通用技术 |
+| LLM推理优化 | [../llm/04-serving/](../llm/04-serving/) | 通用推理优化 |
 | 知识图谱构建 | [../knowledge-graph/](../knowledge-graph/) | 知识本身的理论与构建 |
 | GraphRAG的图谱部分 | [../knowledge-graph/05-applications/](../knowledge-graph/05-applications/) | 知识图谱与LLM结合 |
 
 ## 相关资源
 
-- [LLM推理](../llm/04-inference-and-deployment/) - 生成模块优化
+- [LLM推理](../llm/04-serving/) - 生成模块优化
 - [知识图谱](../knowledge-graph/) - 结构化知识源
 - [LLM评估](../llm/05-evaluation/) - 通用评估方法
 

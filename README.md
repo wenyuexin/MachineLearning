@@ -157,29 +157,29 @@ machine-learning/
 ├── deep-learning/               # 深度学习基础
 │   ├── 01-neural-network-fundamentals/ # 神经网络基础
 │   ├── 02-training-and-optimization/ # 训练与优化
-│   ├── 03-architectures-by-domain/ # 按领域划分的架构
+│   ├── 03-architectures/ # 按领域划分的架构
 │   │   ├── cnns/             # 卷积神经网络
 │   │   ├── rnns-and-sequence-models/ # 循环神经网络与序列模型
 │   │   ├── transformers/     # Transformer
 │   │   └── generative-models/ # 生成模型
 │   ├── 04-advanced-topics/   # 进阶主题
-│   └── 05-deep-learning-infra/ # 深度学习基础设施
+│   └── 05-infra/ # 深度学习基础设施
 │
 ├── reinforce-learning/          # 强化学习
 │   ├── 01-fundamentals/      # 基础概念
 │   ├── 02-model-free-rl/     # 无模型强化学习
-│   ├── 03-policy-based-and-actor-critic/ # 基于策略与Actor-Critic
+│   ├── 03-policy-methods/ # 基于策略与Actor-Critic
 │   ├── 04-model-based-rl/    # 基于模型的强化学习
-│   ├── 05-advanced-and-applied-rl/ # 进阶与应用
+│   ├── 05-advanced-topics/ # 进阶与应用
 │   └── 06-evaluation-and-tools/ # 评估与工具
 │
 ├── cv/                          # 计算机视觉
 │   ├── 01-image-fundamentals/ # 图像基础
 │   ├── 02-image-classification/ # 图像分类
-│   ├── 03-object-detection-and-segmentation/ # 目标检测与分割
+│   ├── 03-detection-and-segmentation/      # 目标检测与分割
 │   ├── 04-video-and-3d-vision/ # 视频与3D视觉
 │   ├── 05-generative-and-multimodal/ # 生成与多模态
-│   ├── 06-self-supervised-and-foundation-models/ # 自监督与基础模型
+│   ├── 06-foundation-models/ # 自监督与基础模型
 │   └── 07-applications-and-tools/ # 应用与工具
 │
 ├── llm/                         # 大语言模型
@@ -195,7 +195,7 @@ machine-learning/
 │   │   ├── pre-training/     # 预训练
 │   │   ├── fine-tuning/      # 微调
 │   │   └── alignment/        # 对齐
-│   ├── 04-inference-and-deployment/ # 推理与部署
+│   ├── 04-serving/ # 推理与部署
 │   │   ├── optimization-techniques/ # 优化技术
 │   │   ├── serving-frameworks/ # Serving框架
 │   │   └── prompt-engineering/ # 提示工程
@@ -203,25 +203,25 @@ machine-learning/
 │   │   ├── benchmarks/       # 基准测试
 │   │   ├── evaluation-methods/ # 评估方法
 │   │   └── evaluation-frameworks/ # 评估框架
-│   ├── 06-applications-and-ethics/ # 应用与伦理
+│   ├── 06-applications/ # 应用与伦理
 │   ├── 07-explainability/    # 可解释性
 │   └── 08-multimodal/        # 多模态
 │
 ├── rag/                         # 检索增强生成
 │   ├── 01-fundamentals/      # 基础概念
-│   ├── 02-indexing-and-retrieval/ # 索引与检索
-│   ├── 03-generation-and-augmentation/ # 生成与增强
+│   ├── 02-retrieval/ # 索引与检索
+│   ├── 03-generation/ # 生成与增强
 │   ├── 04-advanced-rag-patterns/ # 高级RAG模式
-│   ├── 05-evaluation-and-benchmarks/ # 评估与基准
-│   └── 06-production-and-ecosystem/ # 生产与生态
+│   ├── 05-evaluation/ # 评估与基准
+│   └── 06-production/ # 生产与生态
 │
 ├── agentic/                     # AI智能体
 │   ├── 01-core-concepts/     # 核心概念
 │   ├── 02-cognitive-capabilities/ # 认知能力
 │   ├── 03-agent-architectures/ # 智能体架构
-│   ├── 04-environment-and-simulation/ # 环境与仿真
+│   ├── 04-environments/ # 环境与仿真
 │   ├── 05-frameworks-and-tools/ # 框架与工具
-│   └── 06-evaluation-and-reliability/ # 评估与可靠性
+│   └── 06-evaluation/ # 评估与可靠性
 │
 ├── knowledge-graph/             # 知识图谱
 │   ├── 01-representation/    # 知识表示
@@ -229,21 +229,21 @@ machine-learning/
 │   ├── 03-storage-and-query/ # 存储与查询
 │   ├── 04-reasoning/         # 知识推理
 │   ├── 05-applications/      # 应用
-│   └── 06-quality-and-evolution/ # 质量与演化
+│   └── 06-quality/ # 质量与演化
 │
 ├── embodied-intelligence/       # 具身智能
 │   ├── 01-foundations/       # 基础
-│   ├── 02-perception-in-the-loop/ # 感知闭环
+│   ├── 02-perception/ # 感知闭环
 │   ├── 03-motor-control-and-policies/ # 运动控制与策略
 │   ├── 04-planning-and-navigation/ # 规划与导航
-│   ├── 05-manipulation-and-interaction/ # 操作与交互
-│   ├── 06-large-models-for-embodiment/ # 大模型驱动具身
+│   ├── 05-manipulation/ # 操作与交互
+│   ├── 06-foundation-models/ # 大模型驱动具身
 │   └── 07-evaluation-and-benchmarks/ # 评估与基准
 │
 ├── world-models/                # 世界模型
 │   ├── 01-foundations/       # 基础
 │   ├── 02-methods-and-architectures/ # 方法与架构
-│   ├── 03-world-models-for-reasoning/ # 推理用世界模型
+│   ├── 03-reasoning-models/ # 推理用世界模型
 │   ├── 04-large-scale-world-models/ # 大规模世界模型
 │   ├── 05-evaluation/        # 评估
 │   └── 06-applications/      # 应用
@@ -251,10 +251,10 @@ machine-learning/
 ├── training-infra/              # 训练基础设施
 │   ├── 01-hardware-and-networking/ # 硬件与网络
 │   ├── 02-distributed-training/ # 分布式训练
-│   ├── 03-training-frameworks-and-tools/ # 训练框架与工具
-│   ├── 04-memory-and-storage-optimization/ # 内存与存储优化
-│   ├── 05-model-compilation-and-kernels/ # 模型编译与内核
-│   ├── 06-experiment-tracking-and-operations/ # 实验追踪与运维
+│   ├── 03-frameworks-and-tools/ # 训练框架与工具
+│   ├── 04-memory-and-storage/ # 内存与存储优化
+│   ├── 05-compilation-and-kernels/ # 模型编译与内核
+│   ├── 06-ml-operations/ # 实验追踪与运维
 │   └── 07-observability-and-debugging/ # 可观测性与调试
 │
 ├── learning-materials/          # 学习资料
@@ -262,7 +262,7 @@ machine-learning/
 │   ├── 02-courses-and-lectures/ # 课程与讲座
 │   ├── 03-papers-and-surveys/ # 论文与综述
 │   ├── 04-blogs-and-technical-guides/ # 博客与技术指南
-│   ├── 05-tools-and-frameworks-quickstart/ # 工具与框架快速入门
+│   ├── 05-tools-and-frameworks/ # 工具与框架快速入门
 │   ├── 06-datasets/          # 数据集
 │   └── 07-community-and-events/ # 社区与活动
 │

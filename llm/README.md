@@ -31,7 +31,7 @@ llm/
 │       ├── rlhf/
 │       └── dpo/
 │
-├── 04-inference-and-deployment/     # 推理与部署
+├── 04-serving/     # 推理与部署
 │   ├── optimization-techniques/     # 优化技术
 │   ├── serving-frameworks/          # Serving框架
 │   └── prompt-engineering/          # 提示工程
@@ -41,7 +41,7 @@ llm/
 │   ├── evaluation-methods/          # 评估方法
 │   └── evaluation-frameworks/       # 评估框架
 │
-├── 06-applications-and-ethics/      # 应用与伦理
+├── 06-applications/      # 应用与伦理
 │
 ├── 07-explainability/               # 可解释性
 │   ├── mechanistic/                 # 机制可解释性
@@ -64,11 +64,11 @@ llm/
 
 **进阶阶段**
 - `03-training/` — 掌握预训练、微调和对齐方法
-- `04-inference-and-deployment/` — 学习推理优化和使用技巧
+- `04-serving/` — 学习推理优化和使用技巧
 - `05-evaluation/` — 掌握评估方法
 
 **深入阶段**
-- `06-applications-and-ethics/` — 应用与伦理
+- `06-applications/` — 应用与伦理
 - `07-explainability/` — 探索模型内部机制
 - `08-multimodal/` — 扩展到多模态
 

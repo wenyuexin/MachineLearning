@@ -18,7 +18,7 @@ reinforce-learning/
 │       ├── dqn-and-variants/
 │       └── rainbow/
 │
-├── 03-policy-based-and-actor-critic/ # 基于策略与Actor-Critic
+├── 03-policy-methods/ # 基于策略与Actor-Critic
 │   ├── policy-gradient/
 │   │   ├── reinforce/
 │   │   └── ppo/
@@ -33,7 +33,7 @@ reinforce-learning/
 │   │   └── muzero/
 │   └── planning-and-tree-search/
 │
-├── 05-advanced-and-applied-rl/       # 进阶与应用
+├── 05-advanced-topics/       # 进阶与应用
 │   ├── hierarchical-rl/
 │   ├── multi-agent-rl/
 │   ├── inverse-rl/
@@ -51,11 +51,11 @@ reinforce-learning/
 
 **核心阶段**
 - `02-model-free-rl/` — 蒙特卡洛、时序差分、DQN
-- `03-policy-based-and-actor-critic/` — 策略梯度、Actor-Critic、PPO
+- `03-policy-methods/` — 策略梯度、Actor-Critic、PPO
 
 **进阶阶段**
 - `04-model-based-rl/` — 世界模型、规划与树搜索
-- `05-advanced-and-applied-rl/` — 分层RL、多智能体、逆RL、LLM对齐
+- `05-advanced-topics/` — 分层RL、多智能体、逆RL、LLM对齐
 
 ## 详细学习路线
 

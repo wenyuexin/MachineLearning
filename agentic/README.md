@@ -37,7 +37,7 @@ agentic/
 │   │   └── organizational-structures/
 │   └── human-agent-interaction/
 │
-├── 04-environment-and-simulation/     # 环境与仿真
+├── 04-environments/     # 环境与仿真
 │   ├── simulated-environments/
 │   ├── sandboxing-and-safety/
 │   └── benchmarking-frameworks/
@@ -48,7 +48,7 @@ agentic/
 │   ├── crewai/
 │   └── custom-agent-dev/
 │
-└── 06-evaluation-and-reliability/     # 评估与可靠性
+└── 06-evaluation/     # 评估与可靠性
     ├── task-completion-metrics/
     ├── safety-and-robustness/
     └── human-evaluation/
@@ -61,9 +61,9 @@ agentic/
 ```
 01-core-concepts → 02-cognitive-capabilities
                            ↓
-03-agent-architectures ← 04-environment-and-simulation
+03-agent-architectures ← 04-environments
         ↓
-   05-frameworks-and-tools → 06-evaluation-and-reliability
+   05-frameworks-and-tools → 06-evaluation
 ```
 
 ## 相关资源
