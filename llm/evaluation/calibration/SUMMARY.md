@@ -7,7 +7,7 @@
 | 覆盖范围 | LLM校准与不确定性量化的核心方法、理论框架与应用实践 |
 | 最后更新 | 2026年4月 |
 | 伴生索引 | [papers/README.md](./papers/README.md) - 核心论文索引 |
-| 基础理论 | [ECE基础](/traditional-ml/model-selection/evaluation-metrics/SUMMARY.md) - 校准误差理论 |
+| 基础理论 | [ECE基础](/traditional-ml/model-selection/evaluation-metrics/summary.md) - 校准误差理论 |
 
 ---
 

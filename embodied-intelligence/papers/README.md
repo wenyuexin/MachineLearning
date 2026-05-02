@@ -225,7 +225,7 @@
 ### 相关主题
 
 - [Egocentric2Embodiment](../topics/egocentric/README.md) - 从人类视频到机器人技能
-- [SUMMARY.md](../SUMMARY.md) - 具身智能领域技术总结
+- [summary.md](../summary.md) - 具身智能领域技术总结
 
 ---
 

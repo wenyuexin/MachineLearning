@@ -18,7 +18,7 @@
 
 ## 领域概览
 
-详见 [SUMMARY.md](./SUMMARY.md)
+详见 [summary.md](./summary.md)
 
 ---
 

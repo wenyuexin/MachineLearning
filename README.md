@@ -2,6 +2,33 @@
 
 机器学习与人工智能学习笔记
 
+## 层级关系
+
+```
+基础方法层：
+├── traditional-ml/          # 传统机器学习
+├── deep-learning/           # 深度学习基础
+└── reinforce-learning/      # 强化学习
+
+核心领域层：
+├── llm/                     # 大语言模型
+├── cv/                      # 计算机视觉
+└── knowledge-graph/         # 知识图谱
+
+应用与集成层：
+├── rag/                     # 检索增强生成（LLM + 外部知识）
+├── agentic/                 # AI智能体（LLM驱动的自主系统）
+├── world-models/            # 世界模型（环境建模与预测）
+└── embodied-intelligence/   # 具身智能（物理世界落地）
+
+基础设施层：
+└── training-infra/          # 训练基础设施（分布式训练、显存优化）
+
+支撑资源：
+├── learning-materials/      # 学习资料与书籍推荐
+└── asserts/                 # 图片、脚本等资源文件
+```
+
 ## 目录结构
 
 ```
@@ -51,6 +78,10 @@ machine-learning/
 │   ├── architectures/           # 基础架构（CNN、RNN、Transformer等）
 │   ├── foundations/             # 训练技巧、优化方法
 │   └── generative/              # 生成模型（GAN、VAE、Diffusion）
+│
+├── reinforce-learning/          # 强化学习
+│   ├── fundation/               # 基础理论
+│   └── policy-optimization/     # 策略优化（PPO、TRPO等）
 │
 ├── cv/                          # 计算机视觉
 │   ├── traditional/             # 传统方法（SIFT、HOG、Canny等）
@@ -103,9 +134,25 @@ machine-learning/
 │       ├── video/               # 视频语言模型
 │       └── any2any/             # 全模态模型
 │
-├── reinforce-learning/          # 强化学习
-│   ├── fundation/               # 基础理论
-│   └── policy-optimization/     # 策略优化（PPO、TRPO等）
+├── rag/                         # 检索增强生成
+│   ├── architectures/           # RAG架构范式
+│   │   ├── naive-rag/           # 基础RAG
+│   │   ├── advanced-rag/        # 高级RAG
+│   │   ├── modular-rag/         # 模块化RAG
+│   │   └── graph-rag/           # 图增强RAG
+│   ├── retrieval/               # 检索技术
+│   │   ├── embedding-models/    # Embedding模型
+│   │   ├── vector-store/        # 向量数据库
+│   │   ├── hybrid-retrieval/    # 混合检索
+│   │   └── reranking/           # 重排序
+│   ├── context/                 # 上下文管理
+│   │   ├── context-compression/ # 上下文压缩
+│   │   └── context-selection/   # 片段选择
+│   ├── evaluation/              # RAG评估
+│   │   ├── ragas/               # RAGAS框架
+│   │   ├── benchmark-datasets/  # 评测数据集
+│   │   └── metrics/             # 评估指标
+│   └── papers/                  # 论文笔记
 │
 ├── agentic/                     # AI智能体
 │   ├── 00-overview/             # 概述
@@ -118,6 +165,19 @@ machine-learning/
 │   ├── 07-evaluation-and-safety/# 评估与安全
 │   ├── 08-projects/             # 项目实践
 │   └── 09-papers/               # 论文笔记
+│
+├── knowledge-graph/             # 知识图谱
+│   ├── foundations/             # 基础理论
+│   ├── knowledge-representation/# 知识表示（RDF、OWL、属性图）
+│   ├── knowledge-extraction/    # 知识抽取（NER、关系抽取）
+│   ├── knowledge-fusion/        # 知识融合（实体对齐、消解）
+│   ├── knowledge-storage/       # 知识存储（Neo4j、SPARQL）
+│   ├── knowledge-reasoning/     # 知识推理
+│   ├── knowledge-graph-construction/  # 知识图谱构建
+│   ├── llm-kg-integration/      # LLM与知识图谱结合（GraphRAG）
+│   ├── datasets/                # 数据集（Freebase、Wikidata）
+│   ├── tools/                   # 工具与框架
+│   └── papers/                  # 论文笔记
 │
 ├── embodied-intelligence/       # 具身智能
 │   ├── applications/            # 应用场景
@@ -136,19 +196,6 @@ machine-learning/
 │   ├── training/                # 训练方法
 │   └── papers/                  # 论文笔记
 │
-├── knowledge-graph/             # 知识图谱
-│   ├── foundations/             # 基础理论
-│   ├── knowledge-representation/# 知识表示（RDF、OWL、属性图）
-│   ├── knowledge-extraction/    # 知识抽取（NER、关系抽取）
-│   ├── knowledge-fusion/        # 知识融合（实体对齐、消解）
-│   ├── knowledge-storage/       # 知识存储（Neo4j、SPARQL）
-│   ├── knowledge-reasoning/     # 知识推理
-│   ├── knowledge-graph-construction/  # 知识图谱构建
-│   ├── llm-kg-integration/      # LLM与知识图谱结合（GraphRAG）
-│   ├── datasets/                # 数据集（Freebase、Wikidata）
-│   ├── tools/                   # 工具与框架
-│   └── papers/                  # 论文笔记
-│
 ├── training-infra/              # 训练基础设施
 │   ├── distributed-training/    # 分布式训练
 │   ├── optimization/            # 训练优化
@@ -160,29 +207,10 @@ machine-learning/
 │
 ├── learning-materials/          # 学习资料
 │
-└── assets/                     # 资源文件
+└── asserts/                     # 资源文件
     ├── images/                  # 图片
     ├── scripts/                 # 脚本
     └── test/                    # 测试
-```
-
-## 层级关系
-
-```
-层级 1：基础模型
-└── LLM：语言智能核心
-
-层级 2：学习范式（跨领域方法）
-└── Reinforce Learning：通过交互学习
-
-层级 3：应用形态
-└── Agentic：LLM驱动的自主智能体
-
-层级 4：物理落地
-└── Embodied Intelligence：智能体 + 物理身体
-
-横向支撑：
-└── World Models：环境建模与预测
 ```
 
 ## 声明

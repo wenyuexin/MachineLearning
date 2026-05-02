@@ -173,7 +173,7 @@
 #### 4. 元强化学习（Meta-RL）
 
 - **核心内容**：  
-  - 学习“如何快速学习”，适应新任务（如MAML算法）。  
+  - 学习"如何快速学习"，适应新任务（如MAML算法）。  
   - 上下文适应（Context Adaptation）：通过隐变量编码任务特征。  
 - **实践**：  
   - 在Meta-World环境中实现MAML，解决多任务机器人操作问题（如Button Press、Door Open）。  
@@ -181,6 +181,20 @@
 - **资源**：  
   - 论文：《Model-Agnostic Meta-Learning for Fast Adaptation of Deep Networks》（ICML 2017）  
   - 代码：GitHub《Meta-RL》仓库中的MAML实现
+
+#### 5. 强化学习在大模型中的应用
+
+- **核心内容**：  
+  - RLHF（基于人类反馈的强化学习）：PPO、Reward Modeling、KL散度约束。  
+  - RLAIF（AI反馈强化学习）：Constitutional AI、自动化反馈。  
+  - 偏好优化替代方案：DPO、KTO、IPO（无需显式奖励模型）。  
+- **实践**：  
+  - 阅读 InstructGPT、Constitutional AI 论文，理解 RLHF 三阶段流程。  
+  - 对比 PPO 与 DPO 在 LLM 对齐中的差异。  
+- **资源**：  
+  - 论文：《Training language models to follow instructions with human feedback》（InstructGPT, NeurIPS 2022）  
+  - 项目：[llm/post-training/rlhf/](../../llm/post-training/rlhf/) — LLM 中的 RLHF 实践  
+  - 项目：[llm/post-training/dpo/](../../llm/post-training/dpo/) — DPO 偏好优化
 
 # 五、学习资源与社区推荐
 

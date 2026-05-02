@@ -6,8 +6,8 @@
 
 ```
 预训练模型 → SFT → 偏好对齐
-                      ├── DPO
-                      ├── RLHF (PPO)
+                      ├── DPO（无需 RL 基础）
+                      ├── RLHF (PPO) ← 需先学 reinforce-learning/policy-optimization/
                       └── 其他方法 (KTO, IPO, SimPO...)
 ```
 

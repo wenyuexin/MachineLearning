@@ -26,7 +26,7 @@ embodied_intelligence/
 
 | 文档 | 内容说明 |
 |------|----------|
-| [**SUMMARY.md**](./SUMMARY.md) | 具身智能领域技术总结，包含核心技术、研究方向与发展趋势 |
+| [**summary.md**](./summary.md) | 具身智能领域技术总结，包含核心技术、研究方向与发展趋势 |
 
 ---
 
@@ -58,7 +58,7 @@ embodied_intelligence/
 
 ## 快速导航
 
-- **技术总结**: [`SUMMARY.md`](./SUMMARY.md)
+- **技术总结**: [`summary.md`](./summary.md)
 - **论文精读**: [`papers/`](./papers/)
 - **模型架构**: [`models/README.md`](./models/README.md)
 - **数据集**: [`datasets/README.md`](./datasets/README.md)
