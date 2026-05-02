@@ -1,23 +1,19 @@
 <div align="center">
-  <!-- 尺寸增大的静态Logo -->
-  <img src="https://img.shields.io/static/v1?label=&message=MACHINE%20LEARNING&color=1a237e&style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMTUwIj48cmVjdCB3aWR0aD0iMzAwIiBoZWlnaHQ9IjE1MCIgZmlsbD0iIzFhMjM3ZSIvPjxjaXJjbGUgY3g9IjQwIiBjeT0iNTAiIHI9IjEwIiBmaWxsPSIjMDBlNWZmIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iNTAiIHI9IjEwIiBmaWxsPSIjMDBlNWZmIi8+PGNpcmNsZSBjeD0iMTYwIiBjeT0iNTAiIHI9IjEwIiBmaWxsPSIjMDBlNWZmIi8+PHBhdGggZD0iTTQ1IDUwTDY1IDUwTTY1IDUwTDEwMCA1ME0xMDAgNTBMMTYwIDUwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==" alt="ML Logo">
+  <!-- 顶部 Logo  -->
+  <h1>🧠 Machine Learning & AI 学习笔记</h1>
+  <p><strong>个人学习仓库 · 持续更新中</strong></p>
   
-  <!-- 精选徽章组合 -->
+  <!-- 工程化状态 -->
   <p>
-    <img src="https://img.shields.io/github/stars/wenyuexin/machine-learning?style=flat-square&label=Stars&color=00e5ff" alt="Stars">
-    <img src="https://img.shields.io/github/forks/wenyuexin/machine-learning?style=flat-square&label=Forks&color=00e5ff" alt="Forks">
-    <img src="https://img.shields.io/github/actions/workflow/status/wenyuexin/machine-learning/ci.yml?branch=main&style=flat-square&label=CI" alt="CI Status">
+    <img src="https://img.shields.io/badge/Last%20Update-2024%2F03%2F15-informational?style=flat-square" alt="Last Update">
+    <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License">
+    <img src="https://img.shields.io/badge/Status-Learning%20In%20Progress-yellow?style=flat-square" alt="Status">
   </p>
-  <p>
-    <img src="https://img.shields.io/github/license/wenyuexin/machine-learning?style=flat-square&label=License" alt="License">
-    <img src="https://img.shields.io/github/issues-pr/wenyuexin/machine-learning?style=flat-square&label=PRs" alt="PRs">
-  </p>
-  
 </div>
 
+---
 
 
-机器学习与人工智能学习笔记
 
 ## 层级关系
 
