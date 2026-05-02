@@ -1,11 +1,11 @@
-# MachineLearning
+# Machine Learning
 
 机器学习与人工智能学习笔记
 
 ## 目录结构
 
 ```
-MachineLearning/
+machine-learning/
 │
 ├── traditional-ml/              # 传统机器学习
 │   ├── supervised/              # 监督学习
@@ -77,13 +77,26 @@ MachineLearning/
 │   │   ├── deepseek/            # DeepSeek系列
 │   │   ├── mistral/             # Mistral系列
 │   │   └── gemma/               # Gemma系列
-│   ├── pretraining/             # 预训练
-│   ├── sft/                     # 监督微调
-│   ├── dpo/                     # 直接偏好优化
-│   ├── rlhf/                    # 人类反馈强化学习
-│   ├── prompt/                  # Prompt工程
-│   ├── inference/               # 推理优化
+│   ├── pre-training/            # 预训练
+│   │   └── tokenization/        # 分词
+│   ├── post-training/           # 后训练（SFT + 对齐）
+│   │   ├── sft/                 # 监督微调
+│   │   ├── dpo/                 # 直接偏好优化
+│   │   └── rlhf/                # 人类反馈强化学习
+│   ├── inference/               # 推理与使用
+│   │   ├── prompt-engineering/  # Prompt工程
 │   │   └── decoding/            # 解码策略
+│   ├── explainability/          # 可解释性
+│   │   ├── mechanistic/         # 机制可解释性
+│   │   ├── attribution/         # 归因方法
+│   │   ├── probing/             # 探测技术
+│   │   └── counterfactual/      # 反事实解释
+│   ├── evaluation/              # 模型评估
+│   │   ├── benchmarks/          # 综合评估基准
+│   │   ├── calibration/         # 校准与不确定性量化
+│   │   ├── reasoning/           # 推理能力评估
+│   │   ├── safety/              # 安全评估
+│   │   └── generation/          # 生成质量评估
 │   └── multimodal/              # 多模态大模型
 │       ├── vlm/                 # 视觉语言模型
 │       ├── audio/               # 音频语言模型
@@ -92,7 +105,7 @@ MachineLearning/
 │
 ├── reinforce-learning/          # 强化学习
 │   ├── fundation/               # 基础理论
-│   └── policy-otimization/      # 策略优化（PPO、TRPO等）
+│   └── policy-optimization/     # 策略优化（PPO、TRPO等）
 │
 ├── agentic/                     # AI智能体
 │   ├── 00-overview/             # 概述
@@ -147,7 +160,7 @@ MachineLearning/
 │
 ├── learning-materials/          # 学习资料
 │
-└── assets/                      # 资源文件
+└── assets/                     # 资源文件
     ├── images/                  # 图片
     ├── scripts/                 # 脚本
     └── test/                    # 测试
