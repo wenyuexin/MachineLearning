@@ -1,5 +1,27 @@
 # Machine Learning
 
+<div align="center">
+  <!-- 静态Logo -->
+  <img src="https://img.shields.io/static/v1?label=&message=MACHINE%20LEARNING&color=1a237e&style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iIzFhMjM3ZSIvPjxjaXJjbGUgY3g9IjQwIiBjeT0iNTAiIHI9IjEwIiBmaWxsPSIjMDBlNWZmIi8+PGNpcmNsZSBjeD0iMTAwIiBjeT0iNTAiIHI9IjEwIiBmaWxsPSIjMDBlNWZmIi8+PGNpcmNsZSBjeD0iMTYwIiBjeT0iNTAiIHI9IjEwIiBmaWxsPSIjMDBlNWZmIi8+PHBhdGggZD0iTTQ1IDUwTDY1IDUwTTY1IDUwTDEwMCA1ME0xMDAgNTBMMTYwIDUwIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==" alt="ML Logo">
+  
+  <!-- Badges行1 -->
+  <p>
+    <img src="https://img.shields.io/github/stars/wenyuexin/machine-learning?style=flat-square&label=Stars&color=00e5ff" alt="Stars">
+    <img src="https://img.shields.io/github/forks/wenyuexin/machine-learning?style=flat-square&label=Forks&color=00e5ff" alt="Forks">
+    <img src="https://img.shields.io/github/issues/wenyuexin/machine-learning?style=flat-square&label=Issues&color=00e5ff" alt="Issues">
+  </p>
+  
+  <!-- Badges行2（可选） -->
+  <p>
+    <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square" alt="License">
+    <img src="https://img.shields.io/badge/Python-3.8%2B-brightgreen.svg?style=flat-square" alt="Python">
+    <img src="https://img.shields.io/github/last-commit/wenyuexin/machine-learning?style=flat-square&label=Updated" alt="Last Commit">
+  </p>
+  
+  <h1>Advanced ML Projects</h1>
+</div>
+
+
 机器学习与人工智能学习笔记
 
 ## 层级关系
