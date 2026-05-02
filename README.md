@@ -1,19 +1,25 @@
 <div align="center">
-  <!-- 顶部 Logo  -->
-  <h1>🧠 Machine Learning & AI 学习笔记</h1>
-  <p><strong>个人学习仓库 · 持续更新中</strong></p>
+  <!-- 顶部 Logo: 使用 SVG 占位符，无需外部图片，加载极快 -->
+  <img src="https://svg-generator.netlify.app/api/svg?text=ML+Learning+Notes&bg=1a237e&color=00e5ff&weight=bold" alt="ML Logo" width="350">
   
-  <!-- 工程化状态 -->
+  <h1>🧠 Machine Learning Study Notes</h1>
   <p>
-    <img src="https://img.shields.io/badge/Last%20Update-2024%2F03%2F15-informational?style=flat-square" alt="Last Update">
+    <strong>个人机器学习/深度学习/NLP/CV 学习笔记仓库</strong><br>
+    <em>涵盖基础理论、算法实现、论文阅读与工程实践</em>
+  </p>
+
+  <!-- 核心状态栏: 仅保留动态更新时间和必要状态，无 Star/Fork -->
+  <p>
+    <!-- 动态获取最后提交时间 -->
+    <img src="https://img.shields.io/github/last-commit/wenyuexin/machine-learning?style=flat-square&label=Last%20Update&color=00bcd4" alt="Last Commit">
+    <!-- 静态徽章 -->
     <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License">
-    <img src="https://img.shields.io/badge/Status-Learning%20In%20Progress-yellow?style=flat-square" alt="Status">
+    <img src="https://img.shields.io/badge/Status-Active%20Learning-yellow?style=flat-square" alt="Status">
+    <img src="https://img.shields.io/badge/Format-Markdown-lightgrey?style=flat-square" alt="Format">
   </p>
 </div>
 
 ---
-
-
 
 ## 层级关系
 
