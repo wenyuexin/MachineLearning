@@ -1,22 +1,37 @@
 <div align="center">
-  <!-- 顶部 Logo: 使用 SVG 占位符，无需外部图片，加载极快 -->
-  <img src="https://svg-generator.netlify.app/api/svg?text=ML+Learning+Notes&bg=1a237e&color=00e5ff&weight=bold" alt="ML Logo" width="350">
-  
+  <!-- Logo: 使用内联SVG，无需外部图片，绝对不会404 -->
+  <!-- 这是一个大脑+电路的简约图标 -->
+  <a href="https://github.com/wenyuexin/machine-learning">
+    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCI+CiAgPHJlY3Qgd2lkdGg9IjEwMCIgaGVpZ2h0PSIxMDAiIGZpbGw9IiMxYTIzN2UiIHJ4PSIxNSIvPgogIDxjaXJjbGUgY3g9IjMwIiBjeT0iNTAiIHI9IjEwIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIwLjgiLz4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxNSIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iMC45Ii8+CiAgPGNpcmNsZSBjeD0iNzAiIGN5PSI1MCIgcj0iMTAiIGZpbGw9IiNmZmYiIG9wYWNpdHk9IjAuOCIvPgogIDxwYXRoIGQ9Ik0zMCA1MCBMNTAgMzAgTDcwIDUwIiBzdHJva2U9IiMwMGU1ZmYiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIvPgogIDxwYXRoIGQ9Ik0zMCA1MCBMNTAgNzAgTDcwIDUwIiBzdHJva2U9IiMwMGU1ZmYiIHN0cm9rZS13aWR0aD0iMyIgZmlsbD0ibm9uZSIvPgogIDx0ZXh0IHg9IjUwIiB5PSI4MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjE0IiBmaWxsPSIjMDBlNWZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmb250LXdlaWdodD0iYm9sZCI+TUw8L3RleHQ+Cjwvc3ZnPg==" alt="ML Logo" width="80" height="80">
+  </a>
+
   <h1>🧠 Machine Learning Study Notes</h1>
   <p>
     <strong>个人机器学习/深度学习/NLP/CV 学习笔记仓库</strong><br>
     <em>涵盖基础理论、算法实现、论文阅读与工程实践</em>
   </p>
 
-  <!-- 核心状态栏: 仅保留动态更新时间和必要状态，无 Star/Fork -->
-  <p>
-    <!-- 动态获取最后提交时间 -->
-    <img src="https://img.shields.io/github/last-commit/wenyuexin/machine-learning?style=flat-square&label=Last%20Update&color=00bcd4" alt="Last Commit">
-    <!-- 静态徽章 -->
-    <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License">
-    <img src="https://img.shields.io/badge/Status-Active%20Learning-yellow?style=flat-square" alt="Status">
-    <img src="https://img.shields.io/badge/Format-Markdown-lightgrey?style=flat-square" alt="Format">
-  </p>
+  <!-- 核心状态栏: 使用表格布局保证对齐 -->
+  <table align="center" style="border: none;">
+    <tr>
+      <td>
+        <!-- 动态最后更新时间 -->
+        <img src="https://img.shields.io/github/last-commit/wenyuexin/machine-learning?style=flat-square&label=Last%20Update&color=00bcd4" alt="Last Commit">
+      </td>
+      <td>
+        <!-- 许可证 -->
+        <img src="https://img.shields.io/badge/License-MIT-blue?style=flat-square" alt="License">
+      </td>
+      <td>
+        <!-- 状态 -->
+        <img src="https://img.shields.io/badge/Status-Active%20Learning-yellow?style=flat-square" alt="Status">
+      </td>
+      <td>
+        <!-- 格式 -->
+        <img src="https://img.shields.io/badge/Format-Markdown-lightgrey?style=flat-square" alt="Format">
+      </td>
+    </tr>
+  </table>
 </div>
 
 ---
