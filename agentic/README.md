@@ -4,49 +4,66 @@
 
 ```
 agentic/
-├── 00-overview/               # 概述
-│   # Agentic AI的基本概念、发展历史、核心范式
+├── 01-core-concepts/                  # 核心概念
+│   ├── definition-and-taxonomy/
+│   ├── reactive-vs-deliberative/
+│   └── cognitive-architectures-intro/
 │
-├── 01-foundations/            # 基础
-│   # Agent的定义、核心组件、与环境交互
+├── 02-cognitive-capabilities/         # 认知能力
+│   ├── planning/
+│   │   ├── task-decomposition/
+│   │   ├── plan-and-execute/
+│   │   └── tree-of-thoughts/
+│   ├── memory/
+│   │   ├── short-term-memory/
+│   │   ├── long-term-memory/
+│   │   └── retrieval-methods/
+│   ├── tool-use/
+│   │   ├── api-calling/
+│   │   ├── code-interpreter/
+│   │   └── web-browsing/
+│   └── self-reflection/
+│       ├── critique-models/
+│       └── iterative-refinement/
 │
-├── 02-core-capabilities/      # 核心能力
-│   # 规划、推理、工具使用、记忆
+├── 03-agent-architectures/            # 智能体架构
+│   ├── single-agent-patterns/
+│   │   ├── react/
+│   │   ├── ra-aid/
+│   │   └── autogpt-pattern/
+│   ├── multi-agent-systems/
+│   │   ├── collaborative/
+│   │   ├── competitive/
+│   │   └── organizational-structures/
+│   └── human-agent-interaction/
 │
-├── 03-architectures/          # 架构
-│   # ReAct、Reflexion、LATS等Agent架构
+├── 04-environment-and-simulation/     # 环境与仿真
+│   ├── simulated-environments/
+│   ├── sandboxing-and-safety/
+│   └── benchmarking-frameworks/
 │
-├── 04-memory-and-tools/       # 记忆与工具
-│   # 短期/长期记忆、工具设计、API调用
+├── 05-frameworks-and-tools/           # 框架与工具
+│   ├── langchain-agents/
+│   ├── autogen/
+│   ├── crewai/
+│   └── custom-agent-dev/
 │
-├── 05-multi-agent/            # 多智能体
-│   # 协作、竞争、通信协议、AutoGen、MetaGPT
-│
-├── 06-applications/           # 应用
-│   # 代码生成、数据分析、自动化任务
-│
-├── 07-evaluation-and-safety/  # 评估与安全
-│   # Agent评估基准、安全性、对齐
-│
-├── 08-projects/               # 项目实践
-│   └── hermes-agent/
-│
-└── 09-papers/                 # 论文笔记
-    # Agent领域核心论文
+└── 06-evaluation-and-reliability/     # 评估与可靠性
+    ├── task-completion-metrics/
+    ├── safety-and-robustness/
+    └── human-evaluation/
 ```
 
 ## 学习路径
 
-按编号顺序学习即可：
+按编号顺序学习：
 
 ```
-00-overview → 01-foundations → 02-core-capabilities
-                                      ↓
-03-architectures ← 04-memory-and-tools ← 05-multi-agent
+01-core-concepts → 02-cognitive-capabilities
+                           ↓
+03-agent-architectures ← 04-environment-and-simulation
         ↓
-   06-applications → 07-evaluation-and-safety
-        ↓
-   08-projects (实践) + 09-papers (论文)
+   05-frameworks-and-tools → 06-evaluation-and-reliability
 ```
 
 ## 相关资源

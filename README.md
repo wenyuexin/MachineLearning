@@ -2,8 +2,8 @@
 
   <h1>🧠 Machine Learning Study Notes</h1>
   <p>
-    <strong>个人机器学习/深度学习/NLP/CV 学习笔记仓库</strong><br>
-    <em>涵盖基础理论、算法实现、论文阅读与工程实践</em>
+    <strong>从经典算法到大语言模型：一场结构化的现代机器学习之旅</strong><br>
+    <em>ML / DL / NLP / CV / LLM / RAG / KG</em>
   </p>
 
   <!-- 核心状态栏k -->
@@ -23,27 +23,103 @@
 
 ```
 基础方法层：
-├── traditional-ml/          # 传统机器学习
-├── deep-learning/           # 深度学习基础
-└── reinforce-learning/      # 强化学习
+├── traditional-ml/              # 传统机器学习
+├── deep-learning/               # 深度学习基础
+└── reinforce-learning/          # 强化学习
 
 核心领域层：
-├── llm/                     # 大语言模型
-├── cv/                      # 计算机视觉
-└── knowledge-graph/         # 知识图谱
+├── llm/                         # 大语言模型
+├── cv/                          # 计算机视觉
+└── knowledge-graph/             # 知识图谱
 
 应用与集成层：
-├── rag/                     # 检索增强生成（LLM + 外部知识）
-├── agentic/                 # AI智能体（LLM驱动的自主系统）
-├── world-models/            # 世界模型（环境建模与预测）
-└── embodied-intelligence/   # 具身智能（物理世界落地）
+├── rag/                         # 检索增强生成（LLM + 外部知识）
+├── agentic/                     # AI智能体（LLM驱动的自主系统）
+├── world-models/                # 世界模型（环境建模与预测）
+└── embodied-intelligence/       # 具身智能（物理世界落地）
 
 基础设施层：
-└── training-infra/          # 训练基础设施（分布式训练、显存优化）
+└── training-infra/              # 训练基础设施
 
 支撑资源：
-├── learning-materials/      # 学习资料与书籍推荐
-└── asserts/                 # 图片、脚本等资源文件
+├── learning-materials/          # 学习资料与书籍推荐
+└── asserts/                     # 图片、脚本等资源文件
+```
+
+## 知识体系
+
+```mermaid
+flowchart LR
+  %% ========== 基础理论层 ==========
+  subgraph Foundation [基础理论层]
+    direction LR
+    TM[传统机器学习] --> DL[深度学习] --> RL[强化学习]
+  end
+
+  %% ========== 核心领域层 ==========
+  subgraph Core [核心领域层]
+    direction LR
+    CV[计算机视觉]
+    LLM[大语言模型]
+    KG[知识图谱]
+    CV --> LLM --> KG
+  end
+
+  %% ========== 应用与整合层 ==========
+  subgraph App [应用与整合层]
+    direction LR
+    RAG[检索增强生成] --> AG[AI智能体] --> EI[具身智能]
+    WM[世界模型] --> EI
+  end
+
+  %% ========== LLM 扩展 ==========
+  subgraph Ext [LLM 扩展]
+    direction TB
+    LLM_EX[可解释性]
+    LLM_MM[多模态]
+  end
+
+  %% ========== 支撑与资源 ==========
+  subgraph Support [支撑与资源]
+    LM[学习资料]
+    TI[训练基础设施]
+  end
+
+  %% -------- 基础 → 核心（分组对齐，减少远距离穿越）--------
+  DL --> CV
+  DL --> LLM
+  RL --> AG
+  RL --> WM
+  DL --> EI
+
+  %% -------- 核心 → 应用（LLM 与 RAG、AG 紧贴排列）--------
+  LLM --> RAG
+  LLM --> AG
+  LLM --> EI
+
+  %% -------- 应用内横向，已通过顺序优化（RAG→AG→EI）--------
+  AG --> RAG
+
+  %% -------- 核心与应用间特殊连接 --------
+  LLM --> KG
+  AG --> KG
+  KG -.-> EI
+
+  %% -------- 强化学习补充 --------
+  RL --> EI
+
+  %% -------- LLM 扩展 --------
+  LLM_EX -.-> LLM
+  LLM_MM -.-> LLM
+  LLM_MM -.-> CV
+
+  %% -------- 支撑（仅保留关键训练链路）--------
+  TI --> DL
+  TI --> LLM
+  TI --> RL
+
+  %% 学习资料全局引用，用一条虚线指向基础层
+  LM -.-> Foundation
 ```
 
 ## 目录结构
@@ -52,182 +128,147 @@
 machine-learning/
 │
 ├── traditional-ml/              # 传统机器学习
-│   ├── supervised/              # 监督学习
-│   │   ├── classification/      # 分类（SVM、决策树等）
-│   │   └── regression/          # 回归（线性回归、岭回归等）
-│   ├── unsupervised/            # 无监督学习
-│   │   ├── clustering/          # 聚类（K-means、DBSCAN等）
-│   │   └── dimensionality-reduction/  # 降维（PCA、t-SNE等）
-│   ├── semi-supervised/         # 半监督学习
-│   │   ├── self-training/       # 自训练
-│   │   ├── co-training/         # 协同训练
-│   │   ├── pseudo-labeling/     # 伪标签
-│   │   └── consistency-regularization/  # 一致性正则化
-│   ├── self-supervised/         # 自监督学习
-│   │   ├── contrastive-learning/  # 对比学习
-│   │   ├── masked-modeling/     # 掩码预测
-│   │   └── pretext-tasks/       # 代理任务
-│   ├── ensemble/                # 集成学习（Bagging、Boosting、Stacking）
-│   ├── probabilistic/           # 概率图模型
-│   │   ├── bayesian-networks/   # 贝叶斯网络
-│   │   ├── hmm/                 # 隐马尔可夫模型
-│   │   ├── crf/                 # 条件随机场
-│   │   └── gaussian-processes/  # 高斯过程
-│   ├── kernel-methods/          # 核方法
-│   │   ├── kernel-trick/        # 核技巧
-│   │   ├── kernel-pca/          # 核PCA
-│   │   └── rkhs/                # 再生核希尔伯特空间
-│   ├── feature-engineering/     # 特征工程
-│   │   ├── feature-selection/   # 特征选择
-│   │   ├── feature-extraction/  # 特征提取
-│   │   └── encoding/            # 编码方法
-│   ├── model-selection/         # 模型选择与评估
-│   │   ├── cross-validation/    # 交叉验证
-│   │   ├── hyperparameter-tuning/  # 超参搜索
-│   │   └── evaluation-metrics/  # 评估指标
-│   └── time-series/             # 时间序列
-│       ├── arima/               # ARIMA
-│       ├── exponential-smoothing/  # 指数平滑
-│       ├── prophet/             # Prophet
-│       └── anomaly-detection/   # 异常检测
+│   ├── 01-fundamentals/         # 数学基础
+│   │   ├── linear-algebra/   # 线性代数
+│   │   ├── probability-and-statistics/ # 概率论与统计
+│   │   └── optimization/     # 优化理论
+│   ├── 02-supervised-learning/  # 监督学习
+│   │   ├── linear-models/    # 线性模型
+│   │   ├── tree-based-models/ # 树模型
+│   │   ├── svm/              # 支持向量机
+│   │   └── knn/              # K近邻
+│   ├── 03-unsupervised-learning/# 无监督学习
+│   │   ├── clustering/       # 聚类算法
+│   │   └── dimensionality-reduction/ # 降维方法
+│   ├── 04-practical-ml/         # 实践方法
+│   │   ├── feature-engineering/ # 特征工程
+│   │   ├── model-selection-and-tuning/ # 模型选择与调优
+│   │   ├── ensemble-methods/ # 集成方法
+│   │   ├── imbalanced-learning/ # 不平衡学习
+│   │   └── interpretability/ # 可解释性
+│   ├── 05-time-series/          # 时间序列
+│   │   ├── classical-methods/ # 经典方法
+│   │   ├── machine-learning-approaches/ # 机器学习方法
+│   │   └── deep-learning-for-ts/ # 深度学习时序
+│   └── 06-probabilistic-graphical-models/  # 概率图模型
+│       ├── bayesian-networks/ # 贝叶斯网络
+│       └── markov-random-fields/ # 马尔可夫随机场
 │
 ├── deep-learning/               # 深度学习基础
-│   ├── architectures/           # 基础架构（CNN、RNN、Transformer等）
-│   ├── foundations/             # 训练技巧、优化方法
-│   └── generative/              # 生成模型（GAN、VAE、Diffusion）
+│   ├── 01-neural-network-fundamentals/ # 神经网络基础
+│   ├── 02-training-and-optimization/ # 训练与优化
+│   ├── 03-architectures-by-domain/ # 按领域划分的架构
+│   │   ├── cnns/             # 卷积神经网络
+│   │   ├── rnns-and-sequence-models/ # 循环神经网络与序列模型
+│   │   ├── transformers/     # Transformer
+│   │   └── generative-models/ # 生成模型
+│   ├── 04-advanced-topics/   # 进阶主题
+│   └── 05-deep-learning-infra/ # 深度学习基础设施
 │
 ├── reinforce-learning/          # 强化学习
-│   ├── fundation/               # 基础理论
-│   └── policy-optimization/     # 策略优化（PPO、TRPO等）
+│   ├── 01-fundamentals/      # 基础概念
+│   ├── 02-model-free-rl/     # 无模型强化学习
+│   ├── 03-policy-based-and-actor-critic/ # 基于策略与Actor-Critic
+│   ├── 04-model-based-rl/    # 基于模型的强化学习
+│   ├── 05-advanced-and-applied-rl/ # 进阶与应用
+│   └── 06-evaluation-and-tools/ # 评估与工具
 │
 ├── cv/                          # 计算机视觉
-│   ├── traditional/             # 传统方法（SIFT、HOG、Canny等）
-│   ├── deep-learning/           # 深度学习方法
-│   │   ├── architectures/       # 网络架构（ResNet、ViT等）
-│   │   ├── classification/      # 图像分类
-│   │   ├── detection/           # 目标检测（YOLO、Faster R-CNN等）
-│   │   ├── segmentation/        # 图像分割（UNet、SAM等）
-│   │   ├── pose-estimation/     # 姿态估计
-│   │   ├── face/                # 人脸相关
-│   │   ├── ocr/                 # 文字识别
-│   │   ├── tracking/            # 目标跟踪
-│   │   ├── 3d-vision/           # 3D视觉（NeRF、深度估计）
-│   │   ├── video/               # 视频理解
-│   │   └── generative/          # 图像生成（Stable Diffusion等）
-│   └── applications/            # 应用场景（自动驾驶、医学影像等）
+│   ├── 01-image-fundamentals/ # 图像基础
+│   ├── 02-image-classification/ # 图像分类
+│   ├── 03-object-detection-and-segmentation/ # 目标检测与分割
+│   ├── 04-video-and-3d-vision/ # 视频与3D视觉
+│   ├── 05-generative-and-multimodal/ # 生成与多模态
+│   ├── 06-self-supervised-and-foundation-models/ # 自监督与基础模型
+│   └── 07-applications-and-tools/ # 应用与工具
 │
 ├── llm/                         # 大语言模型
-│   ├── architectures/           # 基础架构（Transformer、Attention、MoE等）
-│   ├── models/                  # 开源模型技术报告
-│   │   ├── gpt/                 # GPT系列
-│   │   ├── llama/               # LLaMA系列
-│   │   ├── qwen/                # Qwen系列
-│   │   ├── deepseek/            # DeepSeek系列
-│   │   ├── mistral/             # Mistral系列
-│   │   └── gemma/               # Gemma系列
-│   ├── pre-training/            # 预训练
-│   │   └── tokenization/        # 分词
-│   ├── post-training/           # 后训练（SFT + 对齐）
-│   │   ├── sft/                 # 监督微调
-│   │   ├── dpo/                 # 直接偏好优化
-│   │   └── rlhf/                # 人类反馈强化学习
-│   ├── inference/               # 推理与使用
-│   │   ├── prompt-engineering/  # Prompt工程
-│   │   └── decoding/            # 解码策略
-│   ├── explainability/          # 可解释性
-│   │   ├── mechanistic/         # 机制可解释性
-│   │   ├── attribution/         # 归因方法
-│   │   ├── probing/             # 探测技术
-│   │   └── counterfactual/      # 反事实解释
-│   ├── evaluation/              # 模型评估
-│   │   ├── benchmarks/          # 综合评估基准
-│   │   ├── calibration/         # 校准与不确定性量化
-│   │   ├── reasoning/           # 推理能力评估
-│   │   ├── safety/              # 安全评估
-│   │   └── generation/          # 生成质量评估
-│   └── multimodal/              # 多模态大模型
-│       ├── vlm/                 # 视觉语言模型
-│       ├── audio/               # 音频语言模型
-│       ├── video/               # 视频语言模型
-│       └── any2any/             # 全模态模型
+│   ├── 01-foundations/       # 基础
+│   │   ├── transformer-architecture/ # Transformer架构
+│   │   ├── tokenization/     # 分词
+│   │   └── scaling-laws/     # 缩放定律
+│   ├── 02-model-zoo/         # 模型全景
+│   │   ├── open-source-models/ # 开源模型
+│   │   ├── architectural-variants/ # 架构变体
+│   │   └── emergent-abilities/ # 涌现能力
+│   ├── 03-training/          # 训练
+│   │   ├── pre-training/     # 预训练
+│   │   ├── fine-tuning/      # 微调
+│   │   └── alignment/        # 对齐
+│   ├── 04-inference-and-deployment/ # 推理与部署
+│   │   ├── optimization-techniques/ # 优化技术
+│   │   ├── serving-frameworks/ # Serving框架
+│   │   └── prompt-engineering/ # 提示工程
+│   ├── 05-evaluation/        # 评估
+│   │   ├── benchmarks/       # 基准测试
+│   │   ├── evaluation-methods/ # 评估方法
+│   │   └── evaluation-frameworks/ # 评估框架
+│   ├── 06-applications-and-ethics/ # 应用与伦理
+│   ├── 07-explainability/    # 可解释性
+│   └── 08-multimodal/        # 多模态
 │
 ├── rag/                         # 检索增强生成
-│   ├── architectures/           # RAG架构范式
-│   │   ├── naive-rag/           # 基础RAG
-│   │   ├── advanced-rag/        # 高级RAG
-│   │   ├── modular-rag/         # 模块化RAG
-│   │   └── graph-rag/           # 图增强RAG
-│   ├── retrieval/               # 检索技术
-│   │   ├── embedding-models/    # Embedding模型
-│   │   ├── vector-store/        # 向量数据库
-│   │   ├── hybrid-retrieval/    # 混合检索
-│   │   └── reranking/           # 重排序
-│   ├── context/                 # 上下文管理
-│   │   ├── context-compression/ # 上下文压缩
-│   │   └── context-selection/   # 片段选择
-│   ├── evaluation/              # RAG评估
-│   │   ├── ragas/               # RAGAS框架
-│   │   ├── benchmark-datasets/  # 评测数据集
-│   │   └── metrics/             # 评估指标
-│   └── papers/                  # 论文笔记
+│   ├── 01-fundamentals/      # 基础概念
+│   ├── 02-indexing-and-retrieval/ # 索引与检索
+│   ├── 03-generation-and-augmentation/ # 生成与增强
+│   ├── 04-advanced-rag-patterns/ # 高级RAG模式
+│   ├── 05-evaluation-and-benchmarks/ # 评估与基准
+│   └── 06-production-and-ecosystem/ # 生产与生态
 │
 ├── agentic/                     # AI智能体
-│   ├── 00-overview/             # 概述
-│   ├── 01-foundations/          # 基础
-│   ├── 02-core-capabilities/    # 核心能力
-│   ├── 03-architectures/        # 架构
-│   ├── 04-memory-and-tools/     # 记忆与工具
-│   ├── 05-multi-agent/          # 多智能体
-│   ├── 06-applications/         # 应用
-│   ├── 07-evaluation-and-safety/# 评估与安全
-│   ├── 08-projects/             # 项目实践
-│   └── 09-papers/               # 论文笔记
+│   ├── 01-core-concepts/     # 核心概念
+│   ├── 02-cognitive-capabilities/ # 认知能力
+│   ├── 03-agent-architectures/ # 智能体架构
+│   ├── 04-environment-and-simulation/ # 环境与仿真
+│   ├── 05-frameworks-and-tools/ # 框架与工具
+│   └── 06-evaluation-and-reliability/ # 评估与可靠性
 │
 ├── knowledge-graph/             # 知识图谱
-│   ├── foundations/             # 基础理论
-│   ├── knowledge-representation/# 知识表示（RDF、OWL、属性图）
-│   ├── knowledge-extraction/    # 知识抽取（NER、关系抽取）
-│   ├── knowledge-fusion/        # 知识融合（实体对齐、消解）
-│   ├── knowledge-storage/       # 知识存储（Neo4j、SPARQL）
-│   ├── knowledge-reasoning/     # 知识推理
-│   ├── knowledge-graph-construction/  # 知识图谱构建
-│   ├── llm-kg-integration/      # LLM与知识图谱结合（GraphRAG）
-│   ├── datasets/                # 数据集（Freebase、Wikidata）
-│   ├── tools/                   # 工具与框架
-│   └── papers/                  # 论文笔记
+│   ├── 01-representation/    # 知识表示
+│   ├── 02-construction/      # 知识构建
+│   ├── 03-storage-and-query/ # 存储与查询
+│   ├── 04-reasoning/         # 知识推理
+│   ├── 05-applications/      # 应用
+│   └── 06-quality-and-evolution/ # 质量与演化
 │
 ├── embodied-intelligence/       # 具身智能
-│   ├── applications/            # 应用场景
-│   ├── datasets/                # 数据集
-│   ├── learning-methods/        # 学习方法
-│   ├── models/                  # 模型
-│   ├── papers/                  # 论文
-│   └── topics/                  # 细分主题
+│   ├── 01-foundations/       # 基础
+│   ├── 02-perception-in-the-loop/ # 感知闭环
+│   ├── 03-motor-control-and-policies/ # 运动控制与策略
+│   ├── 04-planning-and-navigation/ # 规划与导航
+│   ├── 05-manipulation-and-interaction/ # 操作与交互
+│   ├── 06-large-models-for-embodiment/ # 大模型驱动具身
+│   └── 07-evaluation-and-benchmarks/ # 评估与基准
 │
 ├── world-models/                # 世界模型
-│   ├── foundations/             # 基础理论
-│   ├── architectures/           # 模型架构
-│   ├── algorithms/              # 核心算法（Dreamer、MuZero等）
-│   ├── applications/            # 应用场景
-│   ├── video-generation/        # 视频生成（Sora、Genie等）
-│   ├── training/                # 训练方法
-│   └── papers/                  # 论文笔记
+│   ├── 01-foundations/       # 基础
+│   ├── 02-methods-and-architectures/ # 方法与架构
+│   ├── 03-world-models-for-reasoning/ # 推理用世界模型
+│   ├── 04-large-scale-world-models/ # 大规模世界模型
+│   ├── 05-evaluation/        # 评估
+│   └── 06-applications/      # 应用
 │
 ├── training-infra/              # 训练基础设施
-│   ├── distributed-training/    # 分布式训练
-│   ├── optimization/            # 训练优化
-│   ├── frameworks/              # 训练框架（Megatron、DeepSpeed等）
-│   ├── hardware/                # 硬件相关
-│   ├── memory-management/       # 显存管理
-│   ├── fault-tolerance/         # 容错机制
-│   └── communication/           # 通信优化
+│   ├── 01-hardware-and-networking/ # 硬件与网络
+│   ├── 02-distributed-training/ # 分布式训练
+│   ├── 03-training-frameworks-and-tools/ # 训练框架与工具
+│   ├── 04-memory-and-storage-optimization/ # 内存与存储优化
+│   ├── 05-model-compilation-and-kernels/ # 模型编译与内核
+│   ├── 06-experiment-tracking-and-operations/ # 实验追踪与运维
+│   └── 07-observability-and-debugging/ # 可观测性与调试
 │
 ├── learning-materials/          # 学习资料
+│   ├── 01-books/             # 书籍
+│   ├── 02-courses-and-lectures/ # 课程与讲座
+│   ├── 03-papers-and-surveys/ # 论文与综述
+│   ├── 04-blogs-and-technical-guides/ # 博客与技术指南
+│   ├── 05-tools-and-frameworks-quickstart/ # 工具与框架快速入门
+│   ├── 06-datasets/          # 数据集
+│   └── 07-community-and-events/ # 社区与活动
 │
-└── asserts/                     # 资源文件
-    ├── images/                  # 图片
-    ├── scripts/                 # 脚本
-    └── test/                    # 测试
+├── asserts/                     # 资源文件
+│
+└── sleuth-agent/                # Agent工具项目
 ```
 
 ## 声明

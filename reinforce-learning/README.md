@@ -4,40 +4,58 @@
 
 ```
 reinforce-learning/
-├── fundation/                 # 基础理论
-│   ├── 00-基本概念.md          # RL基本概念
-│   ├── 01-马尔可夫决策.md      # MDP、状态、动作、奖励
-│   ├── 价值与回报.md           # 价值函数、回报、折扣因子
-│   ├── 基于价值的算法.md       # 价值迭代、策略迭代
-│   ├── 基于策略的方法.md       # 策略梯度、REINFORCE
-│   ├── 蒙特卡洛方法.md         # MC估计
-│   └── 时序差分.md             # TD、SARSA、Q-Learning
+├── 01-fundamentals/                  # 基础理论
+│   ├── markov-decision-processes/
+│   ├── value-functions-and-bellman/
+│   └── exploration-vs-exploitation/
 │
-└── policy-optimization/       # 策略优化
-    ├── 01-AC架构.md           # Actor-Critic架构
-    ├── 02-优势函数.md          # 优势函数、GAE
-    ├── 03-TRPO与重要性采样.md   # TRPO、重要性采样
-    ├── 04-PPO.md              # PPO算法
-    └── paper/                 # 相关论文
+├── 02-model-free-rl/                 # 无模型强化学习
+│   ├── monte-carlo-methods/
+│   ├── temporal-difference-learning/
+│   │   ├── sarsa/
+│   │   └── q-learning/
+│   └── deep-q-networks/
+│       ├── dqn-and-variants/
+│       └── rainbow/
+│
+├── 03-policy-based-and-actor-critic/ # 基于策略与Actor-Critic
+│   ├── policy-gradient/
+│   │   ├── reinforce/
+│   │   └── ppo/
+│   ├── actor-critic-methods/
+│   │   ├── a2c-a3c/
+│   │   └── sac/
+│   └── deterministic-policy-gradient/
+│
+├── 04-model-based-rl/                # 基于模型的强化学习
+│   ├── world-models/
+│   │   ├── dreamer/
+│   │   └── muzero/
+│   └── planning-and-tree-search/
+│
+├── 05-advanced-and-applied-rl/       # 进阶与应用
+│   ├── hierarchical-rl/
+│   ├── multi-agent-rl/
+│   ├── inverse-rl/
+│   └── rl-in-llm-alignment/          # RLHF、GRPO
+│
+└── 06-evaluation-and-tools/          # 评估与工具
+    ├── gym-and-environments/
+    └── benchmark-and-metrics/
 ```
 
 ## 学习路径
 
 **基础阶段**
-- `fundation/` 按编号顺序阅读：
-  1. `00-基本概念.md` — RL基本框架
-  2. `01-马尔可夫决策.md` — MDP形式化
-  3. `价值与回报.md` — 价值函数定义
-  4. `基于价值的算法.md` — 动态规划方法
-  5. `基于策略的方法.md` — 策略梯度基础
-  6. `蒙特卡洛方法.md` / `时序差分.md` — 无模型方法
+- `01-fundamentals/` — MDP、价值函数、探索与利用
+
+**核心阶段**
+- `02-model-free-rl/` — 蒙特卡洛、时序差分、DQN
+- `03-policy-based-and-actor-critic/` — 策略梯度、Actor-Critic、PPO
 
 **进阶阶段**
-- `policy-optimization/` 按编号顺序：
-  1. `01-AC架构.md` — Actor-Critic
-  2. `02-优势函数.md` — 方差缩减
-  3. `03-TRPO与重要性采样.md` — 信任域方法
-  4. `04-PPO.md` — 近端策略优化
+- `04-model-based-rl/` — 世界模型、规划与树搜索
+- `05-advanced-and-applied-rl/` — 分层RL、多智能体、逆RL、LLM对齐
 
 ## 详细学习路线
 
@@ -47,10 +65,10 @@ reinforce-learning/
 
 | 本目录内容 | 关联目录 | 说明 |
 |-----------|---------|------|
-| PPO/TRPO基础 | [../llm/post-training/rlhf/](../llm/post-training/rlhf/) | LLM的RLHF使用PPO |
-| 策略梯度 | [../llm/post-training/dpo/](../llm/post-training/dpo/) | DPO是偏好优化的替代方案 |
-| MBRL | [../world-models/algorithms/](../world-models/algorithms/) | 基于模型的强化学习 |
-| 多智能体 | [../agentic/05-multi-agent/](../agentic/05-multi-agent/) | 多智能体系统中的RL |
+| PPO/TRPO基础 | [../llm/03-training/alignment/rlhf/](../llm/03-training/alignment/rlhf/) | LLM的RLHF使用PPO |
+| 策略梯度 | [../llm/03-training/alignment/dpo/](../llm/03-training/alignment/dpo/) | DPO是偏好优化的替代方案 |
+| MBRL | [../world-models/02-methods-and-architectures/](../world-models/02-methods-and-architectures/) | 基于模型的强化学习 |
+| 多智能体 | [../agentic/03-agent-architectures/multi-agent-systems/](../agentic/03-agent-architectures/multi-agent-systems/) | 多智能体系统中的RL |
 
 ---
 

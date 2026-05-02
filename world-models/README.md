@@ -6,27 +6,36 @@
 
 ```
 world-models/
-├── foundations/               # 基础理论
+├── 01-foundations/                   # 基础
+│   ├── definition-and-motivation/
+│   ├── predictive-models-in-rl/
+│   └── learning-latent-dynamics/
 │
-├── architectures/             # 模型架构
-│   # 潜空间模型、JEPA、Transformer、扩散等架构
+├── 02-methods-and-architectures/     # 方法与架构
+│   ├── dreamer-family/
+│   │   ├── dreamerv1-v2/
+│   │   └── dreamerv3/
+│   ├── autoregressive-world-models/
+│   ├── diffusion-world-models/
+│   └── jepa-and-energy-based-models/
 │
-├── algorithms/                # 核心算法
-│   # Dreamer、MuZero等
+├── 03-world-models-for-reasoning/    # 推理用世界模型
+│   ├── model-based-planning/
+│   └── causal-world-models/
 │
-├── training/                  # 训练方法
+├── 04-large-scale-world-models/      # 大规模世界模型
+│   ├── video-prediction-models/
+│   ├── sora-and-video-generation/
+│   └── embodied-world-models/
 │
-├── video-generation/          # 视频生成
-│   # Sora、Cosmos等
+├── 05-evaluation/                    # 评估
+│   ├── prediction-metrics/
+│   └── downstream-task-transfer/
 │
-├── applications/              # 应用场景
-│   ├── autonomous-driving/    # 自动驾驶
-│   ├── game-ai/               # 游戏AI
-│   ├── rl-planning/           # 强化学习规划
-│   ├── robotics/              # 机器人
-│   └── video-prediction/      # 视频预测
-│
-└── papers/                    # 论文笔记
+└── 06-applications/                  # 应用
+    ├── robotics-simulation/
+    ├── autonomous-driving/
+    └── game-play-and-agi-exploration/
 ```
 
 ## 四大架构类别
@@ -41,29 +50,22 @@ world-models/
 ## 学习路径
 
 **基础阶段**
-- `foundations/` — 理解世界模型的基本概念
-- `architectures/` — 掌握不同架构的特点和适用场景
+- `01-foundations/` — 理解世界模型的基本概念
+- `02-methods-and-architectures/` — 掌握不同架构的特点和适用场景
 
 **算法阶段**
-- `algorithms/` — 学习核心算法实现
-- `training/` — 掌握训练方法和技巧
+- `03-world-models-for-reasoning/` — 基于模型的规划与因果推理
 
 **应用阶段**
-- `video-generation/` — 视频生成专项
-- `applications/` — 各领域的具体应用
-- `papers/` — 领域核心论文
-
-## 在具身AI中的应用
-
-1. **规划验证** — 执行前验证计划可行性
-2. **数据生成** — 合成训练数据、场景、边缘案例
-3. **基于模型的强化学习** — 作为动力学模型降低样本复杂度
+- `04-large-scale-world-models/` — 视频生成、大规模预训练
+- `05-evaluation/` — 评估方法
+- `06-applications/` — 各领域的具体应用
 
 ## 相关资源
 
 - [具身智能](../embodied-intelligence/) — 世界模型的主要应用场景
 - [强化学习](../reinforce-learning/) — MBRL基础理论
-- [视频生成](applications/video-prediction/) — 世界模型的生成应用
+- [视频生成](06-applications/) — 世界模型的生成应用
 
 ---
 

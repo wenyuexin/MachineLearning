@@ -4,72 +4,51 @@
 
 ```
 traditional-ml/
-├── supervised/                # 监督学习
-│   ├── classification/        # 分类（SVM、决策树、随机森林等）
-│   └── regression/            # 回归（线性回归、岭回归、Lasso等）
+├── 01-fundamentals/             # 数学基础
+│   ├── linear-algebra/          # 线性代数
+│   ├── probability-and-statistics/  # 概率论与统计
+│   └── optimization/            # 优化理论
 │
-├── unsupervised/              # 无监督学习
-│   ├── clustering/            # 聚类（K-means、DBSCAN、层次聚类等）
-│   └── dimensionality-reduction/  # 降维（PCA、t-SNE、UMAP等）
+├── 02-supervised-learning/      # 监督学习
+│   ├── linear-models/           # 线性模型
+│   ├── tree-based-models/       # 树模型
+│   ├── svm/                     # 支持向量机
+│   └── knn/                     # K近邻
 │
-├── semi-supervised/           # 半监督学习
-│   ├── self-training/         # 自训练
-│   ├── co-training/           # 协同训练
-│   ├── pseudo-labeling/       # 伪标签
-│   └── consistency-regularization/  # 一致性正则化
+├── 03-unsupervised-learning/    # 无监督学习
+│   ├── clustering/              # 聚类算法
+│   └── dimensionality-reduction/  # 降维方法
 │
-├── self-supervised/           # 自监督学习
-│   ├── contrastive-learning/  # 对比学习
-│   ├── masked-modeling/       # 掩码预测
-│   └── pretext-tasks/         # 代理任务
+├── 04-practical-ml/             # 实践方法
+│   ├── feature-engineering/     # 特征工程
+│   ├── model-selection-and-tuning/  # 模型选择与调优
+│   ├── ensemble-methods/        # 集成方法
+│   ├── imbalanced-learning/     # 不平衡学习
+│   └── interpretability/        # 可解释性
 │
-├── ensemble/                  # 集成学习
-│   # Bagging、Boosting、Stacking
+├── 05-time-series/              # 时间序列
+│   ├── classical-methods/       # 经典方法
+│   ├── machine-learning-approaches/  # 机器学习方法
+│   └── deep-learning-for-ts/    # 深度学习时序
 │
-├── probabilistic/             # 概率图模型
-│   ├── bayesian-networks/     # 贝叶斯网络
-│   ├── hmm/                   # 隐马尔可夫模型
-│   ├── crf/                   # 条件随机场
-│   └── gaussian-processes/    # 高斯过程
-│
-├── kernel-methods/            # 核方法
-│   ├── kernel-trick/          # 核技巧
-│   ├── kernel-pca/            # 核PCA
-│   └── rkhs/                  # 再生核希尔伯特空间
-│
-├── feature-engineering/       # 特征工程
-│   ├── feature-selection/     # 特征选择
-│   ├── feature-extraction/    # 特征提取
-│   └── encoding/              # 编码方法
-│
-├── model-selection/           # 模型选择与评估
-│   ├── cross-validation/      # 交叉验证
-│   ├── hyperparameter-tuning/ # 超参搜索
-│   └── evaluation-metrics/    # 评估指标
-│
-└── time-series/               # 时间序列
-    ├── arima/                 # ARIMA
-    ├── exponential-smoothing/ # 指数平滑
-    ├── prophet/               # Prophet
-    └── anomaly-detection/     # 异常检测
+└── 06-probabilistic-graphical-models/  # 概率图模型
+    ├── bayesian-networks/       # 贝叶斯网络
+    └── markov-random-fields/    # 马尔可夫随机场
 ```
 
 ## 学习路径
 
 **基础阶段**
-- `supervised/` — 掌握分类和回归的基本算法
-- `unsupervised/` — 了解聚类和降维方法
-- `feature-engineering/` — 学会处理特征
+- `01-fundamentals/` — 数学基础（线性代数、概率论、优化）
+- `02-supervised-learning/` — 掌握分类和回归的基本算法
+- `03-unsupervised-learning/` — 了解聚类和降维方法
 
 **进阶阶段**
-- `ensemble/` — 集成方法提升模型性能
-- `model-selection/` — 掌握评估和调参技巧
-- `semi-supervised/` / `self-supervised/` — 利用未标注数据
+- `04-practical-ml/` — 特征工程、模型选择与调优、集成方法
 
 **深入阶段**
-- `probabilistic/` — 概率图模型
-- `kernel-methods/` — 核方法与非线性建模
-- `time-series/` — 时序分析专项
+- `05-time-series/` — 时序分析专项
+- `06-probabilistic-graphical-models/` — 概率图模型
 
 ## 与深度学习的关系
 

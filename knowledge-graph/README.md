@@ -4,33 +4,45 @@
 
 ```
 knowledge-graph/
-├── foundations/               # 基础理论
+├── 01-representation/                # 知识表示
+│   ├── symbolic-representation/
+│   │   ├── rdf-and-owl/
+│   │   └── property-graphs/
+│   └── embedding-based-representation/
+│       ├── translational-models/
+│       ├── bilinear-models/
+│       └── neural-models/
 │
-├── knowledge-representation/  # 知识表示
-│   # RDF、OWL、属性图等表示方法
+├── 02-construction/                  # 知识构建
+│   ├── named-entity-recognition/
+│   ├── relation-extraction/
+│   ├── entity-linking/
+│   ├── event-extraction/
+│   └── knowledge-fusion/
+│       ├── entity-alignment/
+│       └── conflict-resolution/
 │
-├── knowledge-extraction/      # 知识抽取
-│   # NER、关系抽取、事件抽取
+├── 03-storage-and-query/             # 存储与查询
+│   ├── graph-databases/
+│   ├── query-languages/
+│   └── distributed-storage/
 │
-├── knowledge-fusion/          # 知识融合
-│   # 实体对齐、实体消解
+├── 04-reasoning/                     # 知识推理
+│   ├── rule-based-reasoning/
+│   ├── embedding-based-reasoning/
+│   ├── neuro-symbolic-reasoning/
+│   └── temporal-and-spatial-reasoning/
 │
-├── knowledge-graph-construction/  # 知识图谱构建
+├── 05-applications/                  # 应用
+│   ├── question-answering/
+│   ├── recommender-systems/
+│   ├── dialogue-systems/
+│   └── domain-specific-kg/
 │
-├── knowledge-storage/         # 知识存储
-│   # Neo4j、SPARQL、图数据库
-│
-├── knowledge-reasoning/       # 知识推理
-│
-├── llm-kg-integration/        # LLM与知识图谱结合
-│   # GraphRAG、知识增强LLM
-│
-├── datasets/                  # 数据集
-│   # Freebase、Wikidata等
-│
-├── tools/                     # 工具与框架
-│
-└── papers/                    # 论文笔记
+└── 06-quality-and-evolution/         # 质量与演化
+    ├── knowledge-completion/
+    ├── error-detection/
+    └── kg-versioning/
 ```
 
 ## 知识图谱生命周期
@@ -44,27 +56,24 @@ knowledge-graph/
 ## 学习路径
 
 **入门阶段**
-- `foundations/` — 了解知识图谱的基本概念
-- `knowledge-representation/` — 掌握RDF、OWL、属性图等表示方法
+- `01-representation/` — 了解知识图谱的基本概念
+- `02-construction/` — 掌握实体识别和关系抽取
 
 **构建阶段**
-- `knowledge-extraction/` — 学习实体识别和关系抽取
-- `knowledge-fusion/` — 掌握实体对齐和知识融合
-- `knowledge-graph-construction/` — 完整图谱构建流程
-- `knowledge-storage/` — 图数据库使用
+- `03-storage-and-query/` — 图数据库使用
+- `04-reasoning/` — 知识推理方法
 
 **应用阶段**
-- `knowledge-reasoning/` — 知识推理方法
-- `llm-kg-integration/` — LLM与知识图谱结合（GraphRAG等）
-- `papers/` — 领域核心论文
+- `05-applications/` — LLM与知识图谱结合（GraphRAG等）
+- `06-quality-and-evolution/` — 知识图谱质量与演化
 
 ## 与仓库其他目录的关系
 
 | 本目录内容 | 关联目录 | 说明 |
 |-----------|---------|------|
-| GraphRAG检索架构 | [../rag/architectures/graph-rag/](../rag/architectures/graph-rag/) | RAG视角的图增强检索 |
-| LLM推理 | [../llm/inference/](../llm/inference/) | LLM作为抽取/推理工具 |
-| 可解释性 | [../llm/explainability/](../llm/explainability/) | KG驱动的模型解释 |
+| GraphRAG检索架构 | [../rag/04-advanced-rag-patterns/graph-rag/](../rag/04-advanced-rag-patterns/graph-rag/) | RAG视角的图增强检索 |
+| LLM推理 | [../llm/04-inference-and-deployment/](../llm/04-inference-and-deployment/) | LLM作为抽取/推理工具 |
+| 可解释性 | [../llm/07-explainability/](../llm/07-explainability/) | KG驱动的模型解释 |
 
 ---
 
