@@ -56,14 +56,18 @@ agentic/
 
 ## 学习路径
 
-按编号顺序学习：
+推荐学习顺序：
 
-```
-01-core-concepts → 02-cognitive-capabilities
-                           ↓
-03-agent-architectures ← 04-environments
-        ↓
-   05-frameworks-and-tools → 06-evaluation
+```mermaid
+flowchart TD
+    A[01-core-concepts<br/>核心概念] --> B[02-cognitive-capabilities<br/>认知能力]
+    A --> C[03-agent-architectures<br/>智能体架构]
+    B --> D[04-environments<br/>环境与仿真]
+    C --> D
+    B --> E[05-frameworks-and-tools<br/>框架与工具]
+    C --> E
+    D --> F[06-evaluation<br/>评估与可靠性]
+    E --> F
 ```
 
 ## 相关资源
