@@ -1,376 +1,305 @@
-# nashsu/llm_wiki 深度技术剖析
+---
+skill: synthesize-repo
+domain: github
+theme: knowledge_base
+purpose: "追踪 LLM 驱动的个人知识库构建工具的设计演进与架构决策"
+sources:
+  - "https://github.com/nashsu/llm_wiki"
+tags:
+  - github
+  - TypeScript
+  - knowledge-base
+  - llm-agent
+  - tauri
+  - obsidian-alternative
+  - rag
+  - knowledge-graph
+created: "2026-05-04"
+updated: "2026-05-04"
+status: "stable"
+---
 
-> **一句话总结**：LLM Wiki 范式的旗舰级桌面实现——以 Tauri v2 + React 构建跨平台应用，通过两步思维链摄入、四信号知识图谱、Louvain 社区检测、图谱洞察、多模态图片摄入和异步审核系统，将 Karpathy 的抽象模式工程化为覆盖知识管理全生命周期的完整操作系统。
+# nashsu/llm_wiki
+
+> **一句话总结**：LLM Wiki 是 Karpathy 的 LLM Wiki 设计模式最完整的桌面工程实现，通过两步思维链摄入、四信号知识图谱、Louvain 社区检测和多阶段检索管线，将文档自动转化为增量构建的持久化知识库——知识编译一次，持续更新，不再每次从零检索。
 
 ## 基本信息
 
-| 字段 | 内容 |
-|------|------|
-| **仓库** | [nashsu/llm_wiki](https://github.com/nashsu/llm_wiki) |
-| **描述** | 跨平台桌面应用，将文档自动转化为有组织、相互链接的知识库。不同于传统 RAG 的每次查询从零开始，LLM 增量构建并维护一个持久化的 Wiki。 |
-| **Stars** | 5464 |
-| **Forks** | 658 |
-| **主要语言** | TypeScript (前端) + Rust (后端) |
-| **许可证** | 自定义许可证 |
-| **当前版本** | v0.4.6 (截至 2026 年 5 月) |
-| **官方网站** | [llm-wiki.com](https://llm-wiki.com) |
+- **仓库**：nashsu/llm_wiki
+- **描述**：LLM Wiki is a cross-platform desktop application that turns your documents into an organized, interlinked knowledge base — automatically. Instead of traditional RAG (retrieve-and-answer from scratch every time), the LLM incrementally builds and maintains a persistent wiki from your sources。
+- **Stars**：5679 | **Forks**：687
+- **最近更新**：2026-05-01
+- **Open Issues**：46
+- **创建时间**：2026-04-08
+- **主要语言**：TypeScript (前端) + Rust (后端)
+- **许可证**：Custom（允许自由商用，衍生作品需开源）
+- **链接**：https://github.com/nashsu/llm_wiki
 
-## 项目定位与设计哲学
+## 项目定位
 
-`nashsu/llm_wiki` 是 Andrej Karpathy 提出的 LLM Wiki 设计模式最完整的工程实现。Karpathy 的原始文档是一份“有意为之的抽象”方法论文档，只描述模式而不规定实现。nashsu 的贡献在于将这一抽象模式编译为一套可真正运行的、功能覆盖知识管理全生命周期的桌面应用。
+- **解决的问题**：传统 RAG 每次查询都从零检索，回答不一致、无法积累上下文、缺乏结构化理解。LLM Wiki 的核心创新是"增量式知识编译"——LLM 主动理解、结构化、关联文档，持久存储为 wiki 页面，后续查询在已有知识基础上进行。这从根本上改变了 LLM 与文档的交互方式：从"每次临时检索"变为"持续维护一个知识图谱"。
+- **目标用户**：需要深度理解大量文档的研究者和学生；希望构建个人知识库但不想手动整理链接的 Obsidian/Notion 用户；对 LLM 原生知识管理感兴趣的开发者。
+- **在生态中的角色**：与 Obsidian（手动链接）、传统 RAG（临时检索）形成三角关系。LLM Wiki 的独特定位是"LLM 主动管理知识"——不是人手动整理，也不是每次临时检索，而是让 LLM 持续维护一个结构化的知识图谱。它同时是 Karpathy 原始设计模式最完整的工程化实现。
 
-项目严格保留了三层架构（Raw Sources ↔ Wiki ↔ Schema）、三项核心操作（Ingest / Query / Lint）、`index.md` 与 `log.md` 导航系统、`[[wikilink]]` 交叉引用语法、YAML frontmatter 元数据等原始设计要素，同时在每个维度上进行了大幅的工程化增强。
+## 上手成本
 
-**设计哲学**：相比于依托现有笔记生态（如 domleca 的 Obsidian 插件）或面向开发者的 CLI（如 SamurAIGPT），nashsu 选择构建一个完全独立的桌面应用。这带来了更高的构建成本，但换取了最大程度的交互设计自由度和最完整的功能闭环。
+- **安装方式**：预编译二进制文件（支持 macOS/Windows/Linux）、从源码编译（`cargo tauri build`）、Chrome 扩展（Web Clipper）
+- **前置依赖**：Node.js 20+、Rust（如果从源码编译）、一个兼容 OpenAI API 的 LLM 服务端点
+- **首次配置**：在 Settings 中配置 LLM provider（API key + model），选择项目模板，即可开始导入文档。如需向量搜索，需额外配置 embedding endpoint。
+- **学习曲线**：文档包含 Quick Start 指南和 Screenshots。核心概念（purpose.md、schema.md、四信号图谱）需要一定学习成本，但场景模板降低了冷启动门槛。CLI 版本的原型已被桌面应用取代，降低了技术门槛。
 
 ## 技术栈分析
 
-### 前端技术栈
-
-| 层级 | 技术 | 说明 |
-|------|------|------|
-| UI 框架 | React 19 + TypeScript | 严格类型安全的大型 SPA |
-| 构建工具 | Vite | 极快的 HMR 和构建 |
-| 样式 | Tailwind CSS v4 + shadcn/ui | 现代 utility-first 样式系统 |
-| 编辑器 | Milkdown (ProseMirror) | WYSIWYG Markdown 编辑，通过 `@milkdown/plugin-math` 原生支持 KaTeX |
-| 状态管理 | Zustand | 轻量但强大的全局状态，分为 wiki-store、ingest-store、graph-store、chat-store、review-store 等独立切片 |
-| 图谱可视化 | sigma.js + graphology + react-sigma | 为大规模图优化的 WebGL 渲染；graphology 提供 Louvain 等图算法 |
-| 数学渲染 | remark-math + rehype-katex | 完整的 LaTeX 支持，行内 `$...$` 和块级 `$$...$$`，自动检测裸 `\begin{aligned}` 环境 |
-| 国际化 | i18next + react-i18next | 支持中英文界面切换 |
-
-### 后端（Rust）技术栈
-
-| 功能域 | 技术 | 说明 |
-|--------|------|------|
-| 桌面框架 | Tauri v2 | Rust 原生二进制 + 系统 WebView，相较 Electron 显著更小的包体积和内存占用 |
-| PDF 解析 | pdfium-render 0.9 | 利用 `page.objects()` API 提取文本和嵌入图片 |
-| 文档解析 | 内置 ZIP 读取 | 处理 PPTX/DOCX 的 XML 和媒体文件 |
-| 向量数据库 | LanceDB | Rust 原生嵌入式向量存储，零配置，支持 ANN 检索 |
-| 文件系统 | Tauri Plugin FS | 安全的文件 I/O，管理 `raw/` 和 `wiki/` 目录 |
-| HTTP 服务 | tiny_http | 在本地 `19827` 端口监听，接收 Chrome Web Clipper 的推送 |
-
-## 核心功能深度剖析
-
-### 1. 两步思维链摄入（Two-Step Chain-of-Thought Ingest）
-
-这是项目对 Karpathy 原始设计最重要的工程化改造。原始 Ingest 是单步的“阅读-讨论-写入”，nashsu 将其拆分为两次独立的 LLM 调用，形成严格的分析-生成管线。
-
-**Step 1 — 分析（Analysis）**
-
-LLM 阅读原始文档后，输出一份覆盖六个维度的结构化分析报告：
-- 关键实体
-- 关键概念
-- 主要论点与发现
-- 与现有 Wiki 的关联
-- 矛盾与张力
-- 改进建议
-
-在这一步，系统使用 `Promise.all` 并行读取五个文件，为 LLM 提供完整上下文：
-
-```typescript
-const [sourceContent, schema, purpose, index, overview] = await Promise.all([
-    tryReadFile(sp),                          // 源文件内容
-    tryReadFile(`${pp}/schema.md`),           // Wiki 结构规则
-    tryReadFile(`${pp}/purpose.md`),          // 知识库目标定义
-    tryReadFile(`${pp}/wiki/index.md`),       // 现有内容索引
-    tryReadFile(`${pp}/wiki/overview.md`),    // 全局综合概述
-])
-```
-
-这五个文件让 LLM 不仅理解文档本身，还清楚 Wiki 的整体目标、现有结构和当前知识状态，从而准确判断内容的新颖性、重叠性和矛盾性。
-
-**Step 2 — 生成（Generation）**
-
-LLM 接收分析报告和原始文档，按照严格的格式规范生成 Wiki 页面。输出格式使用自定义文件块标记：
-
-```
----FILE: wiki/sources/filename.md---
-（完整文件内容，含 YAML frontmatter、[[wikilink]] 交叉引用）
----END FILE---
-```
-
-生成规范包括：每个页面必须包含完整的 YAML frontmatter（`type`、`title`、`created`、`updated`、`tags`、`related`、`sources` 等字段），必须使用 `[[wikilink]]` 语法，文件名采用 kebab-case，源摘要页有 fallback 机制确保不会遗漏。
-
-**工程价值**：拆分方案使分析可单独检查，便于调试质量问题；SHA-256 增量缓存作用于第一步之前，未变更源文件自动跳过；整体生成质量显著优于单步直出。
-
-### 2. 摄入管线的配套设施
-
-围绕两步 CoT 核心，管线配备了大量工程保障：
-
-- **持久化摄入队列**：任务串行处理（避免并发 LLM 调用），队列持久化到磁盘，应用重启后自动恢复，失败任务最多自动重试 3 次。可视化面板实时展示 pending/processing/failed 状态及进度条
-- **文件夹导入**：递归导入时保留原始目录结构，文件夹路径作为 LLM 分类的上下文提示（例如 `papers/energy/` 暗示文档属于能源领域）
-- **内容感知生成语言**：LLM 以用户配置的语言（英语或中文）生成所有 Wiki 内容，前端界面语言与知识生成语言独立可控
-- **自动嵌入**：启用向量搜索时，摄入完成后自动为新增页面生成 embedding 并写入 LanceDB
-- **源可溯性**：每个 Wiki 页面的 `sources[]` frontmatter 字段精确链接回贡献内容的原始源文件
-- **overview.md 自动更新**：每次摄入后自动重新生成全局综合概述页面，反映知识库的最新状态
-
-### 3. 多模态图片摄入（Multimodal Image Ingestion）
-
-这是项目近期最重大的扩展之一，由一份 389 行的正式技术规格文档（`plans/multimodal-images.md`）驱动，后通过 PR #61 和 #62 实现。
-
-**设计审计**（来自规格文档的精确现状分析）：
-
-- PDF：pdfium-render 的 `page.text().all()` 忽略嵌入图片
-- PPTX/DOCX：解压后只解析文本 XML，`ppt/media/*` 被丢弃
-- 独立图片文件：虽可预览但不进入摄入管线
-- 整个 TypeScript 链（text-chunker、embedding、search、chat-panel）纯文本
-- LanceDB schema 仅含 `chunk_text: Utf8`，无图片字段
-
-**选定方案：Caption-First Hybrid（方案 C，三个被拒替代方案见规格文档附录）**
-
-完整管线如下：
-1. 预处理阶段，Rust 后端从 PDF（通过 pdfium `page.objects()` 提取 Image 对象并编码为 PNG）/ PPTX / DOCX（通过 ZIP 读取 `media/` 目录）中提取图片
-2. 原始图片保存到 `wiki/media/<source-slug>/`
-3. 视觉 LLM 生成 2-4 句事实性描述（包含可见文字、图表轴值、图示结构）
-4. 描述以 `![caption](path)` 形式注入源内容，与文本一同进入分析和生成提示
-5. 描述作为普通文本流经现有 `chunkMarkdown → embedPage → vector_upsert_chunks` 管线
-
-**关键回撤决策**：
-- 不修改 LanceDB schema，描述本身就是文本块，无需多模态嵌入
-- 搜索召回质量无退化，纯文本检索路径未被触碰
-- 用户对话中看到的是实际图片而非仅有文字描述
-- Provider-agnostic：通过 `buildBody` 统一抽象各 LLM 的视觉格式
-
-**四个实施阶段**：
-
-| 阶段 | 文件位置 | 核心工作 | 工期 |
-|------|---------|---------|------|
-| Phase 1 | `src-tauri/src/commands/extract_images.rs`（新） | Rust 端图片提取 | 3-4 天 |
-| Phase 2 | `src/lib/llm-providers.ts` | 视觉消息格式支持（新增 `ContentBlock` 联合类型，为 OpenAI/Anthropic/Gemini/Claude Code CLI/Ollama 各实现对应 wire format） | 2 天 |
-| Phase 3 | `src/lib/vision-caption.ts`（新）+ `src/lib/ingest.ts` | 标题生成助手 + 摄入集成；SHA-256 缓存防重复 | 3 天 |
-| Phase 4 | `src/components/settings/` | 设置开关 + 成本护栏 | 1 天 |
-
-**工程防御措施**：
-
-- **尺寸过滤**：丢弃小于 100×100 像素的图片（在幻灯片场景中可移除约 80% 的 logo/装饰元素噪音）
-- **数量上限**：单文档最多处理 500 张图片，防范包含数千张图片的极端文档
-- **内存防御**：不对提取的图片做 `.collect()`，使用 for 循环流式处理
-- **去重缓存**：SHA-256 哈希 → 标题映射存储在 `.llm-wiki/image-caption-cache.json`，相同 logo 出现在 50 个 PDF 中只调用 1 次 VLM
-- **并行标题生成**：通过 `Promise.all` 并行调用（标题生成间无互斥依赖），30 张图片从 90s 串行降至批处理延迟
-- **软失败策略**：VLM 调用失败/超时时，图片仍保存并以 `![image](path)` 嵌入——用户至少能看到图片，只是不可按内容搜索，不阻塞整个管线
-
-**哪些能力被明确排除**：以图搜图（视觉相似度检索）推迟至 Phase 5，原因是当前主流嵌入端点（如 LM Studio 的 qwen3-embedding-0.6b）不支持多模态嵌入。
-
-### 4. 四信号知识图谱与 Louvain 社区检测
-
-Karpathy 原版文档仅提及 `[[wikilink]]` 作为交叉引用机制，nashsu 从零构建了一整套知识图谱可视化和关联度引擎。
-
-**四信号关联度模型**：
-
-| 信号 | 权重 | 描述 | 技术解读 |
-|------|------|------|---------|
-| **Source Overlap** | ×4.0 | 两个页面在 `sources[]` 中共享相同原始来源 | 语义上最强——讨论同一来源的不同方面，几乎必然深层关联 |
-| **Direct Link** | ×3.0 | 通过 `[[wikilink]]` 建立的显式链接 | 强信号，但依赖 LLM 是否在生成时正确建立链接，存在遗漏可能 |
-| **Adamic-Adar** | ×1.5 | 两个页面共享的共同邻居数，除以每个邻居的对数度数 | 经典链路预测算法，奖励共享“罕见”邻居的节点对，惩罚共享高度数 Hub 节点 |
-| **Type Affinity** | ×1.0 | 同类型页面的微奖励（实体↔实体、概念↔概念） | 弱信号，作为补充 |
-
-**图谱可视化技术栈**：
-- **渲染引擎**：sigma.js，专为大规模图优化的 WebGL 渲染
-- **图数据结构**：graphology，提供完整的图算法生态
-- **布局算法**：ForceAtlas2，力导向布局，擅长让社区结构自然呈现
-- **视觉特性**：节点颜色按页面类型或社区着色；节点大小按链接数的平方根缩放（避免 Hub 过大）；边缘粗细按关联度权重变化（绿色=强，灰色=弱）；悬停时邻居高亮、非邻居变暗；位置缓存防止布局跳动
-
-**Louvain 社区检测**：
-- 基于 graphology-communities-louvain 实现
-- 自动发现知识群落，独立于预定义的页面类型分类
-- 支持类型/社区视图切换
-- 为每个社区计算内聚度评分（intra-edge density = 实际边数 / 可能边数）
-- 内聚度低于 0.15 的社区被标记为警告
-- 社区图例显示顶级节点标签、成员数和内聚度分数
-
-### 5. 图谱洞察：惊喜连接与知识空白
-
-系统自动分析图谱结构，呈现可操作的洞察：
-
-**惊喜连接**：检测意外的跨社区边、跨类型链接、边缘节点↔Hub 的突发耦合。使用复合“惊喜度”分数排序，支持“已阅”标记。
-
-**知识空白**：三类检测——
-- 孤立页面（degree ≤ 1）
-- 稀疏社区（内聚度 < 0.15 且 ≥ 3 页）
-- 桥节点（连接 3+ 个聚类的关键枢纽页面）
-
-每个洞察卡片可点击在图谱中高亮对应节点。知识空白和桥节点附带 **Deep Research** 按钮，触发领域感知的自动研究。
-
-### 6. Deep Research：从知识空白到自动研究
-
-当图谱洞察检测到知识空白，用户一键触发深度研究：
-
-1. LLM 读取 `overview.md` 和 `purpose.md` 理解研究目标和现有知识状态
-2. 自动生成多个优化的搜索关键词
-3. 通过 Tavily API 执行多查询网络搜索
-4. 搜索结果以确认对话框呈现（用户可编辑优化主题和查询）
-5. 确认后，搜索结果作为“源文档”自动摄入 Wiki
-
-整个过程无缝衔接——用户感知到的是“发现空白 → 点击按钮 → Wiki 自己变丰富”。
-
-### 7. 异步审核系统（Async Review System）
-
-LLM 在自动摄入中遇到的冲突或低置信度内容，不阻塞主构建流程，而是放入异步审核队列：
-- 预定义操作：合并到现有页面、创建新页面、忽略
-- 预生成相关的搜索查询作为进一步调研的起点
-- 用户可在方便时处理，与主工作流时间解耦
-
-### 8. 级联删除（Cascade Cleanup）
-
-删除源文件时触发智能级联清理，这是完整知识生命周期管理的关键组件：
-
-- **三种匹配方法**定位受影响的 Wiki 页面：
-  1. frontmatter `sources[]` 字段直接引用
-  2. 源摘要页名称匹配
-  3. frontmatter section 引用
-- **精细化删除**：实体/概念页面被多源引用时，仅移除被删源的条目，而非删除整个页面
-- **残骸清理**：同时清理 `index.md` 中的条目和所有残留的 `[[wikilink]]`
-
-### 9. Chrome Web Clipper
-
-扩展使用 Manifest V3 构建：
-- **核心依赖**：Mozilla Readability.js（精确文章提取，去除广告/导航/侧边栏）+ Turndown.js（HTML → Markdown，支持表格转换）
-- **通信机制**：通过本地 `19827` 端口的 HTTP 服务器（基于 `tiny_http`）实现扩展与应用之间的通信
-- **自动触发**：剪辑后自动触发两步摄入管线，每 3 秒轮询新剪辑
-
-### 10. 对话管理与“知识反哺”
-
-**多对话管理**：创建、重命名、删除独立聊天会话，对话持久化到 `.llm-wiki/chats/{id}.json`。
-
-**Save to Wiki — 闭合知识反哺闭环**：用户与 LLM 的有价值对话可一键归档到 `wiki/queries/`，并自动触发摄入管线，将回答中的实体和概念提取到知识网络中。这是 Karpathy 原始设计中“查询结果可回存 Wiki”的关键实现，也是 domleca 版本（截至分析时）尚未实现的闭环。
-
-### 11. 思维链展示（Thinking / Reasoning Display）
-
-对于支持 `thinking` 块的模型（DeepSeek、QwQ 等），系统流式展示推理过程：
-- 生成时：5 行滚动显示，带透明度渐变
-- 完成后：折叠隐藏，可点击展开
-- 视觉上与主回复明确区分
-
-### 12. KaTeX 数学渲染
-
-完整的 LaTeX 数学支持：
-- 行内 `$...$` 和块级 `$$...$$` 通过 remark-math + rehype-katex 渲染
-- Milkdown 编辑器原生支持数学
-- 自动检测裸 `\begin{aligned}` 等环境并自动包裹 `$$` 分隔符
-- 提供 100+ 个 Unicode 符号映射作为降级方案
-
-### 13. 四阶段查询检索管线
-
-查询时，系统执行多阶段检索，而非简单的单次搜索：
-
-| 阶段 | 方法 | 技术细节 |
+| 层级 | 技术 | 选择原因 |
 |------|------|---------|
-| **Phase 1** | 分词搜索 | 英文：单词切分 + 停用词移除；中文：CJK 双字分词；标题匹配额外 +10 分；搜索范围覆盖 `wiki/` 和 `raw/sources/` |
-| **Phase 1.5** | 向量语义搜索（可选） | 通过任意 OpenAI 兼容 `/v1/embeddings` 端点生成 embedding；存储在 LanceDB；cosine similarity 查找语义相关页面；结果合并（提升已有匹配 + 添加新发现） |
-| **Phase 2** | 图谱扩展 | 将 top 结果作为种子节点；利用四信号关联度模型 2-hop 遍历；越深的连接衰减越大 |
-| **Phase 3** | 上下文预算控制 | 可配置上下文窗口（4K 到 1M tokens）；按比例分配：60% Wiki 页面、20% 聊天历史、5% 索引、15% 系统保留；页面按综合搜索与图谱关联度分数排序 |
-| **Phase 4** | 上下文组装 | 带编号的页面格式化输出；构造最终 LLM 提示 |
+| 桌面框架 | **Tauri v2** (Rust + WebView) | 跨平台、体积小、安全性高（Rust 后端），相比 Electron 大幅减少内存占用 |
+| 前端框架 | React 19 + TypeScript + Vite | 现代 React 生态，Vite 提供快速开发体验 |
+| UI 组件 | shadcn/ui + Tailwind CSS v4 | 原子化 CSS + 可组合组件，快速构建美观界面 |
+| 编辑器 | Milkdown (ProseMirror) | WYSIWYG Markdown 编辑器，支持数学公式 (KaTeX)，插件丰富 |
+| 知识图谱 | sigma.js + graphology + ForceAtlas2 | 高性能图渲染 + 图算法库（Louvain 社区检测） |
+| 搜索 | Tokenized search + graph relevance + LanceDB (可选) | 多层搜索策略：关键词 + 图关联 + 语义向量 |
+| 向量数据库 | LanceDB (Rust, 嵌入式) | 零配置嵌入式向量存储，支持任意 OpenAI-compatible endpoint |
+| 文档解析 | pdf-extract, docx-rs, calamine | 支持 PDF/DOCX/XLSX 多格式导入 |
+| 状态管理 | Zustand | 轻量级状态管理，适合 React 应用 |
+| i18n | react-i18next | 国际化支持（中英文界面） |
 
-这套管线在不启用向量搜索时，仍能基于分词搜索和图谱扩展提供不错的检索质量，向量搜索是作为增强项可选加入。
+### 关键设计决策
 
-### 14. 场景模板、purpose.md 与 schema.md
+**为什么选 Tauri 而不是 Electron？**
+Tauri v2 用 Rust 编写后端，前端仍是 Web 技术（React），但打包体积远小于 Electron（共享系统 WebView 而非自带 Chromium）。对于知识库应用，用户可能同时打开多个文档，内存效率至关重要。此外 Rust 后端为 PDF 解析、图片提取等性能敏感任务提供了原生级别的处理能力。
 
-项目提供 **Research、Reading、Personal Growth、Business、General** 五种预配置场景模板，每种都预置了 `purpose.md` 和 `schema.md`，大幅降低冷启动成本。
+**为什么选 Milkdown 而不是 Monaco/纯文本？**
+Milkdown 基于 ProseMirror，提供真正的 WYSIWYG Markdown 编辑体验，同时保留 Markdown 底层格式。这对"LLM 生成 + 人工编辑"的协作模式至关重要——用户需要既能看渲染效果，又能直接编辑源码。原生支持 KaTeX 数学公式也是一个关键差异化能力。
 
-- **`purpose.md`**：定义知识库的存在理由——目标、关键问题、研究范围和 evolving thesis。LLM 在每次摄入和查询时都会读取以获取方向感。这是 Karpathy 原始设计中没有的显式组件。
-- **`schema.md`**：定义 Wiki 的结构规则——目录组织、页面命名、frontmatter 规范、工作流约定。
+**为什么用 LanceDB 而不是 Pinecone/Weaviate？**
+LanceDB 是嵌入式向量数据库，无需单独部署服务，数据存储在本地文件。这与 LLM Wiki 的"本地优先"理念一致——用户的数据不应该依赖云端向量服务。LanceDB 的 Rust 原生实现也使其与 Tauri 后端天然兼容。
 
-两者形成互补：Schema 约束“怎么做”（结构性规则），Purpose 定义“做什么”（方向性意图）。
+**为什么选 graphology + sigma.js 而不是 D3？**
+sigma.js 专为大规模图优化，使用 WebGL 渲染，在节点数量超过数千时性能远优于 D3 的 SVG 渲染。graphology 提供了完整的图算法生态（包括 Louvain 社区检测、ForceAtlas2 布局），避免了自行实现这些算法的工作量。
+
+## 核心功能
+
+1. **Two-Step Chain-of-Thought Ingest** — LLM 先分析文档结构和主题，再生成带溯源的 wiki 页面
+2. **Multimodal Image Ingestion** — 从 PDF 提取嵌入式图片，用 vision LLM 生成事实性描述
+3. **4-Signal Knowledge Graph** — 综合直接链接、来源重叠、Adamic-Adar 相似度和类型亲和度四种信号
+4. **Louvain Community Detection** — 自动发现知识聚类，用 cohesion score 衡量社区内聚程度
+5. **Graph Insights** — 发现 surprising connections 和 knowledge gaps，支持一键 Deep Research
+6. **Vector Semantic Search** — 可选的基于 LanceDB 的语义检索
+7. **Persistent Ingest Queue** — 串行处理队列，支持崩溃恢复、取消、重试
+8. **Folder Import** — 递归导入文件夹，保留目录结构
+9. **Deep Research** — LLM 优化的搜索主题生成、多查询网页搜索、自动导入
+10. **Async Review System** — LLM 标记需要人工判断的项目
+
+> 以上为 README 提取的功能概要。以下对每个核心功能进行深度剖析：
+
+### 1. Two-Step Chain-of-Thought Ingest
+
+这是项目对 Karpathy 原始设计最重要的工程化改造。原始 Ingest 是单步的"阅读-讨论-写入"，nashsu 将其拆分为两次独立的 LLM 调用，形成严格的分析-生成管线。
+
+**设计动机**：单步 Ingest 中，LLM 同时负责理解和生成，容易在复杂文档中遗漏关键信息或产生幻觉。拆分后，分析步骤的输出可以单独审查，生成步骤基于结构化分析工作，质量显著提升。
+
+**实现策略**：Step 1（Analysis）LLM 阅读原始文档后输出六维度结构化分析（关键实体、概念、论点、与现有 Wiki 的关联、矛盾与张力、改进建议）。系统并行读取五个上下文文件（sourceContent, schema, purpose, index, overview）为 LLM 提供完整环境。Step 2（Generation）基于分析报告生成 wiki 页面，使用自定义 `---FILE: ... ---` 格式，每个页面包含完整的 YAML frontmatter。
+
+**工程价值**：SHA-256 增量缓存作用于第一步之前，未变更源文件自动跳过。分析可单独检查，便于调试质量问题。整体生成质量显著优于单步直出。
+
+### 2. Multimodal Image Ingestion
+
+**设计动机**：纯文本 RAG 系统完全忽略了文档中的图片信息。对于包含图表、流程图、实验截图的学术论文和技术文档，这些视觉信息往往是核心内容的一部分。
+
+**实现策略**：Rust 后端从 PDF（pdfium `page.objects()` API）/ PPTX / DOCX 中提取图片 → 保存到 `wiki/media/` → vision LLM 生成 2-4 句事实性描述 → 描述以 `![caption](path)` 注入源内容 → 与文本一同进入标准摄入管线。描述作为普通文本流经 `chunkMarkdown → embedPage → vector_upsert_chunks`，无需修改 LanceDB schema。
+
+**工程价值**：Caption-First Hybrid 方案在搜索质量、实现复杂度和成本之间取得了最佳平衡。搜索召回质量无退化，因为描述本身就是文本块。图片搜索不需要多模态嵌入，降低了系统依赖。
+
+### 3. 4-Signal Knowledge Graph
+
+**设计动机**：Karpathy 原版仅提及 `[[wikilink]]` 作为交叉引用机制，但 LLM 生成的链接存在遗漏可能。需要多种互补信号来建立更可靠的关联模型。
+
+**实现策略**：综合四种信号计算页面间相关性——Source Overlap (×4.0)：共享原始来源的页面几乎必然深层关联；Direct Link (×3.0)：`[[wikilink]]` 显式链接；Adamic-Adar (×1.5)：共享罕见邻居的节点对更相关；Type Affinity (×1.0)：同类型页面的微奖励。渲染使用 sigma.js + WebGL，节点大小按链接数平方根缩放，边缘粗细按关联度权重变化。
+
+**工程价值**：多信号模型比单一链接更鲁棒。Source Overlap 作为最强信号是合理的选择——讨论同一来源的不同方面，几乎必然存在深层语义关联。Adamic-Adar 捕获了结构性的隐含关联，弥补了 LLM 遗漏链接的缺陷。
+
+### 4. Louvain Community Detection
+
+**设计动机**：随着知识库增长，手动理解知识群落结构变得不可能。需要自动化工具来发现知识聚类和评估聚类质量。
+
+**实现策略**：基于 graphology-communities-louvain 实现，自动发现知识群落，独立于预定义的页面类型分类。为每个社区计算内聚度评分（intra-edge density = 实际边数 / 可能边数），低于 0.15 的社区标记为警告。
+
+**工程价值**：社区检测让用户快速定位知识集中区和稀疏区。内聚度评分是一个实用的质量指标——低内聚度意味着社区内的关联不够紧密，可能需要补充内容。
+
+### 5. Graph Insights
+
+**设计动机**：知识图谱的价值不只在于可视化，更在于发现人眼难以察觉的模式——意外的跨领域关联和知识盲区。
+
+**实现策略**：惊喜连接检测跨社区边、跨类型链接、边缘节点与 Hub 的突发耦合。知识空白检测三类问题：孤立页面（degree ≤ 1）、稀疏社区（内聚度 < 0.15 且 ≥ 3 页）、桥节点（连接 3+ 个聚类）。每个洞察卡片可点击在图谱中高亮，知识空白附带 Deep Research 按钮。
+
+**工程价值**：将被动浏览转为主动探索。用户不再需要手动遍历图谱寻找模式，系统自动推送可操作的洞察。
+
+### 6. Vector Semantic Search
+
+**设计动机**：关键词搜索无法捕获语义相似但用词不同的内容。例如"机器学习"和"ML"在关键词搜索中无法关联，但语义搜索可以。
+
+**实现策略**：可选启用，基于 LanceDB 嵌入式向量存储，支持任意 OpenAI-compatible embedding endpoint。向量搜索作为 Phase 1.5 插入四阶段检索管线，结果与关键词搜索结果合并（提升已有匹配 + 添加新发现）。
+
+**工程价值**：完全可选的设计避免了对云端向量服务的硬依赖。关闭后系统仍能基于 tokenized search + graph relevance 提供不错的检索质量。
+
+### 7. Persistent Ingest Queue
+
+**设计动机**：LLM 调用昂贵且不可靠（超时、速率限制、幻觉）。需要一个健壮的任务调度系统来保证知识构建过程的可靠性。
+
+**实现策略**：串行处理（避免并发 LLM 调用），队列持久化到磁盘。应用重启后自动恢复未完成任务，失败任务最多自动重试 3 次。可视化面板实时展示 pending/processing/failed 状态及进度条。
+
+**工程价值**：将 LLM 调用从"即发即忘"变为"可追踪、可恢复"的持久化操作。这是从原型到产品的关键工程化步骤。
+
+### 8. Folder Import
+
+**设计动机**：研究者通常有组织好的文件夹结构（如 papers/2024/、notes/ml/），这种结构本身包含分类信息。
+
+**实现策略**：递归导入文件夹，保留原始目录结构。文件夹路径作为 LLM 分类的上下文提示（例如 `papers/energy/` 暗示文档属于能源领域）。
+
+**工程价值**：利用用户的现有文件组织作为分类信号，减少了 LLM 的分类不确定性。这是一个低成本高收益的设计——不需要额外的元数据输入，直接复用已有的目录结构信息。
 
 ## 架构设计
 
-### 整体架构
+### 核心数据流
 
-系统采用 Tauri v2 架构，Rust 后端负责性能敏感和系统级任务，Web 前端负责 UI 渲染和业务逻辑编排。LLM 调用发生在前端 TypeScript 层，通过 HTTP 请求到 OpenAI 兼容端点或本地 Ollama。
+```
+文档导入 (PDF/DOCX/MD/Web Clipper)
+    ↓
+Ingest Queue（持久化队列，串行处理）
+    ↓
+Two-Step CoT Ingest
+  Step 1: LLM 分析文档 → 提取主题、结构、关键概念
+  Step 2: LLM 生成 wiki 页面 → 带 source traceability
+    ↓
+Knowledge Graph（4-Signal Relevance Model）
+    ↓
+Louvain Community Detection → 自动聚类
+    ↓
+Indexed Storage（Tokenized + Vector）
+    ↓
+User Query → Multi-phase Retrieval → Chat / Graph / Search
+```
 
-**前端组件结构**（来自源码目录分析）：
+### 关键创新：Purpose.md
 
-| 目录 | 职责 |
-|------|------|
-| `src/components/layout` | 三栏布局，可拖拽调整的面板和图标侧边栏 |
-| `src/components/graph` | 知识图谱可视化，封装 sigma.js 渲染 |
-| `src/components/lint` | Lint 操作的前端界面 |
-| `src/components/review` | 异步审核系统前端 |
-| `src/components/search` | 搜索界面与交互逻辑 |
-| `src/components/settings` | 设置面板 UI |
-| `src/stores` | Zustand 状态管理，包含 wiki-store、ingest-store、graph-store、chat-store、review-store |
-| `src/types` | TypeScript 类型定义 |
-| `src/lib` | 核心业务逻辑：ingest 管道、图谱算法、去重逻辑、深度研究、上下文预算管理等 |
+每个 wiki 项目都有一个 `purpose.md` 文件，被称为 "The Wiki's Soul"。它定义了 wiki 的研究方向、关注领域和知识边界。在文档导入时，LLM 参考 purpose.md 来决定如何分类和关联新知识。这相当于给 LLM 一个"研究框架"，避免知识图谱变成无主题的数据堆积。与 schema.md（结构性规则）形成互补：Schema 约束"怎么做"，Purpose 定义"做什么"。
 
-**Rust 后端职责**（`src-tauri/src/`）：
+### 数据流和模块关系
 
-| 模块 | 职责 |
-|------|------|
-| `commands/extract_images.rs` | PDF/DOCX/PPTX 图片提取 |
-| `commands/` 其他 | 文件 I/O、LanceDB 向量操作、进程管理 |
-| Tauri Plugin 系统 | 文件对话框、HTTP 代理、窗口管理、文件系统权限 |
+**文档导入流程**：
+1. 用户选择文件/文件夹 → Rust 后端提取文件内容和图片
+2. 文件内容+图片描述 → TypeScript 前端组装两步 CoT 提示
+3. Step 1 (Analysis)：LLM 返回六维度结构化分析
+4. Step 2 (Generation)：LLM 基于 analysis 生成 wiki 页面（`---FILE: ... ---` 格式）
+5. 前端解析生成结果 → 写入 `wiki/` 目录 → 更新 index.md 和 overview.md
+6. 自动更新知识图谱（添加新节点和边）→ 触发 Louvain 重新聚类
+7. 若启用向量搜索 → 自动 embedding → 写入 LanceDB
 
-### 跨平台适配细节
+**用户查询流程**：
+1. 用户输入查询 → Phase 1: Tokenized Search（关键词 + CJK 双字分词 + 标题加权）
+2. Phase 1.5 (可选): Vector Search → LanceDB cosine similarity → 合并结果
+3. Phase 2: Graph Expansion → top 结果作为种子 → 4-signal 2-hop 遍历
+4. Phase 3: Budget Control → 按比例分配上下文窗口（60% wiki + 20% chat + 5% index + 15% system）
+5. Phase 4: Context Assembly → 构造带编号页面的最终 LLM 提示
 
-README 展示了深入的跨平台适配工作：
-- 22+ 个文件中使用统一的 `normalizePath()` 进行路径规范化（反斜杠 → 正斜杠）
-- char-based 而非 byte-based 的字符串切片，防止 CJK 文件名崩溃
-- macOS：close-to-hide 行为（关闭按钮隐藏窗口而非退出，Cmd+Q 退出）
-- Windows/Linux：关闭确认对话框
+**级联删除流程**：
+1. 用户删除源文件 → 三种匹配方法定位受影响 wiki 页面（frontmatter sources[]、源摘要页名称、frontmatter section 引用）
+2. 多源引用页面：仅移除被删源条目，而非删除整个页面
+3. 清理 index.md 条目和残留 `[[wikilink]]`
 
-## 与 Karpathy 原始设计的对比
+### 扩展点与插件机制
+
+- **LLM Provider**：通过 OpenAI-compatible API 接入任意模型（本地 Ollama 或远程 API）
+- **Vector Search**：可选开启，支持任意 OpenAI-compatible embedding endpoint
+- **场景模板**：Research、Reading、Personal Growth、Business、General 五种预配置
+- **Chrome Extension**：Web Clipper 使用 Manifest V3 + Mozilla Readability.js + Turndown.js，通过本地 19827 端口 HTTP 服务器通信
+
+### 与上游/理论基础对比
 
 | 维度 | Karpathy 原始设计 | nashsu 实现 | 差异说明 |
 |------|------------------|------------|---------|
-| 架构分层 | raw/wiki/schema 抽象三层 | Sources/Wiki/Graph/Chat 四层 | 增加了图谱和交互层，schema 内化到 wiki 结构 |
-| 摄入方式 | 概念性单次处理 | Two-Step CoT + 增量缓存 + 持久队列 | 从概念变为工程实现，大幅提升质量与可靠性 |
-| 存储格式 | Markdown 纯粹主义 | Markdown + frontmatter 元数据 + 图谱索引 | 保留 Markdown 可读性，增加机器可处理的元数据 |
-| 查询机制 | 未明确 | 分词搜索 + 可选向量检索 + 图谱扩展 + 上下文预算控制 | 四阶段管线，覆盖精确匹配到语义关联 |
-| 知识关联 | 仅 `[[wikilink]]` | 四信号模型 + Louvain 社区检测 + 图谱洞察 | 从简单交叉引用扩展到完整的图谱分析引擎 |
-| 质量控制 | Lint 操作 | Lint + 异步审核 + 级联删除 | 更全面的质量保障体系 |
-| 交互方式 | 强调 LLM + Obsidian 组合 | 独立桌面应用 + Chrome Web Clipper + Save to Wiki | 从依赖外部工具变为自包含系统 |
-| 方向性 | 无 | `purpose.md` + 场景模板 | 为 LLM 注入持续的目标感 |
-| 多模态 | 仅提及可处理图片（概念） | Caption-First Hybrid，四阶段实施 | 完整的工程化多模态支持 |
+| 架构分层 | raw/wiki/schema 抽象三层 | Sources/Wiki/Graph/Chat 四层 | 增加了图谱和交互层 |
+| 摄入方式 | 概念性单次处理 | Two-Step CoT + 增量缓存 + 持久队列 | 从概念变为工程实现 |
+| 存储格式 | Markdown 纯粹主义 | Markdown + frontmatter 元数据 + 图谱索引 | 保留可读性，增加机器可处理元数据 |
+| 查询机制 | 未明确 | 分词 + 可选向量 + 图谱扩展 + 上下文预算控制 | 四阶段管线 |
+| 知识关联 | 仅 `[[wikilink]]` | 四信号模型 + Louvain + 图谱洞察 | 从简单交叉引用到完整图谱分析 |
+| 质量控制 | Lint 操作 | Lint + 异步审核 + 级联删除 | 更全面的质量保障 |
+| 方向性 | 无 | purpose.md + 场景模板 | 为 LLM 注入持续的目标感 |
+| 多模态 | 仅提及可处理图片 | Caption-First Hybrid，描述注入文本流 | 工程化多模态支持 |
 
-## 工程亮点汇总
+## 数据安全与隐私
+
+- **数据存储位置**：完全本地（SQLite/文件系统），无云端同步。wiki 内容和原始文档都存储在用户本地目录。
+- **API Key 管理**：用户自行配置在应用 Settings 中，存储在本地 Tauri 安全存储。向量搜索的 API key 独立配置。
+- **数据传输**：LLM 调用通过用户配置的 API endpoint 进行，数据不上传到开发者服务器。Deep Research 功能通过 Tavily API 执行搜索，需用户自行评估第三方风险。
+- **隐私设计**：所有文档处理在本地完成，LLM 只接收必要的文本片段。Chrome Web Clipper 通过本地 HTTP 服务器通信，不经外部中转。
+
+## 横向对比（与 Obsidian/Notion AI/Quivr，可选）
+
+| 维度 | Obsidian | Notion AI | Quivr | **LLM Wiki** |
+|------|----------|-----------|-------|-------------|
+| 架构分层 | 文件系统 + 双向链接 | 数据库 + AI 辅助 | 云端 RAG | **本地知识编译 + 图谱** |
+| 摄入方式 | 手动创建 | 手动/剪藏 | 上传+自动 | **批量多格式 + 自动分析** |
+| 存储格式 | Markdown 纯文本 | 数据库页面 | 向量+原文 | **Markdown + frontmatter + 图谱** |
+| 查询机制 | 关键词 | AI 临时检索 | 向量检索 | **分词+向量+图谱+预算控制** |
+| 协作模式 | 无（纯个人） | 多人实时协作 | 团队共享 | **单用户设计** |
+
+**差异解读**：LLM Wiki 与 Obsidian 的核心区别在于"谁建立链接"——Obsidian 要求用户手动创建 `[[双向链接]]`，LLM Wiki 让 LLM 自动发现关联。与 Notion AI 的区别在于知识持久化——Notion 的 AI 是临时辅助，LLM Wiki 的 AI 在持续"写作"和"维护"知识库。与 Quivr 的区别在于架构哲学——Quivr 是云端 RAG（每次从零检索），LLM Wiki 是本地知识编译（增量构建）。这些差异不是偶然的，而是设计哲学（LLM 主动管理 vs 人工管理 vs 被动检索）和目标用户（研究者 vs 团队 vs 开发者）不同导致的必然结果。
+
+## 局限性
+
+- **技术局限**：
+  - 依赖 LLM API 质量，低成本模型可能在知识提取阶段产生幻觉。根因：核心功能（摄入、查询、图谱构建）全部依赖 LLM，这是架构层面的根本约束，非技术债务。
+  - 大规模文档集（>10GB）的导入性能未验证。根因：Tauri + Rust 后端理论上能处理，但串行摄入队列在超大规模下可能成为瓶颈，是架构约束。
+  - Tauri + Rust 后端增加了构建复杂度（相比纯 Web 应用）。根因：这是选择"本地优先 + 原生性能"而非"简单部署"的权衡结果。
+- **使用场景局限**：
+  - 不适合实时协作（纯本地，无多用户同步）
+  - 不适合需要严格版本控制的知识库（无 Git 集成）
+  - 对非技术用户，LLM provider 配置仍有门槛
+- **维护状态考量**：
+  - 5.6k stars，687 forks，46 open issues，社区活跃度良好
+  - 基于 Karpathy 的设计模式，有清晰的理论基础
+  - 主要维护者 nashsu 持续更新（最近推送 2026-05-01），但核心团队规模未知
+  - 项目处于 v0.4.x 阶段，API 和文件格式可能尚未完全稳定
+
+## 工程亮点
 
 | 维度 | 工程实践 | 技术价值 |
 |------|---------|---------|
-| 摄入质量 | Two-Step CoT（分析→生成） | 质量显著提升，可调试性高 |
+| 摄入质量 | Two-Step CoT（分析→生成解耦） | 质量显著提升，可调试性高 |
 | 内容去重 | SHA-256 增量缓存 | 未变更文件自动跳过，节省 token 和时间 |
-| 可靠性 | 持久化摄入队列 + 崩溃恢复 | 任务不丢失，重启自动恢复 |
-| 知识关联 | 四信号模型（权重 3.0/4.0/1.5/1.0） | Source Overlap 作最强信号，Adamic-Adar 捕获结构关联 |
+| 可靠性 | 持久化摄入队列 + 崩溃恢复 | 任务不丢失，重启自动恢复，最多重试 3 次 |
+| 知识关联 | 四信号模型（权重 4.0/3.0/1.5/1.0） | Source Overlap 作最强信号，多信号互补鲁棒 |
 | 知识聚类 | Louvain 社区检测 + 内聚度评分 | 自动发现知识群落，低内聚度预警 |
 | 智能引导 | 惊喜连接检测 + 知识空白识别 | 从被动浏览转为主动探索 |
 | 检索质量 | 四阶段混合检索管线 | 兼顾精确、语义、结构三维度 |
 | 上下文控制 | 可配置窗口 + 科学比例分配 | 适应不同模型和成本限制 |
-| 多模态 | PDF 图片提取 + 视觉 LLM + 防抖去重 | 成本可控的多模态知识整合 |
-| 生命周期管理 | 级联删除 + 异步审核 + 查询回存 | 覆盖知识的创建、消费、清理、反哺全周期 |
-| 开发者体验 | 预配置场景模板 + 国际化 | 降低冷启动和学习成本 |
+| 多模态 | Caption-First Hybrid + 描述注入文本流 | 无需修改向量 schema，搜索质量无退化 |
+| 生命周期管理 | 级联删除 + 异步审核 + Save to Wiki | 覆盖知识的创建、消费、清理、反哺全周期 |
 
-## 局限性分析
+## 适用场景
 
-| 局限类型 | 具体表现 |
-|---------|---------|
-| 构建复杂度 | Tauri v2 + Rust 编译需平台特定构建环境，跨平台分发需分别编译原生二进制 |
-| 图谱性能天花板 | 客户端 sigma.js 渲染，超大规模图谱（>10k 节点）下 ForceAtlas2 布局和 WebGL 渲染可能成为瓶颈 |
-| LLM 依赖 | 核心功能高度依赖 LLM API，离线体验受限（需本地 Ollama） |
-| 缺乏实时协作 | 单用户设计，无多用户同步机制 |
-| 学习曲线 | 概念较多（purpose.md、schema.md、四信号图谱、Louvain 检测），新用户需要一定学习成本 |
-| 项目成熟度 | 快速迭代中（v0.4.6），API 和文件格式可能尚未完全稳定 |
+- **最适合**：
+  - 需要深度理解大量学术文献的研究者
+  - 希望构建个人知识库但不想手动整理链接的笔记用户
+  - 对 LLM 原生应用感兴趣的开发者（可作为学习案例）
+  - 需要从 PDF/文档中提取结构化知识的场景
+- **不适合**：
+  - 需要多人实时协作的团队（纯本地，无多用户同步）
+  - 对 LLM 隐私极度敏感且无法使用本地模型的用户
+  - 只需要简单笔记而非知识图谱的用户（Obsidian 更简单）
+  - 需要严格版本控制的知识库（无 Git 集成）
 
-## 与其他实现的对比
+## 关联项目
 
-| 特性 | nashsu/llm_wiki | domleca/llm-wiki | SamurAIGPT/llm-wiki-agent |
-|------|---------|---------|---------|
-| **产品形态** | 独立桌面应用 | Obsidian 插件 | CLI Agent 框架 |
-| **技术栈** | Tauri v2 + React + Rust | TypeScript | Python |
-| **用户群体** | 重度知识库构建者、研究人员 | Obsidian 用户、普通知识工作者 | 开发者、CLI 爱好者 |
-| **知识图谱** | 四维知识图谱、Louvain 社区检测、图谱洞察 | 无可视化，仅实体-概念链接 | 无独立可视化 |
-| **搜索机制** | 分词 + 向量 + 图谱扩展 + 上下文预算 | 混合搜索（关键词+语义+结构） | 依赖 LLM 自身 |
-| **多模态** | Caption-First Hybrid，PDF/DOCX/PPTX 图片提取 | 不支持 | 不支持 |
-| **异步审核** | 完整审核队列 | 无 | 无 |
-| **级联删除** | 三种匹配方法的智能清理 | 无 | 无 |
-| **知识反哺** | Save to Wiki 闭环 | 计划中 | 无 |
-| **核心优势** | 功能最完整，交互设计自由，全生命周期覆盖 | 零切换成本，隐私优先，易上手 | 高度可定制，与 Claude Code 集成 |
-| **核心代价** | 较高的使用和构建门槛 | 生态锁定，功能子集 | 高使用门槛，无 GUI |
+| 项目 | 关系 | 选择建议 |
+|------|------|----------|
+| [Karpathy's llm-wiki.md](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) | 上游/理论基础 | 想理解核心设计思想先看原版，它是本项目的"设计文档" |
+| [Obsidian](https://obsidian.md) | 互补/替代 | 喜欢手动控制链接结构选 Obsidian；想让 LLM 自动管理选 LLM Wiki |
+| [Quivr](https://github.com/StanGirard/quivr) | 替代 | Quivr 是云端 RAG 方案，LLM Wiki 是本地知识编译，隐私偏好决定选择 |
 
-## 总结
+---
 
-`nashsu/llm_wiki` 是 LLM Wiki 生态中功能最完整、工程水平最高的桌面端实现。它忠实保留了 Karpathy 原始设计的全部核心要素，同时在两步骤摄入（分析-生成解耦）、知识图谱（四信号模型 + Louvain 社区检测 + 惊喜连接与知识空白洞察）、多模态图片摄入（Caption-First Hybrid + 去重缓存 + 软失败）、知识全生命周期管理（摄入队列 + 异步审核 + 级联删除 + 查询回存）和检索管线（四阶段混合检索 + 上下文预算控制）等维度进行了跨时代的工程化增强。
-
-项目的技术选型（Tauri v2 + React + Rust）在性能、跨平台支持和开发效率之间取得了巧妙平衡。与 domleca 的 Obsidian 插件（轻量集成但生态锁定）和 SamurAIGPT 的 CLI Agent（高度可定制但门槛高）形成三足鼎立之势，分别占据“独立全栈桌面端”、“插件生态集成”、“开发者 CLI”三个生态位。
-
-对于追求完整知识管理体验、愿意投入学习成本的用户，`nashsu/llm_wiki` 是目前最具技术深度和功能广度的选择。
-
-*分析基于仓库源码结构、README.md（v0.4.6）、plans/multimodal-images.md 及第三方技术解读，反映项目截至 2026 年 5 月的状态。*
+*笔记生成时间：2026-05-04*
+*数据来源：GitHub API + README 分析 + 深度文档摘要*
+*建议下次审查：2026-10-31*
