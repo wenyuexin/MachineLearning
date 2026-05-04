@@ -48,11 +48,24 @@ agentic/
 │   ├── crewai/
 │   └── custom-agent-dev/
 │
-└── 06-evaluation/     # 评估与可靠性
+└── 06-evaluation/                    # 评估与可靠性
     ├── task-completion-metrics/
     ├── safety-and-robustness/
     └── human-evaluation/
 ```
+
+## 开源仓库与工具存放指南
+
+Agentic AI 相关的开源仓库、框架笔记和项目实践，按功能主题放入对应目录：
+
+| 内容类型 | 放入目录 | 示例 |
+|---------|---------|------|
+| 智能体框架（LangChain, AutoGen, CrewAI 等） | `05-frameworks-and-tools/` | langchain-agents, autogen, crewai |
+| 单智能体架构模式（ReAct, AutoGPT 等） | `03-agent-architectures/single-agent-patterns/` | ReAct, RA-AID |
+| 多智能体协作系统 | `03-agent-architectures/multi-agent-systems/` | MetaGPT, ChatDev |
+| 工具使用与技能框架 | `02-cognitive-capabilities/tool-use/` | 工具调用协议、MCP |
+| 评估基准与论文 | `06-evaluation/` | AgentBench, SWE-bench |
+| 环境仿真平台 | `04-environments/` | WebArena, OSWorld |
 
 ## 学习路径
 
@@ -79,4 +92,4 @@ flowchart TD
 
 ---
 
-*最后更新: 2026-05-02*
+*最后更新: 2026-05-03*

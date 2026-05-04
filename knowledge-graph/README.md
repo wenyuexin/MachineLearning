@@ -39,11 +39,24 @@ knowledge-graph/
 │   ├── dialogue-systems/
 │   └── domain-specific-kg/
 │
-└── 06-quality/         # 质量与演化
+└── 06-quality/                       # 质量与演化
     ├── knowledge-completion/
     ├── error-detection/
     └── kg-versioning/
 ```
+
+## 开源仓库与工具存放指南
+
+知识图谱相关的开源仓库/工具笔记，按功能主题优先放入对应技术目录：
+
+| 仓库功能 | 放入目录 | 示例 |
+|---------|---------|------|
+| 知识表示框架/嵌入库 | `01-representation/` | RDFlib, PyKEEN |
+| 抽取/融合/构建工具 | `02-construction/` | OpenIE, DeepKE, graphify |
+| 图数据库/查询引擎 | `03-storage-and-query/` | Neo4j, NebulaGraph |
+| 推理引擎 | `04-reasoning/` | RLvLR, KGEM |
+| 应用框架 | `05-applications/` | GraphRAG, KG4LLM |
+| 质量评估/补全工具 | `06-quality/` | 知识图谱质量评估套件 |
 
 ## 学习路径
 
@@ -69,4 +82,4 @@ knowledge-graph/
 
 ---
 
-*最后更新: 2026-05-02*
+*最后更新: 2026-05-03*

@@ -41,7 +41,12 @@ llm/
 │   ├── evaluation-methods/          # 评估方法
 │   └── evaluation-frameworks/       # 评估框架
 │
-├── 06-applications/      # 应用与伦理
+├── 06-applications/                 # 应用与伦理
+│   ├── agents/                      # LLM 智能体应用
+│   ├── llm-wiki/                    # LLM 知识库/wiki
+│   ├── rag/                         # RAG 应用
+│   ├── safety-and-alignment/        # 安全与对齐
+│   └── social-impact/               # 社会影响
 │
 ├── 07-explainability/               # 可解释性
 │   ├── mechanistic/                 # 机制可解释性
@@ -55,6 +60,22 @@ llm/
     ├── video/                       # 视频语言模型
     └── any2any/                     # 全模态模型
 ```
+
+## 开源仓库与工具存放指南
+
+LLM 相关的开源仓库、框架笔记和项目实践，按功能主题放入对应目录：
+
+| 内容类型 | 放入目录 | 示例 |
+|---------|---------|------|
+| 开源模型系列（GPT, Llama, Qwen 等） | `02-model-zoo/open-source-models/` | 各系列模型技术报告与复刻 |
+| 预训练数据工程 | `03-training/pre-training/data-curation/` | 数据构建与质量控制工具 |
+| 微调与对齐方法 | `03-training/fine-tuning/` / `03-training/alignment/` | LoRA, RLHF, DPO |
+| 推理优化框架 | `04-serving/optimization-techniques/` | vLLM, TensorRT-LLM |
+| 提示工程工具 | `04-serving/prompt-engineering/` | PromptFlow, LangChain Prompts |
+| 评估基准 | `05-evaluation/benchmarks/` | MMLU, C-Eval, HumanEval |
+| LLM 知识库/wiki | `06-applications/llm-wiki/` | Karpathy's LLM Wiki, Obsidian Copilot |
+| 可解释性工具 | `07-explainability/` | TransformerLens, Ecco |
+| 多模态模型 | `08-multimodal/` | LLaVA, Qwen-VL |
 
 ## 学习路径
 
@@ -80,4 +101,4 @@ llm/
 
 ---
 
-*最后更新: 2026-05-02*
+*最后更新: 2026-05-03*

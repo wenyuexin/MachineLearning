@@ -204,7 +204,16 @@ machine-learning/
 │   │   ├── evaluation-methods/     # 评估方法
 │   │   └── evaluation-frameworks/  # 评估框架
 │   ├── 06-applications/            # 应用与伦理
+│   │   ├── agents/                 # LLM 智能体应用
+│   │   ├── llm-wiki/               # LLM 知识库/wiki
+│   │   ├── rag/                    # RAG 应用
+│   │   ├── safety-and-alignment/   # 安全与对齐
+│   │   └── social-impact/          # 社会影响
 │   ├── 07-explainability/          # 可解释性
+│   │   ├── mechanistic/            # 机制可解释性
+│   │   ├── attribution/            # 归因方法
+│   │   ├── probing/                # 探测技术
+│   │   └── counterfactual/         # 反事实解释
 │   └── 08-multimodal/              # 多模态
 │
 ├── rag/                         # 检索增强生成
@@ -260,7 +269,6 @@ machine-learning/
 ├── learning-materials/          # 学习资料
 │   ├── 01-books/                   # 书籍
 │   ├── 02-courses-and-lectures/    # 课程与讲座
-│   ├── 03-papers-and-surveys/      # 论文与综述
 │   ├── 04-blogs-and-technical-guides/ # 博客与技术指南
 │   ├── 05-tools-and-frameworks/    # 工具与框架快速入门
 │   ├── 06-datasets/                # 数据集
