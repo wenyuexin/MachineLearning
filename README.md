@@ -41,6 +41,9 @@
 基础设施层：
 └── training-infra/              # 训练基础设施
 
+跨领域视角层：
+└── interdisciplinarity/           # 跨学科交叉（认知科学·社会学·博弈论·哲学·语言学·控制论·法学）
+
 支撑资源：
 ├── learning-materials/          # 学习资料与书籍推荐
 └── asserts/                     # 图片、脚本等资源文件
@@ -77,6 +80,19 @@ flowchart LR
     direction TB
     LLM_EX[可解释性]
     LLM_MM[多模态]
+  end
+
+  %% ========== 跨领域视角 ==========
+  subgraph Interdisciplinary [跨领域视角层]
+    direction LR
+    COG[认知科学与神经科学]
+    SOC[社会学与组织管理]
+    CXS[复杂系统与涌现]
+    POM[心灵哲学]
+    ECO[经济学与博弈论]
+    LIN[语言学与语用学]
+    CBR[控制论与系统论]
+    LAW[法学与治理]
   end
 
   %% ========== 支撑与资源 ==========
@@ -118,11 +134,30 @@ flowchart LR
   TI --> LLM
   TI --> RL
 
+  %% -------- 跨领域视角横向映射 --------
+  COG -.-> DL
+  COG -.-> LLM
+  COG -.-> AG
+  SOC -.-> AG
+  SOC -.-> EI
+  CXS -.-> LLM
+  CXS -.-> AG
+  POM -.-> LLM
+  ECO -.-> AG
+  LIN -.-> LLM
+  LIN -.-> AG
+  CBR -.-> RL
+  CBR -.-> EI
+  LAW -.-> LLM
+  LAW -.-> AG
+
   %% 学习资料全局引用，用一条虚线指向基础层
   LM -.-> Foundation
 ```
 
 ## 目录结构
+
+> 编号目录展开至子目录名；核心领域展开较深，扩展领域仅列三级目录。各领域详细结构见对应 README。
 
 ```
 machine-learning/
@@ -266,6 +301,16 @@ machine-learning/
 │   ├── 06-ml-operations/           # 实验追踪与运维
 │   └── 07-observability-and-debugging/ # 可观测性与调试
 │
+├── interdisciplinarity/         # 跨学科交叉
+│   ├── 01-cognitive-science-and-neuroscience/   # 认知科学与神经科学
+│   ├── 02-linguistics-and-pragmatics/           # 语言学与语用学
+│   ├── 03-philosophy-of-mind/                   # 心灵哲学
+│   ├── 04-cybernetics-and-systems-theory/       # 控制论与系统论
+│   ├── 05-complex-systems-and-emergence/        # 复杂系统与涌现
+│   ├── 06-sociology-and-organization/           # 社会学与组织管理
+│   ├── 07-economics-and-game-theory/            # 经济学与博弈论
+│   └── 08-law-and-governance/                   # 法学与治理
+│
 ├── learning-materials/          # 学习资料
 │   ├── 01-books/                   # 书籍
 │   ├── 02-courses-and-lectures/    # 课程与讲座
@@ -274,7 +319,7 @@ machine-learning/
 │   ├── 06-datasets/                # 数据集
 │   └── 07-community-and-events/    # 社区与活动
 │
-└──  asserts/                     # 资源文件
+└──  asserts/                    # 资源文件
 ```
 
 ## 声明
