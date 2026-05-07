@@ -11,8 +11,6 @@
 ```
 llm/evaluation/
 ├── calibration/     # 校准与不确定性量化
-│   ├── README.md
-│   └── Uncertainty_Measurement_LLM_Survey_2502.04567.md
 │
 ├── benchmarks/      # 综合评估基准
 │   └── .gitkeep     # MMLU、GSM8K、HumanEval、LongBench等

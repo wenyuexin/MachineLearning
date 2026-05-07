@@ -34,7 +34,7 @@
 
 将组织视为社会结构与制度环境互动的产物。与管理学视角不同，更强调组织的合法性、制度同形、权力与冲突。
 
-> 详见 [`institutional-theory/`](./institutional-theory/)、[`multi-agent-organization/`](./multi-agent-organization/)
+> 详见 [`institutional-theory/`](./institutional-theory/)、[`organizational-forms/`](./organizational-forms/)
 
 ### 6. 性别社会学
 
@@ -124,13 +124,13 @@
 
 探讨组织结构（M型、矩阵制、网络制）如何匹配战略与环境。涉及动态能力、吸收能力等概念。
 
-> 详见 [`multi-agent-organization/`](./multi-agent-organization/)
+> 详见 [`organizational-forms/`](./organizational-forms/)
 
 #### 9. 组织学习与知识管理
 
 研究组织如何获取、共享、创造和保存知识。单环/双环学习（阿吉里斯）、实践社区、知识转移的障碍。
 
-> 详见 [`trust-and-cooperation/`](./trust-and-cooperation/)、[`coordination-and-communication/`](./coordination-and-communication/)
+> 详见 [`social-capital/`](./social-capital/)、[`coordination-theory/`](./coordination-theory/)
 
 #### 10. 组织变革与发展
 

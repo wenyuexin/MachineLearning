@@ -51,7 +51,7 @@
 3. **该学科发展出了哪些解决方案或理论模型？**（如：组织双元性、机制设计）
 4. **这些解决方案能否转译为工程架构或训练策略？**（如：动态路由、奖励塑形）
 
-> 撰写新笔记时，建议遵循 [TEMPLATE.md](./TEMPLATE.md) 的结构化模板。
+> 撰写新笔记时，建议遵循 [template.md](./template.md) 的结构化模板。
 
 ## 目录结构
 
@@ -70,22 +70,21 @@ interdisciplinarity/
 ├── 03-philosophy-of-mind/                   # 心灵哲学
 │                                            # （意向性、具身认知、中文房间、功能主义等）
 │
-├── 04-cybernetics-and-systems-theory/       # 控制论与系统论
+├── 04-cybernetics-systems/                   # 控制论与系统论
 │                                            # （反馈回路、自调节、稳态）
 │
 ├── 05-complex-emergence/                   # 复杂系统与涌现
 │
 ├── 06-sociology-and-organization/           # 社会学与组织管理
-│   ├── README.md                            # 学科导论与全景地图
 │   ├── ambidexterity-and-paradox/          # 双元性与悖论（流程与效率平衡）
 │   ├── social-network-analysis/             # 社会网络分析（嵌入理论、结构洞）
 │   ├── institutional-theory/                # 制度理论（合法性、制度同形）
-│   ├── multi-agent-organization/            # 多智能体组织形式（层级/扁平/市场）
-│   ├── coordination-and-communication/      # 协调与通信机制
-│   ├── trust-and-cooperation/               # 信任与合作博弈
+│   ├── organizational-forms/                # 组织形式理论（科层制/市场/网络）
+│   ├── coordination-theory/                 # 协调理论（任务依赖、沟通机制）
+│   ├── social-capital/                      # 社会资本理论（信任、互惠、合作）
 │   └── organizational-ecology/              # 组织生态学（密度依赖、生态位）
 │
-├── 07-economics-and-game-theory/            # 经济学与博弈论
+├── 07-economics-game-theory/            # 经济学与博弈论
 │                                            # （机制设计、激励对齐、拍卖理论等）
 │
 └── 08-law-and-governance/                   # 法学与治理
@@ -190,16 +189,33 @@ AI 安全对齐、责任归属与治理框架的法律与制度基础。
 
 ## 与纵向技术栈的关系
 
+```mermaid
+flowchart TB
+    subgraph H["interdisciplinarity/ 横向层"]
+        direction LR
+        subgraph L1 [个体层面]
+            01[认知科学]
+            02[语言学]
+            03[心灵哲学]
+        end
+        subgraph L2 [系统层面]
+            04[控制论]
+            05[复杂系统]
+        end
+        subgraph L3 [群体层面]
+            06[社会学]
+            07[博弈论]
+        end
+        subgraph L4 [制度层面]
+            08[法学]
+        end
+    end
+
+    H -->|横向映射| D["deep-learning/<br/>纵向层"]
+    H -->|横向映射| L["llm/<br/>纵向层"]
+    H -->|横向映射| A["agentic/<br/>纵向层"]
 ```
-                    ┌─────────────────────────────────┐
-                    │    interdisciplinarity/ (横向层)    │
-                    │  认知科学·社会学·博弈论·哲学·语言学·控制论·法学  │
-                    └──────────┬──────────────────────┘
-                               │ 横向映射
-          ┌────────────────────┼────────────────────────┐
-          ▼                    ▼                        ▼
-   ┌─────────────┐    ┌─────────────┐          ┌─────────────┐
-   │ deep-learning│    │    llm/     │          │  agentic/   │
-   │  (纵向层)    │    │  (纵向层)    │          │  (纵向层)    │
-   └─────────────┘    └─────────────┘          └─────────────┘
-```
+
+---
+
+*最后更新: 2026-05-07*

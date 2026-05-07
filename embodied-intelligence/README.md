@@ -62,7 +62,7 @@ embodied-intelligence/
 
 ## 快速导航
 
-- **技术总结**: [`summary.md`](./summary.md)
+- **技术总结**: [`overview.md`](./overview.md)
 - **论文精读**: [`07-evaluation-and-benchmarks/papers/`](../world-models/05-evaluation/)
 
 ---

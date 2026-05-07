@@ -305,10 +305,10 @@ machine-learning/
 │   ├── 01-cognitive-neuroscience/              # 认知科学与神经科学
 │   ├── 02-linguistics-and-pragmatics/           # 语言学与语用学
 │   ├── 03-philosophy-of-mind/                   # 心灵哲学
-│   ├── 04-cybernetics-and-systems-theory/       # 控制论与系统论
+│   ├── 04-cybernetics-systems/                 # 控制论与系统论
 │   ├── 05-complex-emergence/                   # 复杂系统与涌现
 │   ├── 06-sociology-and-organization/           # 社会学与组织管理
-│   ├── 07-economics-and-game-theory/            # 经济学与博弈论
+│   ├── 07-economics-game-theory/                # 经济学与博弈论
 │   └── 08-law-and-governance/                   # 法学与治理
 │
 ├── learning-materials/          # 学习资料
