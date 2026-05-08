@@ -37,7 +37,8 @@ knowledge-graph/
 │   ├── question-answering/
 │   ├── recommender-systems/
 │   ├── dialogue-systems/
-│   └── domain-specific-kg/
+│   ├── domain-specific-kg/
+│   └── graphify/                     # 代码项目知识图谱工具
 │
 └── 06-quality/                       # 质量与演化
     ├── knowledge-completion/
@@ -52,7 +53,8 @@ knowledge-graph/
 | 仓库功能 | 放入目录 | 示例 |
 |---------|---------|------|
 | 知识表示框架/嵌入库 | `01-representation/` | RDFlib, PyKEEN |
-| 抽取/融合/构建工具 | `02-construction/` | OpenIE, DeepKE, graphify |
+| 抽取/融合/构建工具 | `02-construction/` | OpenIE, DeepKE |
+| 代码项目知识图谱工具 | `05-applications/graphify/` | Graphify |
 | 图数据库/查询引擎 | `03-storage-and-query/` | Neo4j, NebulaGraph |
 | 推理引擎 | `04-reasoning/` | RLvLR, KGEM |
 | 应用框架 | `05-applications/` | GraphRAG, KG4LLM |
@@ -82,4 +84,4 @@ knowledge-graph/
 
 ---
 
-*最后更新: 2026-05-03*
+*最后更新: 2026-05-08*
