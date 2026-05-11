@@ -1,6 +1,27 @@
 # 知识图谱 (Knowledge Graph)
 
-## 目录结构
+## 分类依据
+
+Knowledge Graph 目录按"表示 → 构建 → 存储 → 推理 → 应用 → 质量"的全生命周期组织：
+
+- **01（知识表示）**：如何形式化描述知识（符号表示、嵌入表示）
+- **02（知识构建）**：从非结构化数据中抽取实体和关系
+- **03（存储与查询）**：图数据库存储与查询语言
+- **04（知识推理）**：基于已有知识推导新知识
+- **05（应用）**：KG 在下游任务中的应用
+- **06（质量）**：知识图谱的维护、补全与评估
+
+## 边界说明
+
+| 内容 | 适合放 KG | 不适合放 KG |
+|------|----------|------------|
+| 知识表示方法（RDF、OWL、嵌入模型） | 01 | — |
+| 实体识别、关系抽取等构建技术 | 02 | 抽取工具在 LLM 场景下的应用放 `llm/` |
+| 图数据库选型与查询 | 03 | 向量数据库放 `rag/02-retrieval/vector-databases/` |
+| 知识推理方法（规则推理、神经符号推理） | 04 | LLM 自身推理能力放 `llm/` |
+| LLM + KG 应用 | 05 (概念层面) | 具体 RAG 项目（GraphRAG）放 `rag/05-implementations/` |
+| 端到端 KG 工具（Graphify） | 05/applications/ | — |
+| 知识图谱质量与补全 | 06 | — |
 
 ```
 knowledge-graph/
@@ -78,10 +99,10 @@ knowledge-graph/
 
 | 本目录内容 | 关联目录 | 说明 |
 |-----------|---------|------|
-| GraphRAG检索架构 | [../rag/04-advanced-rag-patterns/graph-rag/](../rag/04-advanced-rag-patterns/graph-rag/) | RAG视角的图增强检索 |
+| GraphRAG检索架构 | [../rag/05-implementations/graph-rag/](../rag/05-implementations/graph-rag/) | RAG视角的图增强检索，集中rag/不分散 |
 | LLM推理 | [../llm/04-serving/](../llm/04-serving/) | LLM作为抽取/推理工具 |
 | 可解释性 | [../llm/07-explainability/](../llm/07-explainability/) | KG驱动的模型解释 |
 
 ---
 
-*最后更新: 2026-05-08*
+*最后更新: 2026-05-11*

@@ -255,9 +255,12 @@ machine-learning/
 │   ├── 01-fundamentals/            # 基础概念
 │   ├── 02-retrieval/               # 索引与检索
 │   ├── 03-generation/              # 生成与增强
-│   ├── 04-advanced-rag-patterns/   # 高级RAG模式
-│   ├── 05-evaluation/              # 评估与基准
-│   └── 06-production/              # 生产与生态
+│   ├── 04-advanced-patterns/       # 通用高级范式
+│   ├── 05-implementations/         # 项目实现
+│   │   ├── graph-rag/                 # Microsoft GraphRAG
+│   │   └── hipporag/                  # HippoRAG (NeurIPS 2024)
+│   ├── 06-evaluation/              # 评估与基准
+│   └── 07-production/              # 生产与生态
 │
 ├── agentic/                     # AI智能体
 │   ├── 01-core-concepts/           # 核心概念
@@ -319,7 +322,7 @@ machine-learning/
 │   ├── 06-datasets/                # 数据集
 │   └── 07-community-and-events/    # 社区与活动
 │
-└──  asserts/                    # 资源文件
+└──  assets/                    # 资源文件
 ```
 
 ## 声明
