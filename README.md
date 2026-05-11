@@ -6,7 +6,7 @@
     <em>ML / DL / NLP / CV / LLM / RAG / KG</em>
   </p>
 
-  <!-- 核心状态栏k -->
+  <!-- 核心状态栏 -->
   <p>
     <!-- 动态获取最后提交时间 -->
     <img src="https://img.shields.io/github/last-commit/wenyuexin/machine-learning?style=flat-square&label=Last%20Update&color=00bcd4" alt="Last Commit">
@@ -46,113 +46,38 @@
 
 支撑资源：
 ├── learning-materials/          # 学习资料与书籍推荐
-└── asserts/                     # 图片、脚本等资源文件
+└── assets/                      # 图片、脚本等资源文件
 ```
 
 ## 知识体系
 
-```mermaid
-flowchart LR
-  %% ========== 基础理论层 ==========
-  subgraph Foundation [基础理论层]
-    direction LR
-    TM[传统机器学习] --> DL[深度学习] --> RL[强化学习]
-  end
+### 纵向技术栈依赖
 
-  %% ========== 核心领域层 ==========
-  subgraph Core [核心领域层]
-    direction LR
-    CV[计算机视觉]
-    LLM[大语言模型]
-    KG[知识图谱]
-    CV --> LLM --> KG
-  end
+```
+┌────────────────────────────────────────┐
+│ 应用层:  RAG    AG    WM    EI         │
+│ 核心层:  KG    LLM    CV               │
+│ 基础层:  TM     DL    RL               │
+│ 设施层:  TI     LM                     │
+└────────────────────────────────────────┘
+依赖: DL,TM → CV, LLM, KG    RL → AG, WM
+      LLM → RAG, AG          KG → RAG
+      CV,WM → EI
+```
 
-  %% ========== 应用与整合层 ==========
-  subgraph App [应用与整合层]
-    direction LR
-    RAG[检索增强生成] --> AG[AI智能体] --> EI[具身智能]
-    WM[世界模型] --> EI
-  end
+### 跨学科映射
 
-  %% ========== LLM 扩展 ==========
-  subgraph Ext [LLM 扩展]
-    direction TB
-    LLM_EX[可解释性]
-    LLM_MM[多模态]
-  end
+8个学科视角对技术领域的主要启发关系（详细映射见 [interdisciplinarity/](./interdisciplinarity/)）。
 
-  %% ========== 跨领域视角 ==========
-  subgraph Interdisciplinary [跨领域视角层]
-    direction LR
-    COG[认知科学与神经科学]
-    SOC[社会学与组织管理]
-    CXS[复杂系统与涌现]
-    POM[心灵哲学]
-    ECO[经济学与博弈论]
-    LIN[语言学与语用学]
-    CBR[控制论与系统论]
-    LAW[法学与治理]
-  end
-
-  %% ========== 支撑与资源 ==========
-  subgraph Support [支撑与资源]
-    LM[学习资料]
-    TI[训练基础设施]
-  end
-
-  %% -------- 基础 → 核心（分组对齐，减少远距离穿越）--------
-  DL --> CV
-  DL --> LLM
-  RL --> AG
-  RL --> WM
-  DL --> EI
-
-  %% -------- 核心 → 应用（LLM 与 RAG、AG 紧贴排列）--------
-  LLM --> RAG
-  LLM --> AG
-  LLM --> EI
-
-  %% -------- 应用内横向，已通过顺序优化（RAG→AG→EI）--------
-  AG --> RAG
-
-  %% -------- 核心与应用间特殊连接 --------
-  LLM --> KG
-  AG --> KG
-  KG -.-> EI
-
-  %% -------- 强化学习补充 --------
-  RL --> EI
-
-  %% -------- LLM 扩展 --------
-  LLM_EX -.-> LLM
-  LLM_MM -.-> LLM
-  LLM_MM -.-> CV
-
-  %% -------- 支撑（仅保留关键训练链路）--------
-  TI --> DL
-  TI --> LLM
-  TI --> RL
-
-  %% -------- 跨领域视角横向映射 --------
-  COG -.-> DL
-  COG -.-> LLM
-  COG -.-> AG
-  SOC -.-> AG
-  SOC -.-> EI
-  CXS -.-> LLM
-  CXS -.-> AG
-  POM -.-> LLM
-  ECO -.-> AG
-  LIN -.-> LLM
-  LIN -.-> AG
-  CBR -.-> RL
-  CBR -.-> EI
-  LAW -.-> LLM
-  LAW -.-> AG
-
-  %% 学习资料全局引用，用一条虚线指向基础层
-  LM -.-> Foundation
+```
+┌──────────────────────────────────────────┐
+│ 认知科学  语言学  心灵哲学  控制论         │
+│ 复杂系统  社会学  博弈论    法学           │
+├──────────────────────────────────────────┤
+│ 深度学习  大语言模型  AI智能体  强化学习    │
+└──────────────────────────────────────────┘
+映射: 认知科学 → DL, AG    语言学 → LLM    控制论 → RL
+      社会学 → AG          博弈论 → AG     法学 → LLM
 ```
 
 ## 目录结构
@@ -201,7 +126,7 @@ machine-learning/
 │   └── 05-infra/                   # 深度学习基础设施
 │
 ├── reinforce-learning/          # 强化学习
-│   ├── 01-fundamentals/            # 基础概念
+│   ├── 01-foundations/            # 基础概念
 │   ├── 02-model-free-rl/           # 无模型强化学习
 │   ├── 03-policy-methods/          # 基于策略与Actor-Critic
 │   ├── 04-model-based-rl/          # 基于模型的强化学习
@@ -222,7 +147,7 @@ machine-learning/
 │   │   ├── transformer-architecture/ # Transformer架构
 │   │   ├── tokenization/           # 分词
 │   │   └── scaling-laws/           # 缩放定律
-│   ├── 02-model-zoo/               # 模型全景
+│   ├── 02-models/                  # 模型
 │   │   ├── open-source-models/     # 开源模型
 │   │   ├── architectural-variants/ # 架构变体
 │   │   └── emergent-abilities/     # 涌现能力
@@ -238,40 +163,70 @@ machine-learning/
 │   │   ├── benchmarks/             # 基准测试
 │   │   ├── evaluation-methods/     # 评估方法
 │   │   └── evaluation-frameworks/  # 评估框架
-│   ├── 06-applications/            # 应用与伦理
-│   │   ├── agents/                 # LLM 智能体应用
-│   │   ├── llm-wiki/               # LLM 知识库/wiki
-│   │   ├── rag/                    # RAG 应用
-│   │   ├── safety-and-alignment/   # 安全与对齐
-│   │   └── social-impact/          # 社会影响
-│   ├── 07-explainability/          # 可解释性
+│   ├── 06-explainability/          # 可解释性
 │   │   ├── mechanistic/            # 机制可解释性
 │   │   ├── attribution/            # 归因方法
 │   │   ├── probing/                # 探测技术
 │   │   └── counterfactual/         # 反事实解释
-│   └── 08-multimodal/              # 多模态
+│   ├── 07-multimodal/              # 多模态
+│   │   ├── vlm/                    # 视觉语言模型
+│   │   ├── audio/                  # 音频语言模型
+│   │   ├── video/                  # 视频语言模型
+│   │   └── any2any/                # 全模态模型
+│   └── 08-safety-and-society/      # 安全与社会影响
+│       ├── safety-and-alignment/   # 安全与对齐
+│       ├── social-impact/          # 社会影响
+│       └── llm-wiki/               # LLM知识库/wiki
 │
 ├── rag/                         # 检索增强生成
-│   ├── 01-fundamentals/            # 基础概念
-│   ├── 02-retrieval/               # 索引与检索
-│   ├── 03-generation/              # 生成与增强
-│   ├── 04-advanced-patterns/       # 通用高级范式
-│   ├── 05-implementations/         # 项目实现
-│   │   ├── graph-rag/                 # Microsoft GraphRAG
-│   │   └── hipporag/                  # HippoRAG (NeurIPS 2024)
-│   ├── 06-evaluation/              # 评估与基准
-│   └── 07-production/              # 生产与生态
+│   ├── 01-foundations/             # 基础
+│   │   ├── what-is-rag/            # RAG概念与动机
+│   │   ├── naive-rag/              # 朴素RAG
+│   │   ├── rag-pipeline-overview/  # 管线总览
+│   │   ├── context-integration/    # 上下文构建与注入
+│   │   ├── generation-strategies/  # 生成策略
+│   │   └── evaluation-of-generation/ # 生成质量评估
+│   ├── 02-retrieval/               # 检索
+│   │   ├── chunking-strategies/    # 分块策略
+│   │   ├── embedding-models/       # 嵌入模型
+│   │   ├── vector-databases/       # 向量数据库
+│   │   └── advanced-retrieval/     # 高级检索
+│   ├── 03-advanced-patterns/       # 高级范式（含代表实现）
+│   │   ├── graph-rag/              # 图增强RAG
+│   │   ├── self-reflective-rag/    # 自反思RAG
+│   │   ├── agentic-rag/            # Agent驱动RAG
+│   │   ├── modular-rag/            # 模块化RAG
+│   │   └── multimodal-rag/         # 多模态RAG
+│   ├── 04-evaluation/              # 评估
+│   └── 05-production/              # 生产与生态
 │
 ├── agentic/                     # AI智能体
-│   ├── 01-core-concepts/           # 核心概念
-│   ├── 02-cognitive-capabilities/  # 认知能力
-│   ├── 03-agent-architectures/     # 智能体架构
-│   ├── 04-environments/            # 环境与仿真
-│   ├── 05-frameworks-and-tools/    # 框架与工具
-│   └── 06-evaluation/              # 评估与可靠性
+│   ├── 01-foundations/             # 基础概念
+│   │   ├── definition-and-taxonomy/ # 定义与分类
+│   │   ├── reactive-vs-deliberative/ # 反应式vs审慎式
+│   │   └── cognitive-architectures/ # 认知架构总论
+│   ├── 02-single-agent/            # 单智能体
+│   │   ├── planning/               # 规划
+│   │   ├── memory/                 # 记忆
+│   │   ├── tool-use/               # 工具使用
+│   │   ├── self-reflection/        # 自我反思
+│   │   └── patterns/               # 架构模式（ReAct、AutoGPT等）
+│   ├── 03-multi-agent/             # 多智能体
+│   │   ├── collaboration/          # 协作
+│   │   ├── competition/            # 竞争
+│   │   ├── organizational/         # 组织架构
+│   │   ├── shared-memory/          # 共享记忆
+│   │   └── coordination/           # 协调与通信
+│   ├── 04-human-agent-interaction/ # 人机交互
+│   ├── 05-environments/            # 环境与仿真
+│   ├── 06-frameworks-and-tools/    # 框架与工具
+│   └── 07-evaluation/              # 评估与可靠性
 │
 ├── knowledge-graph/             # 知识图谱
-│   ├── 01-representation/          # 知识表示
+│   ├── 01-foundations/             # 基础
+│   │   ├── symbolic-representation/ # 符号表示
+│   │   ├── embedding-based-representation/ # 嵌入表示
+│   │   └── ontology-and-schema/    # 本体与Schema
 │   ├── 02-construction/            # 知识构建
 │   ├── 03-storage-and-query/       # 存储与查询
 │   ├── 04-reasoning/               # 知识推理
@@ -322,7 +277,7 @@ machine-learning/
 │   ├── 06-datasets/                # 数据集
 │   └── 07-community-and-events/    # 社区与活动
 │
-└──  assets/                    # 资源文件
+└── assets/                     # 资源文件
 ```
 
 ## 声明

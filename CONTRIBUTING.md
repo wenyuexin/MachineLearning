@@ -29,8 +29,8 @@
 
 根 README 的目录树展开深度按内容活跃度区分：
 
-- **核心领域**（traditional-ml、deep-learning、reinforce-learning、llm、cv、rag、agentic）展开到 4 级——内容充实、更新频繁，需要更细粒度的导航
-- **次要领域**（knowledge-graph、embodied-intelligence、world-models、training-infra、interdisciplinarity、learning-materials）展开到 3 级——内容量较少或更新节奏较慢
+- **核心领域**（traditional-ml、deep-learning、reinforce-learning、llm、cv、rag、agentic、knowledge-graph）展开到 4 级——内容充实、更新频繁，需要更细粒度的导航
+- **次要领域**（embodied-intelligence、world-models、training-infra、interdisciplinarity、learning-materials）展开到 3 级——内容量较少或更新节奏较慢
 - 各一级目录有自己的 README，承载完整目录结构（不受根 README 深度限制）
 
 ## 四、README 规范
@@ -63,11 +63,13 @@
 **一级目录（技术类）**
 
 - 一句话定位
+- 分类依据（解释二级目录的组织逻辑）
+- 边界说明（什么放本目录、什么应放其他目录）
 - 目录结构
 - 同目录导航（如有 overview.md、backlog.md 等，在显著位置列出）
 - 开源仓库与工具存放指南
 - 学习路径或推荐阅读顺序
-- 相关资源
+- 与其他目录的关系
 
 **一级目录（跨学科类）**
 

@@ -1,47 +1,69 @@
-# RAG (Retrieval-Augmented Generation)
+# RAG (检索增强生成)
 
 检索增强生成：通过外部知识检索提升 LLM 的事实准确性和时效性。
 
 > **推荐阅读**：先看 [overview.md](./overview.md) 了解领域全貌，再按 [学习路径](#学习路径) 顺序深入各子目录。
 
+## 分类依据
+
+RAG 目录按"基础 → 检索 → 高级范式 → 评估 → 生产"组织，检索是 RAG 的差异化核心：
+
+- **01（基础）**：RAG 概念、朴素 RAG、管线总览、上下文构建、生成策略
+- **02（检索）**：分块、嵌入、向量数据库、高级检索方法
+- **03（高级范式）**：图增强、自反思、Agent 驱动、模块化、多模态等范式，含代表实现
+- **04（评估）**：端到端指标、公开基准
+- **05（生产）**：框架、缓存与扩展、安全与隐私
+
+## 边界说明
+
+| 内容 | 归属 | 说明 |
+|------|------|------|
+| Prompt 工程 | [../llm/04-serving/prompt-engineering/](../llm/04-serving/prompt-engineering/) | 通用技术 |
+| LLM 推理优化 | [../llm/04-serving/](../llm/04-serving/) | 通用推理优化 |
+| 知识图谱通用构建方法 | [../knowledge-graph/02-construction/](../knowledge-graph/02-construction/) | 实体抽取、关系抽取等基础方法 |
+| 知识图谱在 RAG 中的应用 | `03-advanced-patterns/graph-rag/` | GraphRAG 等方案集中在此 |
+| Agent 体系知识 | [../agentic/](../agentic/) | Agent 驱动 RAG 在 `03-advanced-patterns/agentic-rag/` |
+
 ## 目录结构
 
 ```
 rag/
-├── 01-fundamentals/                  # 基础概念
-│   ├── naive-rag/
-│   ├── rag-pipeline-overview/
-│   └── what-is-rag/
+├── 01-foundations/                  # 基础
+│   ├── what-is-rag/                 # RAG概念与动机
+│   ├── naive-rag/                   # 朴素RAG
+│   ├── rag-pipeline-overview/       # 管线总览
+│   ├── context-integration/         # 上下文构建与注入
+│   ├── generation-strategies/       # 生成策略
+│   └── evaluation-of-generation/    # 生成质量评估
 │
-├── 02-retrieval/                     # 索引与检索
-│   ├── chunking-strategies/
-│   ├── embedding-models/
-│   ├── vector-databases/
-│   └── advanced-retrieval/
+├── 02-retrieval/                    # 检索
+│   ├── chunking-strategies/         # 分块策略
+│   │   ├── fixed-size/
+│   │   └── semantic-chunking/
+│   ├── embedding-models/            # 嵌入模型
+│   │   ├── dense-embeddings/
+│   │   └── sparse-embeddings/
+│   ├── vector-databases/            # 向量数据库
+│   └── advanced-retrieval/          # 高级检索
+│       ├── hybrid-retrieval/
+│       ├── multi-hop-retrieval/
+│       ├── recursive-retrieval/
+│       └── reranking/
 │
-├── 03-generation/                    # 生成与增强
-│   ├── context-integration/
-│   ├── generation-strategies/
-│   └── evaluation-of-generation/
+├── 03-advanced-patterns/            # 高级范式（含代表实现）
+│   ├── graph-rag/                   # 图增强RAG（含Microsoft GraphRAG）
+│   ├── self-reflective-rag/         # 自反思RAG（含Self-RAG、Corrective RAG）
+│   ├── agentic-rag/                 # Agent驱动RAG
+│   ├── modular-rag/                 # 模块化RAG
+│   └── multimodal-rag/              # 多模态RAG
 │
-├── 04-advanced-patterns/             # 通用高级范式
-│   ├── agentic-rag/
-│   ├── modular-rag/
-│   ├── multimodal-rag/
-│   └── self-reflective-rag/
-│
-├── 05-implementations/               # 具体项目与方案
-│   ├── graph-rag/
-│   └── hipporag/
-│
-├── 06-evaluation/                    # 评估与基准
+├── 04-evaluation/                   # 评估
 │   ├── end-to-end-metrics/
 │   └── public-benchmarks/
 │
-└── 07-production/                    # 生产与生态
-    ├── caching-and-scaling/
+└── 05-production/                   # 生产与生态
     ├── frameworks/
-    ├── papers/
+    ├── caching-and-scaling/
     └── security-and-privacy/
 ```
 
@@ -49,30 +71,20 @@ rag/
 
 | 仓库/工具 | 放入目录 | 说明 |
 |-----------|---------|------|
-| 通用 RAG 框架（LlamaIndex, LangChain RAG 等） | `07-production/frameworks/` | 工程化框架 |
-| 具体 RAG 项目（GraphRAG, HippoRAG, LightRAG 等） | `05-implementations/` | 按项目名称独立目录 |
-| RAG 评估套件（RAGAS, TruLens 等） | `06-evaluation/` | 评估工具 |
-
-## 与其他目录的边界
-
-| 内容 | 归属 | 说明 |
-|------|------|------|
-| Prompt 工程 | [../llm/04-serving/prompt-engineering/](../llm/04-serving/prompt-engineering/) | 通用技术 |
-| LLM 推理优化 | [../llm/04-serving/](../llm/04-serving/) | 通用推理优化 |
-| 知识图谱通用构建方法 | [../knowledge-graph/02-construction/](../knowledge-graph/02-construction/) | 实体抽取、关系抽取等基础方法 |
-| 知识图谱在 RAG 中的应用 | `05-implementations/graph-rag/` | GraphRAG 等方案集中在此，不分散 |
+| 具体 RAG 范式的代表实现 | `03-advanced-patterns/` 对应子目录 | GraphRAG、HippoRAG 等与范式放在一起 |
+| 通用 RAG 框架（LlamaIndex, LangChain RAG 等） | `05-production/frameworks/` | 工程化框架 |
+| RAG 评估套件（RAGAS, TruLens 等） | `04-evaluation/` | 评估工具 |
 
 ## 学习路径
 
 ```mermaid
 flowchart LR
-    A[01-fundamentals<br/>基础概念] --> B[02-retrieval<br/>检索技术]
-    A --> C[03-generation<br/>生成增强]
-    B --> D[04-advanced-patterns<br/>通用范式]
+    A[01-foundations<br/>基础概念] --> B[02-retrieval<br/>检索技术]
+    A --> C[01-foundations<br/>生成策略]
+    B --> D[03-advanced-patterns<br/>高级范式]
     C --> D
-    D --> E[05-implementations<br/>项目实现]
-    E --> F[06-evaluation<br/>评估方法]
-    F --> G[07-production<br/>生产落地]
+    D --> E[04-evaluation<br/>评估方法]
+    E --> F[05-production<br/>生产落地]
 ```
 
 ## 相关资源
