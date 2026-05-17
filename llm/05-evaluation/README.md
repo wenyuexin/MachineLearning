@@ -115,6 +115,10 @@ LLM评估全景
 
 ## 相关资源
 
+### 跨目录交叉引用
+
+- [位置偏差 (Position Bias)](../01-foundations/transformer-architecture/attention-mechanisms/position-bias/) — LLM 在长上下文中的 U 型注意力偏差研究，属于注意力机制的分析性理解，放在 `01-foundations/attention-mechanisms/` 下
+
 ### 综合评估框架
 
 - [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) - EleutherAI
@@ -128,4 +132,4 @@ LLM评估全景
 
 ---
 
-*最后更新: 2026-04-28*
+*最后更新: 2026-05-17*
